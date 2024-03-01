@@ -1,3 +1,13 @@
 # With app
 
-一个 [`vnt`](https://github.com/lbl8603/vnt) (可能魔改)的UI界面
+An open source, magic-modified [`vnt`](https://github.com/lbl8603/vnt)-based visual interface for virtual LAN formation
+
+# Download Prerelease
+
+Note: This is the bleeding edge build, for the more stable build see below. You can use this one if you want to try out the latest development builds, which may contain bugs and unfinished work.
+
+# FAQ
+
+Please do keep in mind that this repository is still in heavy development, it may still contains bugs.
+
+# Do not use builds from the dev branch for actual use!!!
