@@ -185,7 +185,7 @@ fn create_tun(
     mtu: u16,
 ) -> io::Result<(DeviceWriter, DeviceReader, DriverInfo)> {
     unsafe {
-        match Library::new("wintun.dll") {
+        match Library::new("./bin/wintun.dll") {
             Ok(lib) => match TunDevice::delete_for_name(lib, TUN_INTERFACE_NAME) {
                 Ok(_) => {
                     thread::sleep(Duration::from_millis(5));
@@ -195,12 +195,12 @@ fn create_tun(
             Err(e) => {
                 return Err(io::Error::new(
                     io::ErrorKind::Other,
-                    format!("wintun.dll not found {:?}", e),
+                    format!("wintun.dll not found {:?}, put it in current bin dir", e),
                 ));
             }
         }
         let tun_device = match TunDevice::create(
-            Library::new("wintun.dll").unwrap(),
+            Library::new("./bin/wintun.dll").unwrap(),
             TUN_POOL_NAME,
             TUN_INTERFACE_NAME,
         ) {
@@ -208,7 +208,7 @@ fn create_tun(
             Err(_) => {
                 thread::sleep(Duration::from_millis(200));
                 match TunDevice::create(
-                    Library::new("wintun.dll").unwrap(),
+                    Library::new("./bin/wintun.dll").unwrap(),
                     TUN_POOL_NAME,
                     TUN_INTERFACE_NAME,
                 ) {
@@ -270,7 +270,7 @@ fn delete_cache() {
 
 fn delete_tun() {
     unsafe {
-        match Library::new("wintun.dll") {
+        match Library::new("./bin/wintun.dll") {
             Ok(lib) => match TunDevice::delete_for_name(lib, TUN_INTERFACE_NAME) {
                 Ok(_) => {}
                 Err(_) => {}
