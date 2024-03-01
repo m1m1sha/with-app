@@ -1,3 +1,4 @@
+pub mod config;
 pub mod entity;
 use vnt::core::Vnt;
 

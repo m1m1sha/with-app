@@ -5,11 +5,12 @@ use std::time::Duration;
 use std::{io, thread};
 
 use rand::prelude::SliceRandom;
+use serde::{Deserialize, Serialize};
 
 use crate::channel::channel::{send_tcp, start_tcp_handle, Context};
 use crate::handle::recv_handler::ChannelDataHandler;
 
-#[derive(Copy, Clone, Eq, PartialEq, Debug)]
+#[derive(Serialize, Deserialize, Copy, Clone, Eq, PartialEq, Debug)]
 pub enum PunchModel {
     IPv4,
     IPv6,

@@ -34,6 +34,8 @@ spki = { version = "0.7.2", features = [
 ], optional = true }
 openssl-sys = { git = "https://github.com/lbl8603/rust-openssl", optional = true }
 libsm = { git = "https://github.com/lbl8603/libsm", optional = true }
+serde = "1"
+
 
 [target.'cfg(any(target_os = "linux",target_os = "macos"))'.dependencies]
 tun = { path = "./rust-tun" }
