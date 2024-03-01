@@ -29,7 +29,6 @@ pub struct FileConfig {
     pub finger: bool,
     pub punch_model: PunchModel,
     pub port: u16,
-    pub cmd: bool,
     pub first_latency: bool,
 }
 
@@ -61,7 +60,6 @@ impl Default for FileConfig {
             finger: false,
             punch_model: PunchModel::All,
             port: 0,
-            cmd: false,
             first_latency: false,
         }
     }
