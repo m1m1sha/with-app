@@ -2,7 +2,7 @@
 name = "with-app"
 version = "0.0.0"
 description = "with-app"
-authors = ["you"]
+authors = ["m1m1sha"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -15,8 +15,12 @@ vnt = { path = "./vnt" }
 
 tauri = { version = "2.0.0-beta", features = [] }
 tauri-plugin-shell = "2.0.0-beta"
+tracing = "0.1"
+tracing-subscriber = "0.3"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+encoding = "^0.2"
 
 [target.'cfg(any(target_os = "linux",target_os = "macos"))'.dependencies]
 sudo = "0.6"
