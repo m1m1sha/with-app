@@ -1,0 +1,71 @@
+{
+  "name": "with-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@8.15.3",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "lint": "eslint .",
+    "lf": "eslint . --fix",
+    "tc": "vue-tsc --noEmit",
+    "up": "taze major -I",
+    "pi": "npx simple-git-hooks",
+    "sc": "npx vite-bundle-visualizer"
+  },
+  "dependencies": {
+    "@tauri-apps/api": ">=2.0.0-beta.0",
+    "@tauri-apps/plugin-shell": ">=2.0.0-beta.0",
+    "@unhead/vue": "^1.8.10",
+    "@unocss/reset": "^0.58.5",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/head": "^2.0.0",
+    "lodash-es": "^4.17.21",
+    "pinia": "^2.1.7",
+    "tdesign-vue-next": "^1.8.1",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.4",
+    "@tauri-apps/cli": ">=2.0.0-beta.0",
+    "@types/lodash-es": "^4.17.12",
+    "@types/markdown-it-link-attributes": "^3.0.4",
+    "@types/node": "^20.11.24",
+    "@unocss/eslint-plugin": "^0.58.5",
+    "@unocss/reset": "^0.58.5",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue-macros/volar": "^0.18.11",
+    "eslint": "^8.57.0",
+    "eslint-plugin-format": "^0.1.0",
+    "lint-staged": "^15.2.2",
+    "markdown-it-link-attributes": "^4.0.1",
+    "markdown-it-shikiji": "^0.10.2",
+    "shikiji": "^0.10.2",
+    "simple-git-hooks": "^2.9.0",
+    "taze": "^0.13.3",
+    "typescript": "^5.3.3",
+    "unocss": "^0.58.5",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0",
+    "unplugin-vue-macros": "^2.7.10",
+    "unplugin-vue-markdown": "^0.26.0",
+    "unplugin-vue-router": "^0.8.4",
+    "vite": "^5.1.4",
+    "vite-bundle-visualizer": "^1.0.1",
+    "vite-plugin-inspect": "^0.8.3",
+    "vite-plugin-pages": "^0.32.0",
+    "vite-plugin-vue-devtools": "7.0.15",
+    "vite-plugin-vue-layouts": "^0.11.0",
+    "vue-tsc": "^1.8.27"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}

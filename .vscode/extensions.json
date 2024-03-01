@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "tauri-apps.tauri-vscode",
+    "serayuzgur.crates",
+    "redjue.git-commit-plugin",
+    "github.vscode-github-actions",
+    "vue.vscode-typescript-vue-plugin",
+    "antfu.unocss",
+    "csstools.postcss",
+    "vadimcn.vscode-lldb"
+  ]
+}

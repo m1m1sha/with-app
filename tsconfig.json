@@ -1,0 +1,70 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "ES2020",
+    "jsx": "preserve",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "useDefineForClassFields": true,
+    "baseUrl": ".",
+    "module": "ESNext",
+    /* Bundler mode */
+    "moduleResolution": "Node",
+    "paths": {
+      "~/*": [
+        "src/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "vite/client",
+      "unplugin-vue-macros/macros-global",
+      "unplugin-vue-router/client",
+      "vite-plugin-vue-layouts/client"
+    ],
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    /* Linting */
+    "strict": true,
+    "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "references": [],
+  "include": [
+    "node_modules/tdesign-vue-next/global.d.ts",
+    "vite.config.ts",
+    "typed-router.d.ts",
+    "vite-plugin-pages/client",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "vueCompilerOptions": {
+    "plugins": [
+      "@vue-macros/volar/define-options",
+      "@vue-macros/volar/define-models",
+      "@vue-macros/volar/define-props",
+      "@vue-macros/volar/define-props-refs",
+      "@vue-macros/volar/short-vmodel",
+      "@vue-macros/volar/define-slots",
+      "@vue-macros/volar/jsx-directive",
+      "@vue-macros/volar/setup-jsdoc"
+    ]
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
