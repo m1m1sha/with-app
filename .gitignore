@@ -25,5 +25,4 @@ dist-ssr
 *.sln
 *.sw?
 
-src-tauri/with/target/
-src-tauri/with/vnt/src/proto
+src-tauri/vnt/src/proto
