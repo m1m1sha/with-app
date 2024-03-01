@@ -24,3 +24,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+src-tauri/with/target/
+src-tauri/with/vnt/src/proto
