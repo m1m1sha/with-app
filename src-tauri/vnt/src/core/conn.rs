@@ -136,7 +136,8 @@ impl Vnt {
         let (punch_sender, punch_receiver) = sync_channel(3);
         let peer_nat_info_map: Arc<RwLock<HashMap<Ipv4Addr, NatInfo>>> =
             Arc::new(RwLock::new(HashMap::with_capacity(16)));
-        let down_counter = U64Adder::with_capacity(config.ports.as_ref().map(|v| v.len()).unwrap_or_default() + 8);
+        let down_counter =
+            U64Adder::with_capacity(config.ports.as_ref().map(|v| v.len()).unwrap_or_default() + 8);
         let down_count_watcher = down_counter.watch();
         let handler = RecvDataHandler::new(
             #[cfg(feature = "server_encrypt")]

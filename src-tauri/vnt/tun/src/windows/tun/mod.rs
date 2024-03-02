@@ -51,7 +51,7 @@ unsafe impl Sync for Device {}
 impl Device {
     pub fn new(name: String) -> io::Result<Self> {
         unsafe {
-            let library = match Library::new("wintun.dll") {
+            let library = match Library::new("./bin/wintun.dll") {
                 Ok(library) => library,
                 Err(e) => {
                     return Err(io::Error::new(

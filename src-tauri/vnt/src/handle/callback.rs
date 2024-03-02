@@ -12,7 +12,7 @@ pub struct DeviceInfo {
 
 impl Display for DeviceInfo {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.write_str(&format!("name={} ,version={}", self.name, self.version))
+        f.write_str(&format!("name: {}, version: {}", self.name, self.version))
     }
 }
 
@@ -32,7 +32,7 @@ pub struct ConnectInfo {
 
 impl Display for ConnectInfo {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.write_str(&format!("count={} ,address={}", self.count, self.address))
+        f.write_str(&format!("count:{}, address: {}", self.count, self.address))
     }
 }
 

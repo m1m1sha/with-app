@@ -8,29 +8,29 @@ pub struct VntHandler {}
 
 impl VntCallback for VntHandler {
     fn create_tun(&self, info: DeviceInfo) {
-        println!("create_tun {}", info)
+        tracing::info!("虚拟网卡: {}", info);
     }
 
     fn connect(&self, info: ConnectInfo) {
-        println!("connect {}", info)
+        tracing::info!("隧道连接: {}", info);
     }
 
     fn handshake(&self, info: HandshakeInfo) -> bool {
-        println!("handshake {}", info);
+        tracing::info!("通信握手: {}", info);
         true
     }
 
     fn register(&self, info: RegisterInfo) -> bool {
-        println!("register {}", info);
+        tracing::info!("服务注册: {}", info);
         true
     }
 
     fn error(&self, info: ErrorInfo) {
-        println!("error {}", info);
+        tracing::error!("发生错误: {}", info);
     }
 
     fn stop(&self) {
-        println!("stopped");
+        tracing::info!("服务停止");
         process::exit(0)
     }
 }
