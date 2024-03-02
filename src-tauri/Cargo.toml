@@ -13,6 +13,7 @@ tauri-build = { version = "2.0.0-beta", features = [] }
 [dependencies]
 vnt = { path = "./vnt" }
 
+tokio = { version = "1.36", features = ["full"] }
 tauri = { version = "2.0.0-beta", features = [] }
 tauri-plugin-shell = "2.0.0-beta"
 tracing = "0.1"

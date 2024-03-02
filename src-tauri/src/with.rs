@@ -1,12 +1,168 @@
 pub mod config;
 pub mod entity;
-use vnt::core::Vnt;
+
+use vnt::{
+    core::{Vnt, VntUtil},
+    handle::{
+        handshake_handler::HandshakeEnum,
+        registration_handler::{RegResponse, ReqEnum},
+    },
+    tun_tap_device::DriverInfo,
+};
 
 pub struct With {
-    pub vnt: Vnt,
+    pub vnt: Option<Vnt>,
+    pub config: vnt::core::Config,
+    pub reg: Option<RegResponse>,
+    pub driver: Option<DriverInfo>,
 }
 
 impl With {
+    fn new(&self, config: vnt::core::Config) -> Self {
+        Self {
+            vnt: None,
+            config,
+            reg: None,
+            driver: None,
+        }
+    }
+
+    async fn start(&mut self) {
+        if self.status() {
+            tracing::warn!("虚拟连接已启动");
+            return;
+        }
+
+        let server_encrypt = self.config.server_encrypt;
+        let mut with_util = VntUtil::new(self.config.clone()).unwrap();
+        let mut conn_count = 0;
+        // 创建连接
+        self.reg = Some(loop {
+            if conn_count > 0 {
+                tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+            }
+
+            conn_count += 1;
+
+            if let Err(e) = with_util.connect() {
+                tracing::warn!("连接服务器失败 {}", e);
+                return;
+            }
+            match with_util.handshake() {
+                Ok(response) => {
+                    if server_encrypt {
+                        let finger = response.unwrap().finger().unwrap();
+                        tracing::info!("服务器指纹: {}", finger);
+                        match with_util.secret_handshake() {
+                            Ok(_) => {}
+                            Err(e) => {
+                                match e {
+                                    HandshakeEnum::NotSecret => {}
+                                    HandshakeEnum::KeyError => {}
+                                    HandshakeEnum::Timeout => {
+                                        tracing::warn!("握手超时");
+                                    }
+                                    HandshakeEnum::ServerError(str) => {
+                                        tracing::warn!("服务器发生错误: {}", str);
+                                    }
+                                    HandshakeEnum::Other(str) => {
+                                        tracing::warn!("发生未知错误: {}", str);
+                                    }
+                                }
+                                continue;
+                            }
+                        }
+                    }
+                    match with_util.register() {
+                        Ok(response) => {
+                            break response;
+                        }
+                        Err(e) => match e {
+                            ReqEnum::TokenError => {
+                                tracing::error!("token 错误");
+                                return;
+                            }
+                            ReqEnum::AddressExhausted => {
+                                tracing::error!("地址用尽");
+                                return;
+                            }
+                            ReqEnum::Timeout => {
+                                tracing::warn!("超时...");
+                            }
+                            ReqEnum::ServerError(str) => {
+                                tracing::warn!("服务器发生错误: {}", str);
+                            }
+                            ReqEnum::Other(str) => {
+                                tracing::warn!("发生未知错误: {}", str);
+                            }
+                            ReqEnum::IpAlreadyExists => {
+                                tracing::error!("IP已经存在");
+                                return;
+                            }
+                            ReqEnum::InvalidIp => {
+                                tracing::error!("未校验的IP");
+                                return;
+                            }
+                        },
+                    }
+                }
+                Err(e) => match e {
+                    HandshakeEnum::NotSecret => {
+                        tracing::error!("该服务器不支持加密");
+                        return;
+                    }
+                    HandshakeEnum::KeyError => {}
+                    HandshakeEnum::Timeout => {
+                        tracing::warn!("握手超时");
+                    }
+                    HandshakeEnum::ServerError(str) => {
+                        tracing::error!("服务器发生错误: {}", str);
+                    }
+                    HandshakeEnum::Other(str) => {
+                        tracing::error!("发生未知错误: {}", str);
+                    }
+                },
+            }
+        });
+
+        // 创建虚拟网卡
+        self.driver = Some(match with_util.create_iface() {
+            Ok(d) => d,
+            Err(e) => {
+                tracing::error!("虚拟网卡创建失败: {}", e);
+                return;
+            }
+        });
+
+        self.vnt = match with_util.build().await {
+            Ok(vnt) => Some(vnt),
+            Err(e) => {
+                tracing::error!("虚拟连接启动失败: {}", e);
+                return;
+            }
+        };
+
+        tracing::info!("虚拟连接创建成功");
+
+        if let Some(mut vnt) = self.vnt.clone() {
+            vnt.wait_stop().await;
+        }
+
+        tracing::info!("虚拟连接已停止");
+    }
+
+    fn stop(&mut self) {
+        if let Some(vnt) = self.vnt.clone() {
+            let _ = vnt.stop();
+        }
+        self.driver = None;
+        self.reg = None;
+    }
+
+    fn status(&self) -> bool {
+        self.vnt.is_some()
+    }
+
     fn route(&self) -> Vec<entity::RouteItem> {
         let route_table = self.vnt.route_table();
         let mut route_list = Vec::with_capacity(route_table.len());

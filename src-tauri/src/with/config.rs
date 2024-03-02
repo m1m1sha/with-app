@@ -7,7 +7,7 @@ use crate::utils::{self, CurrentPath};
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(default)]
-pub struct FileConfig {
+pub struct WithConfig {
     pub tap: bool,
     pub token: String,
     pub device_id: String,
@@ -32,7 +32,7 @@ pub struct FileConfig {
     pub first_latency: bool,
 }
 
-impl Default for FileConfig {
+impl Default for WithConfig {
     fn default() -> Self {
         Self {
             tap: false,
