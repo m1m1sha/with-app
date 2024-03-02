@@ -4,11 +4,9 @@
     "serayuzgur.crates",
     "redjue.git-commit-plugin",
     "github.vscode-github-actions",
-    "vue.vscode-typescript-vue-plugin",
     "antfu.unocss",
     "csstools.postcss",
     "vadimcn.vscode-lldb",
-    "vue.volar",
     "dbaeumer.vscode-eslint"
   ]
 }
