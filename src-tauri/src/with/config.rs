@@ -38,6 +38,7 @@ pub struct WithConfig {
     pub ports: Option<Vec<u16>>,
     pub first_latency: bool,
     pub device_name: Option<String>,
+    pub timeout_retry: usize,
 }
 
 impl Default for WithConfig {
@@ -70,6 +71,7 @@ impl Default for WithConfig {
             ports: None,
             first_latency: false,
             device_name: None,
+            timeout_retry: 5,
         }
     }
 }
@@ -142,6 +144,7 @@ impl WithConfig {
             self.first_latency,
             self.device_name.clone(),
             self.use_channel,
+            self.timeout_retry,
         ) {
             Ok(c) => Ok(c),
             Err(e) => Err(e.to_string()),

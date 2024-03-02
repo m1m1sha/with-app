@@ -39,6 +39,7 @@ pub struct Config {
     #[cfg(target_os = "android")]
     pub device_fd: i32,
     pub use_channel_type: UseChannelType,
+    pub timeout_retry: usize,
 }
 
 impl Config {
@@ -67,6 +68,7 @@ impl Config {
         #[cfg(not(target_os = "android"))] device_name: Option<String>,
         #[cfg(target_os = "android")] device_fd: i32,
         use_channel_type: UseChannelType,
+        timeout_retry: usize,
     ) -> io::Result<Self> {
         for x in stun_server.iter_mut() {
             if !x.contains(":") {
@@ -111,6 +113,7 @@ impl Config {
             #[cfg(target_os = "android")]
             device_fd,
             use_channel_type,
+            timeout_retry,
         })
     }
 }
