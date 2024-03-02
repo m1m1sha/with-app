@@ -24,6 +24,7 @@ use crate::cipher::sm4_cbc::Sm4CbcCipher;
 ))]
 use crate::cipher::Finger;
 use crate::protocol::NetPacket;
+use serde::{Deserialize, Serialize};
 #[cfg(any(
     feature = "aes_gcm",
     feature = "server_encrypt",
@@ -35,7 +36,7 @@ use sha2::Digest;
 use std::io;
 use std::str::FromStr;
 
-#[derive(Copy, Clone, Eq, PartialEq, Debug)]
+#[derive(Serialize, Deserialize, Copy, Clone, Eq, PartialEq, Debug)]
 pub enum CipherModel {
     #[cfg(any(feature = "aes_gcm", feature = "server_encrypt"))]
     AesGcm,

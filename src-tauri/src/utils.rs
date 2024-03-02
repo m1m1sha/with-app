@@ -1,4 +1,5 @@
 pub mod identifier;
+pub mod parse;
 mod root;
 
 use std::path::PathBuf;

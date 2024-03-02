@@ -10,6 +10,7 @@ use vnt::{
     tun_tap_device::DriverInfo,
 };
 
+#[derive(Clone)]
 pub struct With {
     pub vnt: Option<Vnt>,
     pub config: vnt::core::Config,
