@@ -643,19 +643,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "dashmap"
-version = "5.5.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "978747c1d849a7d2ee5e8adc0159961c48fb7e5db2f06af6723b80123bb53856"
-dependencies = [
- "cfg-if",
- "hashbrown 0.14.3",
- "lock_api",
- "once_cell",
- "parking_lot_core",
-]
-
-[[package]]
 name = "der"
 version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1687,9 +1674,9 @@ dependencies = [
 
 [[package]]
 name = "ioctl-sys"
-version = "0.6.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c429fffa658f288669529fc26565f728489a2e39bc7b24a428aaaf51355182e"
+checksum = "8bd11f3a29434026f5ff98c730b668ba74b1033637b8817940b54d040696133c"
 
 [[package]]
 name = "ipnet"
@@ -1714,15 +1701,6 @@ checksum = "173609498df190136aa7dea1a91db051746d339e18476eed5ca40521f02d7aa5"
 dependencies = [
  "is-docker",
  "once_cell",
-]
-
-[[package]]
-name = "itertools"
-version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1c173a5686ce8bfa551b3563d0c2170bf24ca44da99c7ca4bfdab5418c3fe57"
-dependencies = [
- "either",
 ]
 
 [[package]]
@@ -2061,6 +2039,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f3d0b296e374a4e6f3c7b0a1f5a51d748a0d34c85e7dc48fc3fa9a87657fe09"
 dependencies = [
  "libc",
+ "log",
  "wasi 0.11.0+wasi-snapshot-preview1",
  "windows-sys 0.48.0",
 ]
@@ -4213,11 +4192,15 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 
 [[package]]
 name = "tun"
-version = "0.5.4"
+version = "0.1.0"
 dependencies = [
  "ioctl-sys",
  "libc",
- "thiserror",
+ "libloading 0.8.1",
+ "log",
+ "rand 0.8.5",
+ "widestring",
+ "winapi",
 ]
 
 [[package]]
@@ -4310,7 +4293,7 @@ checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
 
 [[package]]
 name = "vnt"
-version = "1.2.8"
+version = "1.2.9"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -4318,12 +4301,12 @@ dependencies = [
  "cbc",
  "crossbeam-epoch",
  "crossbeam-utils",
- "dashmap",
  "ecb",
  "libc",
  "libloading 0.8.1",
  "libsm",
  "log",
+ "mio",
  "packet",
  "parking_lot",
  "protobuf",
@@ -4337,9 +4320,7 @@ dependencies = [
  "spki",
  "stun-format",
  "thiserror",
- "tokio",
  "tun",
- "win-tun-tap",
 ]
 
 [[package]]
@@ -4628,21 +4609,6 @@ name = "widestring"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "653f141f39ec16bba3c5abe400a0c60da7468261cc2cbf36805022876bc721a8"
-
-[[package]]
-name = "win-tun-tap"
-version = "0.1.0"
-dependencies = [
- "itertools",
- "libloading 0.8.1",
- "log",
- "once_cell",
- "rand 0.8.5",
- "scopeguard",
- "widestring",
- "winapi",
- "winreg 0.51.0",
-]
 
 [[package]]
 name = "winapi"

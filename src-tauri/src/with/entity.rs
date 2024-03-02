@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Info {
     pub name: String,
@@ -12,6 +11,8 @@ pub struct Info {
     pub public_ips: String,
     pub local_addr: String,
     pub ipv6_addr: String,
+    pub up: u64,
+    pub down: u64,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

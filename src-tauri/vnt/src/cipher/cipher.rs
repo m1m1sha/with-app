@@ -36,7 +36,7 @@ use sha2::Digest;
 use std::io;
 use std::str::FromStr;
 
-#[derive(Serialize, Deserialize, Copy, Clone, Eq, PartialEq, Debug)]
+#[derive(Deserialize, Serialize, Copy, Clone, Eq, PartialEq, Debug)]
 pub enum CipherModel {
     #[cfg(any(feature = "aes_gcm", feature = "server_encrypt"))]
     AesGcm,

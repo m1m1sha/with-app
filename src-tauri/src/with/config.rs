@@ -3,14 +3,19 @@ use serde::{Deserialize, Serialize};
 use std::net::{Ipv4Addr, ToSocketAddrs};
 use std::path::PathBuf;
 use std::str::FromStr;
-use vnt::cipher::CipherModel;
-use vnt::{channel::punch::PunchModel, core::Config};
+
+use vnt::{
+    channel::{punch::PunchModel, UseChannelType},
+    cipher::CipherModel,
+    core::Config,
+};
 
 use crate::utils::{self, CurrentPath};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(default)]
 pub struct WithConfig {
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
     pub tap: bool,
     pub token: String,
     pub device_id: String,
@@ -20,24 +25,25 @@ pub struct WithConfig {
     pub in_ips: Vec<String>,
     pub out_ips: Vec<String>,
     pub password: Option<String>,
-    pub simulate_multicast: bool,
-    pub mtu: Option<u16>,
+    pub mtu: Option<u32>,
     pub tcp: bool,
     pub ip: Option<String>,
-    pub relay: bool,
+    pub use_channel: UseChannelType,
     pub no_proxy: bool,
     pub server_encrypt: bool,
     pub parallel: usize,
     pub cipher_model: CipherModel,
     pub finger: bool,
     pub punch_model: PunchModel,
-    pub port: u16,
+    pub ports: Option<Vec<u16>>,
     pub first_latency: bool,
+    pub device_name: Option<String>,
 }
 
 impl Default for WithConfig {
     fn default() -> Self {
         Self {
+            #[cfg(any(target_os = "windows", target_os = "linux"))]
             tap: false,
             token: "".to_string(),
             device_id: unique_identifier(),
@@ -51,25 +57,25 @@ impl Default for WithConfig {
             in_ips: vec![],
             out_ips: vec![],
             password: None,
-            simulate_multicast: false,
             mtu: None,
             tcp: false,
             ip: None,
-            relay: false,
+            use_channel: UseChannelType::All,
             no_proxy: false,
             server_encrypt: false,
             parallel: 1,
             cipher_model: CipherModel::AesGcm,
             finger: false,
             punch_model: PunchModel::All,
-            port: 0,
+            ports: None,
             first_latency: false,
+            device_name: None,
         }
     }
 }
 
 impl WithConfig {
-    fn to_config(&self) -> Result<Config, String> {
+    pub fn to_config(&self) -> Result<Config, String> {
         let addr = match self.server_address.to_socket_addrs() {
             Ok(mut addr) => {
                 if let Some(addr) = addr.next() {
@@ -112,6 +118,7 @@ impl WithConfig {
             }
         }
         match Config::new(
+            #[cfg(any(target_os = "windows", target_os = "linux"))]
             self.tap,
             self.token.clone(),
             self.device_id.clone(),
@@ -122,19 +129,19 @@ impl WithConfig {
             in_ips,
             out_ips,
             self.password.clone(),
-            self.simulate_multicast,
             self.mtu,
             self.tcp,
             virtual_ip,
-            self.relay,
             self.no_proxy,
             self.server_encrypt,
             self.parallel,
             self.cipher_model,
             self.finger,
             self.punch_model,
-            self.port,
+            self.ports.clone(),
             self.first_latency,
+            self.device_name.clone(),
+            self.use_channel,
         ) {
             Ok(c) => Ok(c),
             Err(e) => Err(e.to_string()),
