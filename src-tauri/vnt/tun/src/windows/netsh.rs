@@ -35,7 +35,7 @@ pub fn set_interface_mtu(index: u32, mtu: u32) -> io::Result<()> {
 }
 pub fn set_interface_metric(index: u32, metric: u16) -> io::Result<()> {
     let cmd = format!(
-        "netsh interface ip set interface {} metric: {}",
+        "netsh interface ip set interface {} metric={}",
         index, metric
     );
     exe_cmd(&cmd)
