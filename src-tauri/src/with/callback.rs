@@ -12,7 +12,9 @@ impl VntCallback for VntHandler {
     }
 
     fn connect(&self, info: ConnectInfo) {
-        tracing::info!("隧道连接: {}", info);
+        if info.count > 1 {
+            tracing::info!("第{:2}次重新连接", info.count - 1);
+        }
     }
 
     fn handshake(&self, info: HandshakeInfo) -> bool {

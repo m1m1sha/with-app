@@ -1,3 +1,5 @@
+use std::io;
+
 use vnt::core::Vnt;
 
 use self::entity::RouteItem;
@@ -17,21 +19,30 @@ impl With {
         Self { vnt: None, config }
     }
 
-    pub fn run(&mut self) {
+    pub fn run(&mut self) -> io::Result<()> {
         if self.status() {
             tracing::warn!("虚拟连接已启动");
-            return;
+            return Ok(());
         }
-        let vnt_util = Vnt::new(self.config.clone(), callback::VntHandler {}).unwrap();
+        let vnt_util = match Vnt::new(self.config.clone(), callback::VntHandler {}) {
+            Ok(v) => v,
+            Err(e) => {
+                tracing::error!("{}", e.to_string());
+                return Err(e);
+            }
+        };
+        // 出现 vnt 反复重连时，未能获取到当前 vnt 导致不能停止
         self.vnt = Some(vnt_util.clone());
 
         tracing::info!("虚拟连接启动");
-        vnt_util.wait()
+        vnt_util.wait();
+
+        Ok(())
     }
 
     pub fn stop(&mut self) {
         if let Some(vnt) = self.vnt.clone() {
-            let _ = vnt.stop();
+            vnt.stop();
         }
     }
 
