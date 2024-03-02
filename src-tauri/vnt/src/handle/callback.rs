@@ -58,14 +58,14 @@ impl Display for HandshakeInfo {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         #[cfg(feature = "server_encrypt")]
         return match &self.finger {
-            None => f.write_str(&format!("no_secret server version={}", self.version)),
+            None => f.write_str(&format!("no_secret server version: {}", self.version)),
             Some(finger) => f.write_str(&format!(
-                "finger={} ,server version={}",
+                "finger: {}, server version: {}",
                 finger, self.version
             )),
         };
         #[cfg(not(feature = "server_encrypt"))]
-        f.write_str(&format!("server version={}", self.version))
+        f.write_str(&format!("server version: {}", self.version))
     }
 }
 #[cfg(feature = "server_encrypt")]
@@ -105,7 +105,7 @@ pub struct RegisterInfo {
 impl Display for RegisterInfo {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         f.write_str(&format!(
-            "ip={} ,netmask={} ,gateway={}",
+            "ip: {}, netmask: {}, gateway: {}",
             self.virtual_ip, self.virtual_netmask, self.virtual_gateway,
         ))
     }
@@ -130,12 +130,12 @@ pub struct ErrorInfo {
 
 impl Display for ErrorInfo {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.write_str(&format!("ErrorType={:?} ", self.code))?;
+        f.write_str(&format!("ErrorType: {:?}", self.code))?;
         if let Some(msg) = &self.msg {
-            f.write_str(&format!(",msg={:?} ", msg))?;
+            f.write_str(&format!(", msg: {:?}", msg))?;
         }
         if let Some(source) = &self.source {
-            f.write_str(&format!(",source={:?} ", source))?;
+            f.write_str(&format!(", source: {:?}", source))?;
         }
         Ok(())
     }

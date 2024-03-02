@@ -218,7 +218,7 @@ impl Punch {
                     .is_ok();
             }
             Err(e) => {
-                log::warn!("连接到tcp失败,addr={},err={}", addr, e);
+                log::warn!("连接到tcp失败,addr={},err: {}", addr, e);
             }
         }
         false
