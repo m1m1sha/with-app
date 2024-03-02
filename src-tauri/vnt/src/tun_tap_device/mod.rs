@@ -6,7 +6,7 @@ use tun::Device;
 
 use crate::core::Config;
 
-const DEFAULT_NAME: &str = "vnt0";
+const DEFAULT_NAME: &str = "with";
 
 pub fn create_device(config: &Config) -> io::Result<Arc<Device>> {
     #[cfg(target_os = "linux")]

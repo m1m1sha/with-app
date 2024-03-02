@@ -11,7 +11,7 @@ pub use sockaddr::SockAddr;
 pub fn exe_cmd(cmd: &str) -> std::io::Result<Output> {
     use std::io;
     use std::process::Command;
-    println!("exe cmd: {}", cmd);
+    log::info!("exe cmd: {}", cmd);
     let out = Command::new("sh")
         .arg("-c")
         .arg(cmd)

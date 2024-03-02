@@ -27,7 +27,7 @@ pub const fn ctl_code(device_type: DWORD, function: DWORD, method: DWORD, access
 }
 
 pub fn exe_cmd(cmd: &str) -> io::Result<()> {
-    println!("exe cmd: {}", cmd);
+    log::info!("cmd: {}", cmd);
     let out = std::process::Command::new("cmd")
         .creation_flags(CREATE_NO_WINDOW)
         .arg("/C")
@@ -36,7 +36,7 @@ pub fn exe_cmd(cmd: &str) -> io::Result<()> {
     if !out.status.success() {
         return Err(io::Error::new(
             io::ErrorKind::Other,
-            format!("cmd={},out={:?}", cmd, String::from_utf8(out.stderr)),
+            format!("cmd: {}, out: {:?}", cmd, String::from_utf8(out.stderr)),
         ));
     }
     Ok(())
