@@ -19,7 +19,7 @@ impl With {
         Self { vnt: None, config }
     }
 
-    pub fn run(&mut self) -> io::Result<()> {
+    pub fn deploy(&mut self) -> io::Result<()> {
         if self.status() {
             tracing::warn!("虚拟连接已启动");
             return Ok(());
@@ -34,9 +34,13 @@ impl With {
         // 出现 vnt 反复重连时，未能获取到当前 vnt 导致不能停止
         self.vnt = Some(vnt_util.clone());
 
-        tracing::info!("虚拟连接启动");
-        vnt_util.wait();
+        Ok(())
+    }
 
+    pub fn wait(&mut self) -> io::Result<()> {
+        tracing::info!("虚拟连接启动");
+        let vnt_until = self.vnt.clone().unwrap();
+        vnt_until.wait();
         Ok(())
     }
 

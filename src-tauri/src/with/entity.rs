@@ -65,6 +65,14 @@ impl UseChannelType {
             UseChannelType::All => vnt::channel::UseChannelType::All,
         }
     }
+
+    pub fn from_vnt(vnt: vnt::channel::UseChannelType) -> UseChannelType {
+        match vnt {
+            vnt::channel::UseChannelType::Relay => UseChannelType::Relay,
+            vnt::channel::UseChannelType::P2p => UseChannelType::P2p,
+            vnt::channel::UseChannelType::All => UseChannelType::All,
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Copy, Clone, Eq, PartialEq)]
@@ -86,6 +94,16 @@ impl CipherModel {
             CipherModel::None => vnt::cipher::CipherModel::None,
         }
     }
+
+    pub fn from_vnt(vnt: vnt::cipher::CipherModel) -> CipherModel {
+        match vnt {
+            vnt::cipher::CipherModel::AesGcm => CipherModel::AesGcm,
+            vnt::cipher::CipherModel::AesCbc => CipherModel::AesCbc,
+            vnt::cipher::CipherModel::AesEcb => CipherModel::AesEcb,
+            vnt::cipher::CipherModel::Sm4Cbc => CipherModel::Sm4Cbc,
+            vnt::cipher::CipherModel::None => CipherModel::None,
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Copy, Clone, Eq, PartialEq)]
@@ -101,6 +119,14 @@ impl PunchModel {
             PunchModel::IPv4 => vnt::channel::punch::PunchModel::IPv4,
             PunchModel::IPv6 => vnt::channel::punch::PunchModel::IPv6,
             PunchModel::All => vnt::channel::punch::PunchModel::All,
+        }
+    }
+
+    pub fn from_vnt(vnt: vnt::channel::punch::PunchModel) -> PunchModel {
+        match vnt {
+            vnt::channel::punch::PunchModel::IPv4 => PunchModel::IPv4,
+            vnt::channel::punch::PunchModel::IPv6 => PunchModel::IPv6,
+            vnt::channel::punch::PunchModel::All => PunchModel::All,
         }
     }
 }

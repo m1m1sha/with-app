@@ -4291,7 +4291,6 @@ dependencies = [
  "protoc-bin-vendored",
  "rand 0.8.5",
  "rsa",
- "serde",
  "sha2",
  "socket2",
  "spki",
