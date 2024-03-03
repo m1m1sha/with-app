@@ -35,32 +35,28 @@ pub fn idle_gateway<Call: VntCallback>(
     tcp_socket_sender: AcceptSocketSender<(TcpStream, SocketAddr, Option<Vec<u8>>)>,
     call: Call,
     mut connect_count: usize,
-    retry: usize,
 ) {
-    if retry < connect_count {
-        idle_gateway0(
-            &context,
-            &current_device_info,
-            &config,
-            &tcp_socket_sender,
-            &call,
-            &mut connect_count,
-        );
-        let rs = scheduler.timeout(Duration::from_secs(5), move |s| {
-            idle_gateway(
-                s,
-                context,
-                current_device_info,
-                config,
-                tcp_socket_sender,
-                call,
-                connect_count,
-                retry,
-            )
-        });
-        if !rs {
-            log::info!("定时任务停止");
-        }
+    idle_gateway0(
+        &context,
+        &current_device_info,
+        &config,
+        &tcp_socket_sender,
+        &call,
+        &mut connect_count,
+    );
+    let rs = scheduler.timeout(Duration::from_secs(5), move |s| {
+        idle_gateway(
+            s,
+            context,
+            current_device_info,
+            config,
+            tcp_socket_sender,
+            call,
+            connect_count,
+        )
+    });
+    if !rs {
+        log::info!("定时任务停止");
     }
 }
 fn idle_gateway0<Call: VntCallback>(

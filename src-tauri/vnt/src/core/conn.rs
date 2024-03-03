@@ -193,7 +193,6 @@ impl Vnt {
             tcp_socket_sender.clone(),
             callback.clone(),
             0,
-            config.timeout_retry,
         );
         {
             let context = context.clone();
