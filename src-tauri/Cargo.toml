@@ -11,7 +11,7 @@ edition = "2021"
 tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
-vnt = { path = "./vnt" }
+vnt = { path = "./vnt/vnt" }
 
 tauri = { version = "2.0.0-beta", features = [] }
 tauri-plugin-shell = "2.0.0-beta"
