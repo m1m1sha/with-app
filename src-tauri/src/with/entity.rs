@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use vnt;
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Info {
     pub name: String,
@@ -47,4 +48,59 @@ pub enum NatTraversalType {
     Relay,
     RelayServer,
     RelayClient,
+}
+
+#[derive(Serialize, Deserialize, Debug, Copy, Clone, Eq, PartialEq)]
+pub enum UseChannelType {
+    Relay,
+    P2p,
+    All,
+}
+
+impl UseChannelType {
+    pub fn to_vnt(&self) -> vnt::channel::UseChannelType {
+        match self {
+            UseChannelType::Relay => vnt::channel::UseChannelType::Relay,
+            UseChannelType::P2p => vnt::channel::UseChannelType::P2p,
+            UseChannelType::All => vnt::channel::UseChannelType::All,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Copy, Clone, Eq, PartialEq)]
+pub enum CipherModel {
+    AesGcm,
+    AesCbc,
+    AesEcb,
+    Sm4Cbc,
+    None,
+}
+
+impl CipherModel {
+    pub fn to_vnt(&self) -> vnt::cipher::CipherModel {
+        match self {
+            CipherModel::AesGcm => vnt::cipher::CipherModel::AesGcm,
+            CipherModel::AesCbc => vnt::cipher::CipherModel::AesCbc,
+            CipherModel::AesEcb => vnt::cipher::CipherModel::AesEcb,
+            CipherModel::Sm4Cbc => vnt::cipher::CipherModel::Sm4Cbc,
+            CipherModel::None => vnt::cipher::CipherModel::None,
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Copy, Clone, Eq, PartialEq)]
+pub enum PunchModel {
+    IPv4,
+    IPv6,
+    All,
+}
+
+impl PunchModel {
+    pub fn to_vnt(&self) -> vnt::channel::punch::PunchModel {
+        match self {
+            PunchModel::IPv4 => vnt::channel::punch::PunchModel::IPv4,
+            PunchModel::IPv6 => vnt::channel::punch::PunchModel::IPv6,
+            PunchModel::All => vnt::channel::punch::PunchModel::All,
+        }
+    }
 }

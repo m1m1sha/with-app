@@ -4,13 +4,11 @@ use std::net::{Ipv4Addr, ToSocketAddrs};
 use std::path::PathBuf;
 use std::str::FromStr;
 
-use vnt::{
-    channel::{punch::PunchModel, UseChannelType},
-    cipher::CipherModel,
-    core::Config,
-};
+use vnt::core::Config;
 
 use crate::utils::{self, CurrentPath};
+
+use super::entity;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(default)]
@@ -28,17 +26,16 @@ pub struct WithConfig {
     pub mtu: Option<u32>,
     pub tcp: bool,
     pub ip: Option<String>,
-    pub use_channel: UseChannelType,
+    pub use_channel: entity::UseChannelType,
     pub no_proxy: bool,
     pub server_encrypt: bool,
     pub parallel: usize,
-    pub cipher_model: CipherModel,
+    pub cipher_model: entity::CipherModel,
     pub finger: bool,
-    pub punch_model: PunchModel,
+    pub punch_model: entity::PunchModel,
     pub ports: Option<Vec<u16>>,
     pub first_latency: bool,
     pub device_name: Option<String>,
-    pub timeout_retry: usize,
 }
 
 impl Default for WithConfig {
@@ -61,17 +58,16 @@ impl Default for WithConfig {
             mtu: None,
             tcp: false,
             ip: None,
-            use_channel: UseChannelType::All,
+            use_channel: entity::UseChannelType::All,
             no_proxy: false,
             server_encrypt: false,
             parallel: 1,
-            cipher_model: CipherModel::AesGcm,
+            cipher_model: entity::CipherModel::AesGcm,
             finger: false,
-            punch_model: PunchModel::All,
+            punch_model: entity::PunchModel::All,
             ports: None,
             first_latency: false,
             device_name: None,
-            timeout_retry: 5,
         }
     }
 }
@@ -137,14 +133,13 @@ impl WithConfig {
             self.no_proxy,
             self.server_encrypt,
             self.parallel,
-            self.cipher_model,
+            self.cipher_model.to_vnt(),
             self.finger,
-            self.punch_model,
+            self.punch_model.to_vnt(),
             self.ports.clone(),
             self.first_latency,
             self.device_name.clone(),
-            self.use_channel,
-            self.timeout_retry,
+            self.use_channel.to_vnt(),
         ) {
             Ok(c) => Ok(c),
             Err(e) => Err(e.to_string()),
