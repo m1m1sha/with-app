@@ -45,7 +45,7 @@
     "markdown-it-link-attributes": "^4.0.1",
     "markdown-it-shikiji": "^0.10.2",
     "shikiji": "^0.10.2",
-    "simple-git-hooks": "^2.9.0",
+    "simple-git-hooks": "^2.10.0",
     "taze": "^0.13.3",
     "typescript": "^5.3.3",
     "unocss": "^0.58.5",
