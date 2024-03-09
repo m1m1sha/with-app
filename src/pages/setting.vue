@@ -53,7 +53,7 @@ onUnmounted(async () => {
         </t-form-item>
       </t-form>
     </t-tab-panel>
-    <t-tab-panel value="server" label="服务器">
+    <t-tab-panel v-if="false" value="server" label="服务器">
       <div />
     </t-tab-panel>
   </t-tabs>

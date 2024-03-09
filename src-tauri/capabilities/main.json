@@ -35,10 +35,6 @@
     {
       "identifier": "fs:write-files",
       "allow": [{ "path": "**/**" }]
-    },
-    {
-      "identifier": "fs:read-all",
-      "allow": [{ "path": "**/**" }]
     }
   ]
 }

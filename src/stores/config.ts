@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import {
   BaseDirectory,
+  exists,
   mkdir,
   readTextFile,
   writeTextFile,
@@ -12,25 +13,46 @@ export const useConfigStore = defineStore('config', () => {
   const config = ref<config>({ ...DEFAULT_CONFIG })
 
   async function loadConfig() {
-    await mkdir(APP_CONFIG_DIR, {
-      baseDir: BaseDirectory.Config,
-      recursive: true,
-    })
-
-    const content = await readTextFile(CONFIG_FILE, {
-      baseDir: BaseDirectory.AppConfig,
-    })
-
-    try {
-      const data = JSON.parse(content)
-      config.value = data
+    if (
+      !(await exists(APP_CONFIG_DIR, {
+        baseDir: BaseDirectory.Config,
+      }))
+    ) {
+      await mkdir(APP_CONFIG_DIR, {
+        baseDir: BaseDirectory.Config,
+      })
     }
-    catch (e) {}
+
+    if (
+      await exists(CONFIG_FILE, {
+        baseDir: BaseDirectory.AppConfig,
+      })
+    ) {
+      const content = await readTextFile(CONFIG_FILE, {
+        baseDir: BaseDirectory.AppConfig,
+      })
+
+      try {
+        const data = JSON.parse(content)
+        config.value = data
+      }
+      catch (e) {}
+    }
 
     saveConfig()
   }
 
   async function saveConfig() {
+    if (
+      !(await exists(APP_CONFIG_DIR, {
+        baseDir: BaseDirectory.Config,
+      }))
+    ) {
+      await mkdir(APP_CONFIG_DIR, {
+        baseDir: BaseDirectory.Config,
+      })
+    }
+
     await writeTextFile(CONFIG_FILE, JSON.stringify(config.value), {
       baseDir: BaseDirectory.AppConfig,
     })
