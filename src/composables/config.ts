@@ -1,4 +1,24 @@
-interface withConfig {
+export enum cipherMode {
+  AesGcm = 0,
+  AesCbc,
+  AesEcb,
+  Sm4Cbc,
+  None,
+}
+
+export enum punchMode {
+  IPv4 = 0,
+  IPv6,
+  All,
+}
+
+export enum channelMode {
+  Relay = 0,
+  P2p,
+  All,
+}
+
+export interface withConfig {
   // udi: String,                        // 设备唯一标识
   server: string // withs 节点
   token: string // 组网 token | 房间名
@@ -22,21 +42,28 @@ interface withConfig {
   channel: channelMode // 信道模式
 }
 
-enum cipherMode {
-  AesGcm = 0,
-  AesCbc,
-  AesEcb,
-  Sm4Cbc,
-  None,
-}
-
-enum punchMode {
-  IPv4 = 0,
-  IPv6,
-  All,
-}
-enum channelMode {
-  Relay = 0,
-  P2p,
-  All,
+export const DEFAULT_CONFIG: config = {
+  with: {
+    server: 'nat1.wherewego.top:29872',
+    token: '',
+    passwd: '',
+    stuns: [
+      'stun.qq.com:3478',
+      'stun.miwifi.com:3478',
+      'stun1.l.google.com:19302',
+      'stun2.l.google.com:19302',
+    ],
+    name: '',
+    proxy: true,
+    server_encrypt: false,
+    finger: false,
+    latency: true,
+    tcp: false,
+    ip: '',
+    parallel: 2,
+    cipher: cipherMode.None,
+    punch: punchMode.All,
+    channel: channelMode.All,
+  },
+  servers: [],
 }
