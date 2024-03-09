@@ -1,9 +1,27 @@
 <template>
-  <main px-4 py-10 text="center gray-700 dark:gray-200">
-    <RouterView />
-    <TheFooter />
-    <div mx-auto mt-5 text-center text-sm opacity-50>
-      [Default Layout]
+  <div>
+    <t-head-menu>
+      <template #operations>
+        <div>
+          <t-button variant="text" shape="square">
+            <template #icon>
+              <t-icon name="setting" />
+            </template>
+          </t-button>
+        </div>
+      </template>
+    </t-head-menu>
+    <div px-4 py-6 text="center gray-700 dark:gray-200">
+      <RouterView />
     </div>
-  </main>
+  </div>
 </template>
+
+<style scoped lang="postcss">
+.t-head-menu {
+  & :deep(.t-head-menu__inner),
+  & :deep(.t-menu__operations:not(:empty)) {
+    height: var(--td-comp-size-xl);
+  }
+}
+</style>

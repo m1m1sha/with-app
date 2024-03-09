@@ -12,8 +12,8 @@
     "windows": [
       {
         "title": "WithApp",
-        "width": 800,
-        "height": 600
+        "width": 475,
+        "height": 320
       }
     ],
     "security": {

@@ -403,7 +403,7 @@ dependencies = [
 [[package]]
 name = "cipher"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with#4c74fa232368ad620e4d943db43954852d7904db"
+source = "git+https://github.com/m1m1sha/with?branch=dev#72359198cd498ac61fc37acac6eff9b7962e4080"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -1903,7 +1903,7 @@ dependencies = [
 [[package]]
 name = "libsm"
 version = "0.5.1"
-source = "git+https://github.com/m1m1sha/with#4c74fa232368ad620e4d943db43954852d7904db"
+source = "git+https://github.com/m1m1sha/with?branch=dev#72359198cd498ac61fc37acac6eff9b7962e4080"
 dependencies = [
  "byteorder",
  "getrandom 0.2.12",
@@ -2090,7 +2090,7 @@ checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
 [[package]]
 name = "nat"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with#4c74fa232368ad620e4d943db43954852d7904db"
+source = "git+https://github.com/m1m1sha/with?branch=dev#72359198cd498ac61fc37acac6eff9b7962e4080"
 dependencies = [
  "crossbeam-utils",
  "encoding",
@@ -2101,7 +2101,7 @@ dependencies = [
  "tokio",
  "tracing",
  "utils",
- "windows 0.52.0",
+ "windows 0.54.0",
  "winreg 0.52.0",
 ]
 
@@ -2312,17 +2312,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "os_info"
-version = "3.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "006e42d5b888366f1880eda20371fedde764ed2213dc8496f49622fa0c99cd5e"
-dependencies = [
- "log",
- "serde",
- "winapi",
-]
-
-[[package]]
 name = "os_pipe"
 version = "1.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2341,7 +2330,7 @@ checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
 [[package]]
 name = "packet"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with#4c74fa232368ad620e4d943db43954852d7904db"
+source = "git+https://github.com/m1m1sha/with?branch=dev#72359198cd498ac61fc37acac6eff9b7962e4080"
 dependencies = [
  "byteorder",
 ]
@@ -2781,7 +2770,7 @@ dependencies = [
 [[package]]
 name = "protocol"
 version = "0.0.0"
-source = "git+https://github.com/m1m1sha/with#4c74fa232368ad620e4d943db43954852d7904db"
+source = "git+https://github.com/m1m1sha/with?branch=dev#72359198cd498ac61fc37acac6eff9b7962e4080"
 
 [[package]]
 name = "quick-xml"
@@ -4266,12 +4255,12 @@ checksum = "09cc8ee72d2a9becf2f2febe0205bbed8fc6615b7cb429ad062dc7b7ddd036a9"
 [[package]]
 name = "utils"
 version = "0.0.0"
-source = "git+https://github.com/m1m1sha/with#4c74fa232368ad620e4d943db43954852d7904db"
+source = "git+https://github.com/m1m1sha/with?branch=dev#72359198cd498ac61fc37acac6eff9b7962e4080"
 dependencies = [
  "parking_lot",
  "tokio",
  "tracing",
- "windows 0.52.0",
+ "windows 0.54.0",
 ]
 
 [[package]]
@@ -4649,6 +4638,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "windows"
+version = "0.54.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9252e5725dbed82865af151df558e754e4a3c2c30818359eb17465f1346a1b49"
+dependencies = [
+ "windows-core 0.54.0",
+ "windows-targets 0.52.4",
+]
+
+[[package]]
 name = "windows-core"
 version = "0.52.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4662,6 +4661,16 @@ name = "windows-core"
 version = "0.53.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9dcc5b895a6377f1ab9fa55acedab1fd5ac0db66ad1e6c7f47e28a22e446a5dd"
+dependencies = [
+ "windows-result",
+ "windows-targets 0.52.4",
+]
+
+[[package]]
+name = "windows-core"
+version = "0.54.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "12661b9c89351d684a50a8a643ce5f608e20243b9fb84687800163429f161d65"
 dependencies = [
  "windows-result",
  "windows-targets 0.52.4",
@@ -4947,7 +4956,7 @@ dependencies = [
 [[package]]
 name = "with"
 version = "0.0.0"
-source = "git+https://github.com/m1m1sha/with#4c74fa232368ad620e4d943db43954852d7904db"
+source = "git+https://github.com/m1m1sha/with?branch=dev#72359198cd498ac61fc37acac6eff9b7962e4080"
 dependencies = [
  "bytes",
  "cipher 0.1.0",
@@ -4973,7 +4982,6 @@ name = "with-app"
 version = "0.0.0"
 dependencies = [
  "encoding",
- "os_info",
  "serde",
  "serde_json",
  "tauri",

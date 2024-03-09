@@ -7,8 +7,17 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Greet: typeof import('./components/Greet.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TButton: typeof import('tdesign-vue-next')['Button']
+    TForm: typeof import('tdesign-vue-next')['Form']
+    TFormItem: typeof import('tdesign-vue-next')['FormItem']
+    THeadMenu: typeof import('tdesign-vue-next')['HeadMenu']
+    TIcon: typeof import('tdesign-vue-next')['Icon']
+    TInput: typeof import('tdesign-vue-next')['Input']
+    TMenuItem: typeof import('tdesign-vue-next')['MenuItem']
+    TOption: typeof import('tdesign-vue-next')['Option']
+    TSelect: typeof import('tdesign-vue-next')['Select']
+    TSpace: typeof import('tdesign-vue-next')['Space']
   }
 }
