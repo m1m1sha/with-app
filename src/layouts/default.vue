@@ -47,7 +47,7 @@ const menu = ref('/')
   }
 
   & :deep(.t-layout__content) {
-    @apply px-2 py-4;
+    @apply px-2 pt-4;
   }
 
   & :deep(.t-layout__footer) {
