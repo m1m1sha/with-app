@@ -1,12 +1,6 @@
-pub mod identifier;
-pub mod parse;
-mod root;
-
 use std::path::PathBuf;
 
 use encoding::{all::GBK, DecoderTrap, Encoding};
-
-pub use root::is_app_elevated;
 
 #[derive(Debug, Clone)]
 pub struct CurrentPath {
