@@ -1,5 +1,6 @@
 <script setup lang="ts">
-
+const configStore = useConfigStore()
+const { config } = storeToRefs(configStore)
 </script>
 
 <template>
@@ -7,19 +8,18 @@
     <t-space direction="vertical">
       <t-form>
         <t-form-item label="服务器">
-          <t-select>
-            <t-option key="apple" label="Apple" value="apple" />
-            <t-option key="orange" label="Orange" value="orange">
-              OrangeContentSlot
-            </t-option>
-            <t-option key="banana" label="Banana" value="banana" />
+          <t-select v-model="config.with.server">
+            <t-option
+              key="nat1.wherewego.top:29872" label="nat1.wherewego.top:29872"
+              value="nat1.wherewego.top:29872"
+            />
           </t-select>
         </t-form-item>
         <t-form-item label="Token" help="输入相同的才能进入同一局域网哦">
-          <t-input />
+          <t-input v-model="config.with.token" />
         </t-form-item>
         <t-form-item label="密码" help="可以不填, 要填大家得填一样的">
-          <t-input />
+          <t-input v-model="config.with.passwd" />
         </t-form-item>
         <t-form-item>
           <t-button>确定</t-button>
