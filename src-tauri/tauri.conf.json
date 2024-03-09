@@ -1,6 +1,6 @@
 {
   "productName": "WithApp",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "identifier": "cn.smjb.with",
   "build": {
     "beforeDevCommand": "pnpm dev",
@@ -11,9 +11,10 @@
   "app": {
     "windows": [
       {
-        "title": "WithApp",
+        "title": "虚拟局域网组网",
         "width": 475,
-        "height": 320
+        "height": 320,
+        "resizable": false
       }
     ],
     "security": {
@@ -21,8 +22,10 @@
     }
   },
   "bundle": {
+    "copyright": "m1m1sha",
     "active": true,
-    "targets": "all",
+    "targets": ["nsis", "updater"],
+    "resources": ["bin"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -30,5 +33,10 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM1MEVGNTZBODg1M0E4MzgKUldRNHFGT0lhdlVPeGRYKzJQNEpROEZKMzhrTFZYK0wrT3ozS01HRTBzZkZqNU9KUUxzS3pWbmkK"
+    }
   }
 }
