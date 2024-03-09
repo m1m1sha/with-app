@@ -2,12 +2,17 @@
 import type { MenuProps } from 'tdesign-vue-next'
 
 const router = useRouter()
+const route = useRoute()
+const appStore = useAppStore()
+
+const { menu } = storeToRefs(appStore)
+
+if (route.path !== menu.value)
+  menu.value = route.path
 
 const changeHandler: MenuProps['onChange'] = (active) => {
   router.push(active)
 }
-
-const menu = ref('/')
 </script>
 
 <template>
