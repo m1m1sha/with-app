@@ -1,0 +1,72 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" color-interpolation-filters="sRGB" preserveAspectRatio="xMidYMid meet" version="1.0">
+
+ <g>
+  <title>Layer 1</title>
+  <g style="vector-effect: non-scaling-stroke;" transform="translate(4, 15) translate(-5, -20) translate(-64, -9) translate(-89, -161) translate(0, 131) translate(86.001) translate(-116, -56) translate(0, 131) translate(86.001) translate(119.998, 94.3759) scale(3.16996) translate(-119.998, -94.3759) translate(119.998, 94.3759) scale(1.46999) translate(-119.998, -94.3759)" id="svg_11" class="icon-text-wrapper icon-svg-group iconsvg" fill="#ff7f00">
+   <g style="vector-effect: non-scaling-stroke;" id="svg_12" class="iconsvg-imagesvg">
+    <g style="vector-effect: non-scaling-stroke;" id="svg_13">
+     <rect style="vector-effect: non-scaling-stroke;" id="svg_14" class="image-rect" height="61.24824" width="100" y="94.37588" x="120" stroke-width="2" fill-opacity="0" fill="#ff7f00"/>
+     <g style="vector-effect: non-scaling-stroke;" id="svg_5">
+      <svg style="vector-effect: non-scaling-stroke;" id="svg_15" class="image-svg-svg primary" filtersec="colorsb5984045382" height="61.24824" width="100" y="94.37588" x="120">
+       <g style="vector-effect: non-scaling-stroke;" id="svg_10">
+        <svg style="vector-effect: non-scaling-stroke;" id="svg_16" viewBox="0.027576187625527382 -0.039846621453762054 1214.7960205078125 744.0399169921875" xmlns="http://www.w3.org/2000/svg">
+         <defs style="vector-effect: non-scaling-stroke;">
+          <linearGradient style="vector-effect: non-scaling-stroke;" y2="0.49997" x2="1.00001" y1="0.49997" x1="-0.00009" id="svg_9">
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc64a" offset="0"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc143" offset="0.12"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffb531" offset="0.3"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffa013" offset="0.5"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff9300" offset="0.61"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff7f00" offset="1"/>
+          </linearGradient>
+          <linearGradient style="vector-effect: non-scaling-stroke;" y2="0.49997" x2="1.00003" y1="0.49997" x1="-0.00001" id="svg_8">
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc64a" offset="0"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc143" offset="0.12"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffb531" offset="0.3"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffa013" offset="0.5"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff9300" offset="0.61"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff7f00" offset="1"/>
+          </linearGradient>
+          <linearGradient style="vector-effect: non-scaling-stroke;" y2="0.49997" x2="0.99999" y1="0.49997" x1="-0.00007" id="svg_7">
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc64a" offset="0"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc143" offset="0.12"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffb531" offset="0.3"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffa013" offset="0.5"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff9300" offset="0.61"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff7f00" offset="1"/>
+          </linearGradient>
+          <linearGradient style="vector-effect: non-scaling-stroke;" x1="-0.00001" y2="0.49997" x2="1.00003" y1="0.49997" id="svg_6">
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc64a" offset="0"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffc143" offset="0.12"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffb531" offset="0.3"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ffa013" offset="0.5"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff9300" offset="0.61"/>
+           <stop style="vector-effect: non-scaling-stroke;" stop-color="#ff7f00" offset="1"/>
+          </linearGradient>
+         </defs>
+         <g style="vector-effect: non-scaling-stroke;" id="svg_17">
+          <g style="vector-effect: non-scaling-stroke;" id="svg_18">
+           <path style="vector-effect: non-scaling-stroke;" id="svg_19" fill="url(#svg_9)" d="m862.92,744a96.29,96.29 0 0 1 -87.26,-136.74l255.57,-551.46a96.24,96.24 0 1 1 174.64,80.94l-255.57,551.42a96.26,96.26 0 0 1 -87.38,55.84z"/>
+           <path style="vector-effect: non-scaling-stroke;" id="svg_20" fill="url(#svg_8)" d="m863,744a96.25,96.25 0 0 1 -87.38,-55.8l-255.53,-551.46a96.24,96.24 0 1 1 174.64,-80.94l255.57,551.42a96.29,96.29 0 0 1 -87.3,136.78z"/>
+           <path style="vector-effect: non-scaling-stroke;" id="svg_21" fill="url(#svg_7)" d="m351.77,744a96.29,96.29 0 0 1 -87.26,-136.74l255.58,-551.46a96.24,96.24 0 1 1 174.64,80.94l-255.57,551.42a96.26,96.26 0 0 1 -87.39,55.84z"/>
+           <path style="vector-effect: non-scaling-stroke;" id="svg_22" fill="url(#svg_6)" d="m351.9,744a96.25,96.25 0 0 1 -87.38,-55.8l-255.57,-551.46a96.24,96.24 0 1 1 174.64,-80.94l255.57,551.42a96.29,96.29 0 0 1 -87.26,136.78z"/>
+          </g>
+         </g>
+        </svg>
+       </g>
+      </svg>
+     </g>
+    </g>
+   </g>
+   <g style="vector-effect: non-scaling-stroke;" id="svg_23" transform="translate(119.998, 94.3759) scale(3.16996) translate(-119.998, -94.3759) translate(37.8548, 29.772) scale(3.16996) translate(-37.8548, -29.772) translate(11.9417, 9.39191) scale(3.16996) translate(-11.9417, -9.39191) translate(3.76716, 2.96279) scale(3.16996) translate(-3.76716, -2.96279) translate(1.18839, 0.934645) scale(3.16996) translate(-1.18839, -0.934645) translate(0.374892, 0.294845) scale(3.16996) translate(-0.374892, -0.294845) translate(0.118264, 0.0930121) scale(3.16996) translate(-0.118264, -0.0930121) translate(0.0373078, 0.0293417) scale(3.16996) translate(-0.0373078, -0.0293417) translate(0.0117692, 0.00925619) scale(3.16996) translate(-0.0117692, -0.00925619) translate(0.00371272, 0.00291997) scale(1.46999) translate(-0.00371272, -0.00291997) translate(0.00252567, 0.00198639) scale(1.46999) translate(-0.00252567, -0.00198639) translate(0.00171816, 0.00135129) scale(1.46999) translate(-0.00171816, -0.00135129) translate(0.00116882, 0.000919252) scale(1.46999) translate(-0.00116882, -0.000919252) translate(0.000795121, 0.000625345) scale(1.46999) translate(-0.000795121, -0.000625345) translate(0.000540902, 0.000425408) scale(1.46999) translate(-0.000540902, -0.000425408)">
+    <g transform="translate(119.998, 94.3759) scale(3.16996) translate(-119.998, -94.3759) translate(11.9417, 9.39191) scale(3.16996) translate(-11.9417, -9.39191) translate(1.18839, 0.934645) scale(3.16996) translate(-1.18839, -0.934645) translate(0.118264, 0.0930121) scale(3.16996) translate(-0.118264, -0.0930121) translate(0.0117692, 0.00925619) scale(3.16996) translate(-0.0117692, -0.00925619) translate(0.00117122, 0.000921139) scale(3.16996) translate(-0.00117122, -0.000921139) translate(0.000116555, 9.1668e-05) scale(3.16996) translate(-0.000116555, -9.1668e-05) translate(1.15991e-05, 9.12243e-06) scale(3.16996) translate(-1.15991e-05, -9.12243e-06) translate(1.1543e-06, 9.07828e-07) scale(3.16996) translate(-1.1543e-06, -9.07828e-07) translate(1.14871e-07, 9.03434e-08) scale(1.46999) translate(-1.14871e-07, -9.03434e-08) translate(5.31594e-08, 4.18087e-08) scale(1.46999) translate(-5.31594e-08, -4.18087e-08) translate(2.46009e-08, 1.93481e-08) scale(1.46999) translate(-2.46009e-08, -1.93481e-08) translate(1.13847e-08, 8.95382e-09) scale(1.46999) translate(-1.13847e-08, -8.95382e-09) translate(5.26856e-09, 4.14361e-09) scale(1.46999) translate(-5.26856e-09, -4.14361e-09) translate(2.43816e-09, 1.91756e-09) scale(1.46999) translate(-2.43816e-09, -1.91756e-09)" style="vector-effect: non-scaling-stroke;" id="svg_24" class="tp-name iconsvg-namesvg" data-gra="path-name">
+     <g style="vector-effect: non-scaling-stroke;" id="svg_25" transform="translate(120, 86.6241) scale(1) translate(119.998, 94.3759) scale(3.16996) translate(-119.998, -94.3759) translate(3.76716, 2.96279) scale(3.16996) translate(-3.76716, -2.96279) translate(0.118264, 0.0930121) scale(3.16996) translate(-0.118264, -0.0930121) translate(0.00371272, 0.00291997) scale(3.16996) translate(-0.00371272, -0.00291997) translate(0.000116555, 9.1668e-05) scale(3.16996) translate(-0.000116555, -9.1668e-05) translate(3.65907e-06, 2.87778e-06) scale(3.16996) translate(-3.65907e-06, -2.87778e-06) translate(1.14871e-07, 9.03434e-08) scale(3.16996) translate(-1.14871e-07, -9.03434e-08) translate(3.60619e-09, 2.83619e-09) scale(3.16996) translate(-3.60619e-09, -2.83619e-09) translate(1.13211e-10, 8.90379e-11) scale(3.16996) translate(-1.13211e-10, -8.90379e-11) translate(3.55408e-12, 2.79521e-12) scale(1.46999) translate(-3.55408e-12, -2.79521e-12) translate(1.11888e-12, 8.79974e-13) scale(1.46999) translate(-1.11888e-12, -8.79974e-13) translate(3.5224e-13, 2.77029e-13) scale(1.46999) translate(-3.5224e-13, -2.77029e-13) translate(1.10891e-13, 8.72132e-14) scale(1.46999) translate(-1.10891e-13, -8.72132e-14) translate(3.49102e-14, 2.74559e-14) scale(1.46999) translate(-3.49102e-14, -2.74559e-14) translate(1.09902e-14) scale(1.46999) translate(-1.09902e-14)">
+      <g transform="translate(119.998, 94.3759) scale(3.16996) translate(-119.998, -94.3759) translate(1.18839, 0.934645) scale(3.16996) translate(-1.18839, -0.934645) translate(0.0117692, 0.00925619) scale(3.16996) translate(-0.0117692, -0.00925619) translate(0.000116555, 9.1668e-05) scale(3.16996) translate(-0.000116555, -9.1668e-05) translate(1.1543e-06, 9.07828e-07) scale(3.16996) translate(-1.1543e-06, -9.07828e-07) translate(1.14315e-08, 8.99061e-09) scale(3.16996) translate(-1.14315e-08, -8.99061e-09) translate(1.13211e-10, 8.90379e-11) scale(3.16996) translate(-1.13211e-10, -8.90379e-11) translate(1.12117e-12, 8.81795e-13) scale(3.16996) translate(-1.12117e-12, -8.81795e-13) translate(1.11057e-14) scale(3.16996) translate(-1.11057e-14) translate(-0) scale(1.46999) translate(0) translate(-0) scale(1.46999) translate(0) translate(-0) scale(1.46999) translate(0) translate(-0) scale(1.46999) translate(0) translate(-0) scale(1.46999) translate(0) translate(-0) scale(1.46999) translate(0)" style="vector-effect: non-scaling-stroke;" id="svg_26">
+       <path style="vector-effect: non-scaling-stroke;" id="svg_27"/>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
