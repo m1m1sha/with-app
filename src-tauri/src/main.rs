@@ -2,7 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod utils;
-mod with;
 
 fn main() {
     tracing_subscriber::fmt::init();

@@ -1,4 +1,0 @@
-[submodule "src-tauri/vnt"]
-	path = src-tauri/vnt
-	url = https://github.com/lbl8603/vnt.git
-	branch = mio

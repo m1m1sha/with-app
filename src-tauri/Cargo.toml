@@ -2,7 +2,7 @@
 name = "with-app"
 version = "0.0.0"
 description = "with-app"
-authors = ["m1m1sha"]
+authors = [ "m1m1sha" ]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -11,27 +11,17 @@ edition = "2021"
 tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
-vnt = { path = "./vnt/vnt" }
-
 tauri = { version = "2.0.0-beta", features = [] }
 tauri-plugin-shell = "2.0.0-beta"
 tracing = "0.1"
 tracing-subscriber = "0.3"
-serde = { version = "1", features = ["derive"] }
+serde = { version = "1", features = [ "derive" ] }
 serde_json = "1"
-uuid = { version = "1", features = ["v4"] }
+uuid = { version = "1", features = [ "v4" ] }
 encoding = "^0.2"
 os_info = "3.7"
-
-[target.'cfg(any(target_os = "linux",target_os = "macos"))'.dependencies]
-sudo = "0.6"
-
-[target.'cfg(target_os = "windows")'.dependencies]
-windows = { version = "0.54", features = [
-    "Win32_Security",
-    "Win32_System_Threading",
-] }
+with = { git = "https://github.com/m1m1sha/with" }
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!
-custom-protocol = ["tauri/custom-protocol"]
+custom-protocol = [ "tauri/custom-protocol" ]
