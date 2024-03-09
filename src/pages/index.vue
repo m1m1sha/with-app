@@ -16,10 +16,12 @@ const { config } = storeToRefs(configStore)
         <t-form-item label="密码" help="可以不填, 要填大家得填一样的">
           <t-input v-model="config.with.passwd" type="password" :maxlength="32" show-limit-number />
         </t-form-item>
-        <t-form-item>
-          <t-button>确定</t-button>
-        </t-form-item>
       </t-form>
+      <div flex items-center justify-center>
+        <t-button w-120px>
+          启动！
+        </t-button>
+      </div>
     </t-space>
   </div>
 </template>
