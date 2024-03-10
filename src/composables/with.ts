@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api";
 import { UnlistenFn, listen } from "@tauri-apps/api/event";
 import type { withConfig } from "./config";
-import { NeedRoute, WithRoute } from "~/stores/app";
+import { NeedRoute, WithRoute, WithStatus } from "~/stores/app";
 
 const WITH_START = "with_start";
 const WITH_STOP = "with_stop";
@@ -11,11 +11,12 @@ const appStore = useAppStore();
 
 const { withStatus, withRoutes } = storeToRefs(appStore);
 export async function withStart(config: withConfig) {
+  withStatus.value = WithStatus.Connecting;
   await invoke(WITH_START, { config });
 }
 
 export async function withStop() {
-  withStatus.value = "stopped";
+  withStatus.value = WithStatus.Stopping;
   await invoke(WITH_STOP, {});
 }
 
@@ -26,15 +27,25 @@ interface eventPayload {
 
 export async function withEventConnect(): Promise<UnlistenFn> {
   return listen<eventPayload>(WITH_EVENT_CONNECT, (event) => {
-    const data = JSON.parse(event.payload.data);
+    let data = {};
+
+    try {
+      data = JSON.parse(event.payload.data);
+    } catch (e) {
+      data = {};
+    }
 
     if (event.payload.flag === "success") {
-      withStatus.value = "connected";
+      withStatus.value = WithStatus.Connecting;
+    }
+
+    if (event.payload.flag === "stop") {
+      withStatus.value = WithStatus.Stopped;
     }
 
     if (event.payload.flag === "route") {
-      if (withStatus.value !== "connected") {
-        withStatus.value = "connected";
+      if (withStatus.value !== WithStatus.Connected) {
+        withStatus.value = WithStatus.Connected;
       }
       let d = data as WithRoute[];
       let arr: NeedRoute[] = [];

@@ -10,6 +10,7 @@ declare global {
   const DEFAULT_CONFIG: typeof import('./composables/config')['DEFAULT_CONFIG']
   const EffectScope: typeof import('vue')['EffectScope']
   const WITH_EVENT_CONNECT: typeof import('./composables/with')['WITH_EVENT_CONNECT']
+  const WithStatus: typeof import('./stores/app')['WithStatus']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const channelMode: typeof import('./composables/config')['channelMode']
   const cipherMode: typeof import('./composables/config')['cipherMode']
@@ -109,6 +110,7 @@ declare module 'vue' {
     readonly CONFIG_FILE: UnwrapRef<typeof import('./composables/path')['CONFIG_FILE']>
     readonly DEFAULT_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_CONFIG']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
     readonly cipherMode: UnwrapRef<typeof import('./composables/config')['cipherMode']>
@@ -198,6 +200,7 @@ declare module '@vue/runtime-core' {
     readonly CONFIG_FILE: UnwrapRef<typeof import('./composables/path')['CONFIG_FILE']>
     readonly DEFAULT_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_CONFIG']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
     readonly cipherMode: UnwrapRef<typeof import('./composables/config')['cipherMode']>

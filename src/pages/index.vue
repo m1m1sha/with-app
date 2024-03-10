@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { StickyToolProps, TableProps } from 'tdesign-vue-next';
+import { WithStatus } from '~/stores/app';
 
 const configStore = useConfigStore()
 const { config } = storeToRefs(configStore)
@@ -52,15 +53,17 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </t-form-item>
       </t-form>
       <div flex items-center justify-center>
-        <t-button w-120px @click="start" v-show="withStatus !== 'connected'">
+        <t-button w-120px @click="start" v-show="withStatus !== WithStatus.Connected"
+          :loading="withStatus === WithStatus.Connecting">
           启动！
         </t-button>
-        <t-button theme="danger" w-120px @click="stop" v-show="withStatus === 'connected'">
+        <t-button theme="danger" w-120px @click="stop" v-show="withStatus === WithStatus.Connected"
+          :loading="withStatus === WithStatus.Stopping">
           关闭
         </t-button>
       </div>
     </t-space>
-    <t-sticky-tool type="compact" v-if="withStatus === 'connected'" @click="handleClick">
+    <t-sticky-tool type="compact" v-if="withStatus === WithStatus.Connected" @click="handleClick">
       <t-sticky-item popup="组用户">
         <template #icon>
           <t-icon name="user-list" />

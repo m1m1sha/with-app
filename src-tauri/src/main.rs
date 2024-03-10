@@ -4,6 +4,7 @@
 use std::{
     net::{Ipv4Addr, ToSocketAddrs},
     sync::Mutex,
+    time::Duration,
     vec,
 };
 
@@ -101,10 +102,22 @@ async fn with_start(
         100,
     )
     .unwrap();
-    let core = with::core::Core::new(cfg).unwrap();
 
-    let with = core.init(AppCallback { window }).await.unwrap();
+    let with = tokio::time::timeout(Duration::from_secs(5), async move {
+        with::core::With::new(AppCallback { window }, cfg)
+            .await
+            .unwrap()
+    })
+    .await;
+    let with = match with {
+        Ok(with) => with,
+        Err(_) => {
+            return Err("timeout".to_owned());
+        }
+    };
+
     let with_c = with.clone();
+
     tauri::async_runtime::spawn(async move {
         with_c.wait();
     });
@@ -176,7 +189,6 @@ struct RoutePayload {
 
 impl callback::Callback for AppCallback {
     fn success(&self) {
-        // emit("with-success", ());
         let _ = self.window.emit(
             "with_event_connect",
             EventPayload {
@@ -210,7 +222,7 @@ impl callback::Callback for AppCallback {
         let _ = self.window.emit(
             "with_event_connect",
             EventPayload {
-                flag: "connecting".to_owned(),
+                flag: "connect".to_owned(),
                 data,
             },
         );
