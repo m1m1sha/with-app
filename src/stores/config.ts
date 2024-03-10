@@ -1,10 +1,5 @@
 import { defineStore } from 'pinia'
-import {
-  BaseDirectory,
-  exists,
-  readTextFile,
-  writeTextFile,
-} from '@tauri-apps/api/fs'
+import { BaseDirectory, exists } from '@tauri-apps/api/fs'
 
 export const useConfigStore = defineStore('config', () => {
   const config = ref<config>({ ...DEFAULT_CONFIG })

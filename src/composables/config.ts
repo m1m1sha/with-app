@@ -1,21 +1,21 @@
 export enum cipherMode {
-  AesGcm = 0,
-  AesCbc,
-  AesEcb,
-  Sm4Cbc,
-  None,
+  AesGcm = 'AesGcm',
+  AesCbc = 'AesCbc',
+  AesEcb = 'AesEcb',
+  Sm4Cbc = 'Sm4Cbc',
+  None = 'None',
 }
 
 export enum punchMode {
-  IPv4 = 0,
-  IPv6,
-  All,
+  IPv4 = 'Ipv4',
+  IPv6 = 'Ipv6',
+  All = 'All',
 }
 
 export enum channelMode {
-  Relay = 0,
-  P2p,
-  All,
+  Relay = 'Relay',
+  P2p = 'P2p',
+  All = 'All',
 }
 
 export interface withConfig {
