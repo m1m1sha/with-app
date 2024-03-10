@@ -110,18 +110,15 @@ async fn with_start(
     let core = with::core::Core::new(cfg).unwrap();
 
     let with = core.init(AppCallback { window }).await.unwrap();
-
-    let c_mutex = Arc::clone(&state.with);
     with.wait();
-    *c_mutex.lock().unwrap() = Some(with);
+    *state.with.lock().unwrap() = Some(with);
     Ok(())
 }
 
 #[tauri::command]
 async fn with_stop(state: tauri::State<'_, WithState>) -> Result<(), String> {
-    let c_mutex = Arc::clone(&state.with);
-    c_mutex.lock().unwrap().clone().unwrap().stop();
-    *c_mutex.lock().unwrap() = None;
+    state.with.lock().unwrap().clone().unwrap().stop();
+    *state.with.lock().unwrap() = None;
     Ok(())
 }
 
