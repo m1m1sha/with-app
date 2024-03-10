@@ -8,17 +8,6 @@ import '@unocss/reset/tailwind.css'
 import 'uno.css'
 import '~/styles/main.css'
 
-const app = createApp(App)
-
-const router = createRouter({
-  history: createWebHistory(),
-  extendRoutes: (routes: RouteRecordRaw[]) => setupLayouts(routes),
-})
-
-app.use(router)
-app.use(createPinia())
-app.mount('#app')
-
 if (import.meta.env.PROD) {
   document.addEventListener('keydown', (event) => {
     if (
@@ -34,5 +23,13 @@ if (import.meta.env.PROD) {
   })
 }
 
-const configStore = useConfigStore()
-await configStore.loadConfig()
+const app = createApp(App)
+
+const router = createRouter({
+  history: createWebHistory(),
+  extendRoutes: (routes: RouteRecordRaw[]) => setupLayouts(routes),
+})
+
+app.use(router)
+app.use(createPinia())
+app.mount('#app')
