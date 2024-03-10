@@ -60,7 +60,7 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </t-button>
       </div>
     </t-space>
-    <t-sticky-tool type="compact" v-if="withStatus !== 'connected'" @click="handleClick">
+    <t-sticky-tool type="compact" v-if="withStatus === 'connected'" @click="handleClick">
       <t-sticky-item popup="组用户">
         <template #icon>
           <t-icon name="user-list" />
