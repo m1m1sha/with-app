@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { UnlistenFn } from '@tauri-apps/api/event';
 import type { MenuProps } from 'tdesign-vue-next'
 
 const router = useRouter()
@@ -13,6 +14,16 @@ if (route.path !== menu.value)
 const changeHandler: MenuProps['onChange'] = (active) => {
   router.push(active)
 }
+let unlisten: null | UnlistenFn = null
+
+onMounted(async () => {
+  unlisten = await withEventConnect()
+})
+
+onUnmounted(() => {
+  if (unlisten !== null)
+    unlisten()
+})
 </script>
 
 <template>

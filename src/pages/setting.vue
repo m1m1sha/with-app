@@ -30,25 +30,25 @@ onUnmounted(async () => {
       <t-form>
         <t-form-item label="加密模式" help="需要选择相同加密模式">
           <t-select v-model="config.with.cipher">
-            <t-option key="aes-gcm" label="aes-gcm" :value="0" />
-            <t-option key="aes-cbc" label="aes-cbc" :value="1" />
-            <t-option key="aes-ecb" label="aes-ecb" :value="2" />
-            <t-option key="sm4-cbc" label="sm4-cbc" :value="3" />
-            <t-option key="none" label="无加密" :value="4" />
+            <t-option key="aes-gcm" label="aes-gcm" value="AesGcm" />
+            <t-option key="aes-cbc" label="aes-cbc" value="AesCbc" />
+            <t-option key="aes-ecb" label="aes-ecb" value="AesEcb" />
+            <t-option key="sm4-cbc" label="sm4-cbc" value="Sm4Cbc" />
+            <t-option key="none" label="无加密" value="None" />
           </t-select>
         </t-form-item>
         <t-form-item label="打洞模式" help="按实际情况选择">
           <t-select v-model="config.with.punch">
-            <t-option key="ipv4" label="ipv4" :value="0" />
-            <t-option key="ipv6" label="ipv6" :value="1" />
-            <t-option key="all" label="ipv4/6" :value="2" />
+            <t-option key="ipv4" label="ipv4" value="Ipv4" />
+            <t-option key="ipv6" label="ipv6" value="Ipv6" />
+            <t-option key="all" label="ipv4/6" value="All" />
           </t-select>
         </t-form-item>
         <t-form-item label="通道模式" help="按实际情况选择">
           <t-select v-model="config.with.channel">
-            <t-option key="relay" label="中转" :value="0" />
-            <t-option key="p2p" label="p2p" :value="1" />
-            <t-option key="all" label="中转/p2p" :value="2" />
+            <t-option key="relay" label="中转" value="Relay" />
+            <t-option key="p2p" label="p2p" value="P2p" />
+            <t-option key="all" label="中转/p2p" value="All" />
           </t-select>
         </t-form-item>
       </t-form>

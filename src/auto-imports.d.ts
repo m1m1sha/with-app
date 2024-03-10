@@ -9,6 +9,7 @@ declare global {
   const CONFIG_FILE: typeof import('./composables/path')['CONFIG_FILE']
   const DEFAULT_CONFIG: typeof import('./composables/config')['DEFAULT_CONFIG']
   const EffectScope: typeof import('vue')['EffectScope']
+  const WITH_EVENT_CONNECT: typeof import('./composables/with')['WITH_EVENT_CONNECT']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const channelMode: typeof import('./composables/config')['channelMode']
   const cipherMode: typeof import('./composables/config')['cipherMode']
@@ -87,6 +88,9 @@ declare global {
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
   const watchSyncEffect: typeof import('vue')['watchSyncEffect']
+  const withEventConnect: typeof import('./composables/with')['withEventConnect']
+  const withStart: typeof import('./composables/with')['withStart']
+  const withStop: typeof import('./composables/with')['withStop']
   const writeConfig: typeof import('./composables/path')['writeConfig']
   const writeText: typeof import('./composables/path')['writeText']
 }
@@ -181,6 +185,9 @@ declare module 'vue' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly withEventConnect: UnwrapRef<typeof import('./composables/with')['withEventConnect']>
+    readonly withStart: UnwrapRef<typeof import('./composables/with')['withStart']>
+    readonly withStop: UnwrapRef<typeof import('./composables/with')['withStop']>
     readonly writeConfig: UnwrapRef<typeof import('./composables/path')['writeConfig']>
   }
 }
@@ -267,6 +274,9 @@ declare module '@vue/runtime-core' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly withEventConnect: UnwrapRef<typeof import('./composables/with')['withEventConnect']>
+    readonly withStart: UnwrapRef<typeof import('./composables/with')['withStart']>
+    readonly withStop: UnwrapRef<typeof import('./composables/with')['withStop']>
     readonly writeConfig: UnwrapRef<typeof import('./composables/path')['writeConfig']>
   }
 }

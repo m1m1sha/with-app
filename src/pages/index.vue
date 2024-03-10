@@ -1,6 +1,14 @@
 <script setup lang="ts">
 const configStore = useConfigStore()
 const { config } = storeToRefs(configStore)
+
+async function start() {
+  const cfg = JSON.parse(JSON.stringify(config.value.with))
+  await withStart(cfg)
+}
+async function stop() {
+  await withStop()
+}
 </script>
 
 <template>
@@ -21,8 +29,11 @@ const { config } = storeToRefs(configStore)
         </t-form-item>
       </t-form>
       <div flex items-center justify-center>
-        <t-button w-120px>
+        <t-button w-120px @click="start">
           启动！
+        </t-button>
+        <t-button w-120px @click="stop">
+          关闭
         </t-button>
       </div>
     </t-space>
