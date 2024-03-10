@@ -29,7 +29,6 @@ export async function withEventConnect(): Promise<UnlistenFn> {
     const data = JSON.parse(event.payload.data);
 
     if (event.payload.flag === "success") {
-      console.log("sss");
       withStatus.value = "connected";
     }
 
