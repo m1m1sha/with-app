@@ -18,9 +18,7 @@ mod util;
 fn main() {
     tracing_subscriber::fmt::init();
     tauri::Builder::default()
-        .manage(WithState {
-            with: Arc::new(Mutex::new(None)),
-        })
+        .manage(WithState(Mutex::new(None)))
         .invoke_handler(tauri::generate_handler![
             with_start,
             with_stop,
@@ -31,11 +29,7 @@ fn main() {
         .expect("error while running tauri application");
 }
 
-#[derive(Clone)]
-pub struct WithState {
-    pub with: Arc<Mutex<Option<with::core::With>>>,
-}
-
+pub struct WithState(Mutex<Option<with::core::With>>);
 #[derive(Deserialize, Serialize, Clone, Debug)]
 pub struct FrontConfig {
     pub stuns: Vec<String>,   // stun 节点
@@ -110,21 +104,24 @@ async fn with_start(
     let core = with::core::Core::new(cfg).unwrap();
 
     let with = core.init(AppCallback { window }).await.unwrap();
-    with.wait();
-    *state.with.lock().unwrap() = Some(with);
+    let with_c = with.clone();
+    tauri::async_runtime::spawn(async move {
+        with_c.wait();
+    });
+    *state.0.lock().unwrap() = Some(with);
     Ok(())
 }
 
 #[tauri::command]
 async fn with_stop(state: tauri::State<'_, WithState>) -> Result<(), String> {
-    state.with.lock().unwrap().clone().unwrap().stop();
-    *state.with.lock().unwrap() = None;
+    state.0.lock().unwrap().as_ref().unwrap().stop();
+    *state.0.lock().unwrap() = None;
     Ok(())
 }
 
 #[tauri::command]
 fn with_route(state: tauri::State<'_, WithState>) -> Vec<(Ipv4Addr, Vec<with::channel::Route>)> {
-    if let Some(with) = state.with.lock().unwrap().clone() {
+    if let Some(with) = state.0.lock().unwrap().as_ref() {
         with.route_table()
     } else {
         vec![]
@@ -133,7 +130,7 @@ fn with_route(state: tauri::State<'_, WithState>) -> Vec<(Ipv4Addr, Vec<with::ch
 
 #[tauri::command]
 fn with_status(state: tauri::State<'_, WithState>) -> bool {
-    if let Some(with) = state.with.lock().unwrap().clone() {
+    if let Some(with) = state.0.lock().unwrap().as_ref() {
         with.current_device().status.online()
     } else {
         false
