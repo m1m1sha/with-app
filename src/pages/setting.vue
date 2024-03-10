@@ -18,6 +18,9 @@ onUnmounted(async () => {
   <t-tabs v-model="settingTab" h-full @change="changeHandler">
     <t-tab-panel value="basic" label="基本">
       <t-form>
+        <t-form-item label="组网昵称" help="用于区分, 不填默认为设备识别码">
+          <t-input v-model="config.with.name" />
+        </t-form-item>
         <t-form-item label="强制TCP" help="建议仅在UDP丢包严重时启用">
           <t-switch v-model="config.with.tcp" />
         </t-form-item>
