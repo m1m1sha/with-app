@@ -23,5 +23,8 @@ declare module 'vue' {
     TOption: typeof import('tdesign-vue-next')['Option']
     TSelect: typeof import('tdesign-vue-next')['Select']
     TSpace: typeof import('tdesign-vue-next')['Space']
+    TSwitch: typeof import('tdesign-vue-next')['Switch']
+    TTabPanel: typeof import('tdesign-vue-next')['TabPanel']
+    TTabs: typeof import('tdesign-vue-next')['Tabs']
   }
 }

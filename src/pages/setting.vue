@@ -26,7 +26,7 @@ onUnmounted(async () => {
         </t-form-item>
       </t-form>
     </t-tab-panel>
-    <t-tab-panel value="advanced" label="高级">
+    <t-tab-panel value="mode" label="模式">
       <t-form>
         <t-form-item label="加密模式" help="需要选择相同加密模式">
           <t-select v-model="config.with.cipher">
