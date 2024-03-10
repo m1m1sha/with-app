@@ -29,10 +29,14 @@ export async function withEventConnect(): Promise<UnlistenFn> {
     const data = JSON.parse(event.payload.data);
 
     if (event.payload.flag === "success") {
+      console.log("sss");
       withStatus.value = "connected";
     }
 
     if (event.payload.flag === "route") {
+      if (withStatus.value !== "connected") {
+        withStatus.value = "connected";
+      }
       let d = data as WithRoute[];
       let arr: NeedRoute[] = [];
       d.forEach((i) => {

@@ -52,10 +52,10 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </t-form-item>
       </t-form>
       <div flex items-center justify-center>
-        <t-button w-120px @click="start" v-if="withStatus === 'stopped'">
+        <t-button w-120px @click="start" v-show="withStatus !== 'connected'">
           启动！
         </t-button>
-        <t-button theme="danger" w-120px @click="stop" v-else>
+        <t-button theme="danger" w-120px @click="stop" v-show="withStatus === 'connected'">
           关闭
         </t-button>
       </div>
