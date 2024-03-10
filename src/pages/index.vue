@@ -67,12 +67,12 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </template>
       </t-sticky-item>
     </t-sticky-tool>
-    <t-dialog :footer="false" :header="false" :closeOnEscKeydown="false" :closeOnOverlayClick="false"
-      preventScrollThrough showOverlay showInAttachedElement v-model:visible="visible">
-      <t-table :stripe="true" size="small" height="50%" :data="withRoutes" :columns="columns" row-key="ip">
+    <t-dialog :footer="false" :header="false" preventScrollThrough showOverlay showInAttachedElement
+      v-model:visible="visible">
+      <t-table :stripe="true" size="small" maxHeight="50%" :data="withRoutes" :columns="columns" row-key="ip">
         <template #empty>
           <span
-            style="display: flex; align-items: center; justify-content: center; height: 40px; color: var(--td-text-color-placeholder)">
+            style="display: flex; align-items: center; justify-content: center; height: 38px; color: var(--td-text-color-placeholder)">
             😊 暂时还未发现其他组网设备
           </span>
         </template>
@@ -93,5 +93,9 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
 
 :global(.t-dialog__body) {
   @apply p-0;
+}
+
+:global(.t-table__empty) {
+  min-height: auto;
 }
 </style>
