@@ -9,13 +9,13 @@ export interface Route {
   is_tcp: boolean;
   index: number;
   addr: string;
-  metric: number;
-  rt: number;
+  metric: string;
+  rt: string;
 }
 
 export interface NeedRoute {
   ip: string;
-  rt: number;
+  rt: string;
   channel: string;
 }
 
@@ -26,6 +26,12 @@ export enum WithStatus {
   Connected,
 }
 
+export interface WithLocalInfo {
+  virtual_gateway: string;
+  virtual_ip: string;
+  virtual_netmask: string;
+}
+
 export const useAppStore = defineStore("app", () => {
   const menu = ref("/");
   const settingTab = ref("basic");
@@ -34,10 +40,13 @@ export const useAppStore = defineStore("app", () => {
 
   const withRoutes = ref<NeedRoute[]>([]);
 
+  const withLocalInfo = ref<WithLocalInfo>();
+
   return {
     menu,
     settingTab,
     withStatus,
     withRoutes,
+    withLocalInfo,
   };
 });
