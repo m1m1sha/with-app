@@ -13,6 +13,7 @@ declare global {
   const channelMode: typeof import('./composables/config')['channelMode']
   const cipherMode: typeof import('./composables/config')['cipherMode']
   const computed: typeof import('vue')['computed']
+  const config: typeof import('./composables/path')['config']
   const createApp: typeof import('vue')['createApp']
   const createPinia: typeof import('pinia')['createPinia']
   const customRef: typeof import('vue')['customRef']
@@ -22,6 +23,7 @@ declare global {
   const definePage: typeof import('unplugin-vue-router/runtime')['definePage']
   const defineStore: typeof import('pinia')['defineStore']
   const effectScope: typeof import('vue')['effectScope']
+  const existsConfig: typeof import('./composables/path')['existsConfig']
   const getActivePinia: typeof import('pinia')['getActivePinia']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -56,6 +58,7 @@ declare global {
   const provide: typeof import('vue')['provide']
   const punchMode: typeof import('./composables/config')['punchMode']
   const reactive: typeof import('vue')['reactive']
+  const readConfig: typeof import('./composables/path')['readConfig']
   const readonly: typeof import('vue')['readonly']
   const ref: typeof import('vue')['ref']
   const resolveComponent: typeof import('vue')['resolveComponent']
@@ -84,6 +87,8 @@ declare global {
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
   const watchSyncEffect: typeof import('vue')['watchSyncEffect']
+  const writeConfig: typeof import('./composables/path')['writeConfig']
+  const writeText: typeof import('./composables/path')['writeText']
 }
 // for type re-export
 declare global {
@@ -112,6 +117,7 @@ declare module 'vue' {
     readonly definePage: UnwrapRef<typeof import('unplugin-vue-router/runtime')['definePage']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly existsConfig: UnwrapRef<typeof import('./composables/path')['existsConfig']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
@@ -146,6 +152,7 @@ declare module 'vue' {
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly punchMode: UnwrapRef<typeof import('./composables/config')['punchMode']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
+    readonly readConfig: UnwrapRef<typeof import('./composables/path')['readConfig']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
@@ -174,6 +181,7 @@ declare module 'vue' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly writeConfig: UnwrapRef<typeof import('./composables/path')['writeConfig']>
   }
 }
 declare module '@vue/runtime-core' {
@@ -195,6 +203,7 @@ declare module '@vue/runtime-core' {
     readonly definePage: UnwrapRef<typeof import('unplugin-vue-router/runtime')['definePage']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly existsConfig: UnwrapRef<typeof import('./composables/path')['existsConfig']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
@@ -229,6 +238,7 @@ declare module '@vue/runtime-core' {
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly punchMode: UnwrapRef<typeof import('./composables/config')['punchMode']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
+    readonly readConfig: UnwrapRef<typeof import('./composables/path')['readConfig']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
@@ -257,5 +267,6 @@ declare module '@vue/runtime-core' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly writeConfig: UnwrapRef<typeof import('./composables/path')['writeConfig']>
   }
 }

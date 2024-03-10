@@ -1,14 +1,42 @@
 {
-  "productName": "WithApp",
-  "version": "0.1.0",
-  "identifier": "cn.smjb.with",
   "build": {
     "beforeDevCommand": "pnpm dev",
-    "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "pnpm build",
-    "frontendDist": "../dist"
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
   },
-  "app": {
+  "package": {
+    "productName": "vith",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "updater": {
+      "active": true,
+      "dialog": true,
+      "endpoints": [],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM1MEVGNTZBODg1M0E4MzgKUldRNHFGT0lhdlVPeGRYKzJQNEpROEZKMzhrTFZYK0wrT3ozS01HRTBzZkZqNU9KUUxzS3pWbmkK",
+      "windows": {
+        "installMode": "passive",
+        "installerArgs": []
+      }
+    },
+    "allowlist": {
+      "all": false,
+      "path": {
+        "all": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["**/*"]
+      },
+      "shell": {
+        "all": false,
+        "execute": true,
+        "sidecar": false,
+        "open": true,
+        "scope": []
+      }
+    },
     "windows": [
       {
         "title": "虚拟局域网组网",
@@ -19,24 +47,19 @@
     ],
     "security": {
       "csp": null
-    }
-  },
-  "bundle": {
-    "copyright": "m1m1sha",
-    "active": true,
-    "targets": ["nsis", "updater"],
-    "resources": ["bin"],
-    "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.icns",
-      "icons/icon.ico"
-    ]
-  },
-  "plugins": {
-    "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM1MEVGNTZBODg1M0E4MzgKUldRNHFGT0lhdlVPeGRYKzJQNEpROEZKMzhrTFZYK0wrT3ozS01HRTBzZkZqNU9KUUxzS3pWbmkK"
+    },
+    "bundle": {
+      "active": true,
+      "resources": ["./bin"],
+      "targets": ["nsis", "updater"],
+      "identifier": "cn.smjb.with",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
     }
   }
 }

@@ -2,35 +2,22 @@ import { defineStore } from 'pinia'
 import {
   BaseDirectory,
   exists,
-  mkdir,
   readTextFile,
   writeTextFile,
-} from '@tauri-apps/plugin-fs'
-import { APP_CONFIG_DIR } from '~/composables/path'
-import { DEFAULT_CONFIG } from '~/composables/config'
+} from '@tauri-apps/api/fs'
 
 export const useConfigStore = defineStore('config', () => {
   const config = ref<config>({ ...DEFAULT_CONFIG })
 
   async function loadConfig() {
-    if (
-      !(await exists(APP_CONFIG_DIR, {
-        baseDir: BaseDirectory.Config,
-      }))
-    ) {
-      await mkdir(APP_CONFIG_DIR, {
-        baseDir: BaseDirectory.Config,
-      })
-    }
+    await existsConfig()
 
     if (
       await exists(CONFIG_FILE, {
-        baseDir: BaseDirectory.AppConfig,
+        dir: BaseDirectory.AppConfig,
       })
     ) {
-      const content = await readTextFile(CONFIG_FILE, {
-        baseDir: BaseDirectory.AppConfig,
-      })
+      const content = await readConfig(CONFIG_FILE)
 
       try {
         const data = JSON.parse(content)
@@ -43,19 +30,8 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   async function saveConfig() {
-    if (
-      !(await exists(APP_CONFIG_DIR, {
-        baseDir: BaseDirectory.Config,
-      }))
-    ) {
-      await mkdir(APP_CONFIG_DIR, {
-        baseDir: BaseDirectory.Config,
-      })
-    }
-
-    await writeTextFile(CONFIG_FILE, JSON.stringify(config.value), {
-      baseDir: BaseDirectory.AppConfig,
-    })
+    await existsConfig()
+    await writeConfig(CONFIG_FILE, JSON.stringify(config.value))
   }
 
   return {
