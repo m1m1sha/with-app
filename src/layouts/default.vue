@@ -5,14 +5,16 @@ import type { MenuProps } from 'tdesign-vue-next'
 const router = useRouter()
 const route = useRoute()
 const appStore = useAppStore()
-
+const configStore = useConfigStore()
 const { menu } = storeToRefs(appStore)
 
 if (route.path !== menu.value)
   menu.value = route.path
 
+await configStore.loadConfig()
+
 const changeHandler: MenuProps['onChange'] = (active) => {
-  router.push(active)
+  router.push(active.toString())
 }
 let unlisten: null | UnlistenFn = null
 

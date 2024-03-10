@@ -3,7 +3,7 @@
 
 use std::{
     net::{Ipv4Addr, ToSocketAddrs},
-    sync::{Arc, Mutex},
+    sync::Mutex,
     vec,
 };
 

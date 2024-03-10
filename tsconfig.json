@@ -13,7 +13,7 @@
     "baseUrl": ".",
     "module": "ESNext",
     /* Bundler mode */
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Bundler",
     "paths": {
       "~/*": [
         "src/*"
