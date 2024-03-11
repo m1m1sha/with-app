@@ -2,14 +2,15 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::sync::Mutex;
-use tauri::{Manager, SystemTray, SystemTrayEvent, SystemTrayMenu};
+use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu};
 
 mod core;
 mod util;
 
 fn main() {
     tracing_subscriber::fmt::init();
-    let tray_menu = SystemTrayMenu::new(); // insert the menu items here
+    let quit = CustomMenuItem::new("quit".to_string(), "退出");
+    let tray_menu = SystemTrayMenu::new().add_item(quit); // insert the menu items here
     let system_tray = SystemTray::new().with_menu(tray_menu);
     tauri::Builder::default()
         .manage(core::WithState(Mutex::new(None)))
@@ -23,6 +24,12 @@ fn main() {
                 let window = app.get_window("main").unwrap();
                 window.show().unwrap();
             }
+            SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
+                "quit" => {
+                    std::process::exit(0);
+                }
+                _ => {}
+            },
             _ => {}
         })
         .invoke_handler(tauri::generate_handler![
