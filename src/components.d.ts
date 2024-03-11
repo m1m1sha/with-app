@@ -21,9 +21,14 @@ declare module 'vue' {
     TLayout: typeof import('tdesign-vue-next')['Layout']
     TMenu: typeof import('tdesign-vue-next')['Menu']
     TMenuItem: typeof import('tdesign-vue-next')['MenuItem']
+    TOption: typeof import('tdesign-vue-next')['Option']
+    TSelect: typeof import('tdesign-vue-next')['Select']
     TSpace: typeof import('tdesign-vue-next')['Space']
     TStickyItem: typeof import('tdesign-vue-next')['StickyItem']
     TStickyTool: typeof import('tdesign-vue-next')['StickyTool']
+    TSwitch: typeof import('tdesign-vue-next')['Switch']
     TTable: typeof import('tdesign-vue-next')['Table']
+    TTabPanel: typeof import('tdesign-vue-next')['TabPanel']
+    TTabs: typeof import('tdesign-vue-next')['Tabs']
   }
 }
