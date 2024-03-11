@@ -25,6 +25,13 @@ interface eventPayload {
   data: string;
 }
 
+enum eventFlag {
+  success = "success",
+  stop = "stop",
+  register = "register",
+  route = "route",
+}
+
 export async function withEventConnect(): Promise<UnlistenFn> {
   return listen<eventPayload>(WITH_EVENT_CONNECT, (event) => {
     let data = {};
@@ -35,41 +42,40 @@ export async function withEventConnect(): Promise<UnlistenFn> {
       data = {};
     }
 
-    if (event.payload.flag === "success") {
-      withStatus.value = WithStatus.Connecting;
-    }
-
-    if (event.payload.flag === "stop") {
-      withStatus.value = WithStatus.Stopped;
-    }
-
-    if (event.payload.flag === "register") {
-      withLocalInfo.value = data as WithLocalInfo;
-    }
-
-    if (event.payload.flag === "route") {
-      if (withStatus.value !== WithStatus.Connected) {
+    switch (event.payload.flag) {
+      case eventFlag.success:
         withStatus.value = WithStatus.Connected;
-      }
-      let d = data as WithRoute[];
-      let arr: NeedRoute[] = [
-        {
-          ip: withLocalInfo.value!.virtual_ip,
-          rt: "0",
-          channel: "本机",
-        },
-      ];
+        break;
+      case eventFlag.stop:
+        withStatus.value = WithStatus.Stopped;
+        break;
+      case eventFlag.register:
+        withLocalInfo.value = data as WithLocalInfo;
+        break;
+      case eventFlag.route:
+        if (withStatus.value !== WithStatus.Connected) {
+          withStatus.value = WithStatus.Connected;
+        }
+        let d = data as WithRoute[];
+        let arr: NeedRoute[] = [
+          {
+            ip: withLocalInfo.value!.virtual_ip,
+            rt: "0",
+            channel: "本机",
+          },
+        ];
 
-      d.forEach((i) => {
-        arr.push({
-          ip: i.ip,
-          rt: i.routes[0].rt,
-          channel:
-            (i.routes[0].is_tcp ? "tcp" : "udp") +
-            (i.ip === withLocalInfo.value!.virtual_gateway ? "(网关)" : ""),
+        d.forEach((i) => {
+          arr.push({
+            ip: i.ip,
+            rt: i.routes[0].rt,
+            channel:
+              (i.routes[0].is_tcp ? "tcp" : "udp") +
+              (i.ip === withLocalInfo.value!.virtual_gateway ? "(网关)" : ""),
+          });
         });
-      });
-      withRoutes.value = arr;
+        withRoutes.value = arr;
+        break;
     }
   });
 }
