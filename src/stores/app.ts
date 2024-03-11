@@ -20,10 +20,10 @@ export interface NeedRoute {
 }
 
 export enum WithStatus {
-  Stopping,
-  Stopped,
-  Connecting,
-  Connected,
+  Stopping = "stopping",
+  Stopped = "stopped",
+  Connecting = "connecting",
+  Connected = "connected",
 }
 
 export interface WithLocalInfo {

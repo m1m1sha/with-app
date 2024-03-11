@@ -61,9 +61,8 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </t-button>
         <div v-if="(withStatus === WithStatus.Connecting && withTryConnect >= 1)" mx-2></div>
         <t-button theme="danger" @click="stop"
-          v-if="withStatus === WithStatus.Connected || (withStatus === WithStatus.Connecting && withTryConnect >= 1)"
-          :loading="withStatus === WithStatus.Stopping">
-          {{ withStatus === WithStatus.Stopping ? "关闭中..." : "关闭" }}
+          v-if="withStatus === WithStatus.Connected || (withStatus === WithStatus.Connecting && withTryConnect >= 1)">
+          "关闭"
         </t-button>
       </div>
     </t-space>
