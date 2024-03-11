@@ -1,6 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use core::WithState;
 use std::sync::Mutex;
 use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu};
 
@@ -28,6 +29,10 @@ fn main() {
             }
             SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
                 "quit" => {
+                    let window = app.get_window("main").unwrap();
+                    let state = window.state::<WithState>();
+                    state.0.lock().unwrap().as_ref().unwrap().stop();
+                    *state.0.lock().unwrap() = None;
                     std::process::exit(0);
                 }
                 _ => {}

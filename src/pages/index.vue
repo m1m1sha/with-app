@@ -54,12 +54,14 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
             show-limit-number :disabled="withStatus != WithStatus.Stopped" />
         </t-form-item>
       </t-form>
-      <div flex items-center justify-center>
-        <t-button @click="start" v-show="withStatus !== WithStatus.Connected"
+      <div w-full flex items-center justify-center>
+        <t-button @click="start" v-if="withStatus !== WithStatus.Connected"
           :loading="withStatus === WithStatus.Connecting">
           {{ withStatus === WithStatus.Connecting ? withTryConnect ? `正在尝试第${withTryConnect}次连接` : '启动中...' : "启动" }}
         </t-button>
-        <t-button theme="danger" @click="stop" v-show="withStatus === WithStatus.Connected"
+        <div v-if="(withStatus === WithStatus.Connecting && withTryConnect >= 1)" mx-2></div>
+        <t-button theme="danger" @click="stop"
+          v-if="withStatus === WithStatus.Connected || (withStatus === WithStatus.Connecting && withTryConnect >= 1)"
           :loading="withStatus === WithStatus.Stopping">
           {{ withStatus === WithStatus.Stopping ? "关闭中..." : "关闭" }}
         </t-button>

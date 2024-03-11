@@ -36,7 +36,7 @@ export const useAppStore = defineStore("app", () => {
   const menu = ref("/");
   const settingTab = ref("basic");
 
-  const withStatus = ref(WithStatus.Stopped);
+  const withStatus = ref<WithStatus>(WithStatus.Stopped);
 
   const withRoutes = ref<NeedRoute[]>([]);
   const withTryConnect = ref(0);
