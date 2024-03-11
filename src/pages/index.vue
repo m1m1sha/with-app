@@ -65,7 +65,7 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </t-button>
       </div>
     </t-space>
-    <t-sticky-tool type="compact" @click="handleClick">
+    <t-sticky-tool type="compact" @click="handleClick" v-show="withStatus === WithStatus.Connected">
       <t-sticky-item popup="邀请加入（未完成）" v-if="false">
         <template #icon>
           <t-icon name="share" />
@@ -80,9 +80,9 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
     <t-dialog :footer="false" :header="false" :closeBtn="false" preventScrollThrough showOverlay showInAttachedElement
       v-model:visible="visible">
       <div flex justify-between>
-        <div>{{ withLocalInfo ? `本机：${withLocalInfo!.virtual_ip}` : '' }}</div>
+        <div>{{ withLocalInfo ? `本机：${withLocalInfo!.virtual_ip}` : '本机信息获取中' }}</div>
         <div>{{ withGatewayRoute ? `网关：${withGatewayRoute!.ip}, 类型：${withGatewayRoute!.channel},
-          延迟：${withGatewayRoute!.rt}ms` : '' }}
+          延迟：${withGatewayRoute!.rt}ms` : '网关信息获取中' }}
         </div>
       </div>
       <t-table :stripe="true" size="small" headerAffixedTop maxHeight="50%" :data="withRoutes" :columns="columns"
