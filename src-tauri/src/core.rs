@@ -2,7 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::{
     net::{Ipv4Addr, ToSocketAddrs},
     sync::Mutex,
-    time::Duration,
     vec,
 };
 use tauri::{api::path::app_config_dir, Window};

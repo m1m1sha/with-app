@@ -10,7 +10,7 @@ mod tool;
 mod util;
 
 fn main() {
-    tracing_subscriber::fmt::init();
+    tracing_subscriber::fmt().init();
     tool::win_ip_broadcast();
     let quit = CustomMenuItem::new("quit".to_string(), "退出");
     let tray_menu = SystemTrayMenu::new().add_item(quit); // insert the menu items here
