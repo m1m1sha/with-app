@@ -20,6 +20,9 @@
         "installerArgs": []
       }
     },
+    "systemTray": {
+      "iconPath": "icons/icon.png"
+    },
     "allowlist": {
       "all": false,
       "path": {
