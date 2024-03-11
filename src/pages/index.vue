@@ -6,7 +6,7 @@ const configStore = useConfigStore()
 const { config } = storeToRefs(configStore)
 
 const appStore = useAppStore()
-const { withStatus, withRoutes } = storeToRefs(appStore)
+const { withStatus, withRoutes, withGatewayRoute, withLocalInfo } = storeToRefs(appStore)
 const visible = ref(false);
 
 const columns: TableProps['columns'] = [
@@ -70,8 +70,13 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </template>
       </t-sticky-item>
     </t-sticky-tool>
-    <t-dialog :footer="false" :header="false" preventScrollThrough showOverlay showInAttachedElement
+    <t-dialog :footer="false" :header="false" :closeBtn="false" preventScrollThrough showOverlay showInAttachedElement
       v-model:visible="visible">
+      <div flex justify-between>
+        <div>本机: {{ withLocalInfo ? withLocalInfo!.virtual_ip : '' }}</div>
+        <div>网关: {{ withGatewayRoute ? withGatewayRoute!.ip : '' }}, {{ withGatewayRoute ? `${withGatewayRoute!.rt}ms` :
+            '' }}</div>
+      </div>
       <t-table :stripe="true" size="small" maxHeight="50%" :data="withRoutes" :columns="columns" row-key="ip">
         <template #empty>
           <span

@@ -40,7 +40,8 @@ export const useAppStore = defineStore("app", () => {
 
   const withRoutes = ref<NeedRoute[]>([]);
 
-  const withLocalInfo = ref<WithLocalInfo>();
+  const withLocalInfo = ref<WithLocalInfo | null>();
+  const withGatewayRoute = ref<NeedRoute | null>();
 
   return {
     menu,
@@ -48,5 +49,6 @@ export const useAppStore = defineStore("app", () => {
     withStatus,
     withRoutes,
     withLocalInfo,
+    withGatewayRoute,
   };
 });

@@ -9,7 +9,8 @@ const WITH_STOP = "with_stop";
 const WITH_EVENT_CONNECT = "with_event_connect";
 const appStore = useAppStore();
 
-const { withStatus, withRoutes, withLocalInfo } = storeToRefs(appStore);
+const { withStatus, withRoutes, withLocalInfo, withGatewayRoute } =
+  storeToRefs(appStore);
 export async function withStart(config: withConfig) {
   withStatus.value = WithStatus.Connecting;
   await invoke(WITH_START, { config });
@@ -48,6 +49,9 @@ export async function withEventConnect(): Promise<UnlistenFn> {
         break;
       case eventFlag.stop:
         withStatus.value = WithStatus.Stopped;
+        withGatewayRoute.value = null;
+        withLocalInfo.value = null;
+        withRoutes.value = [];
         break;
       case eventFlag.register:
         withLocalInfo.value = data as WithLocalInfo;
@@ -57,22 +61,22 @@ export async function withEventConnect(): Promise<UnlistenFn> {
           withStatus.value = WithStatus.Connected;
         }
         let d = data as WithRoute[];
-        let arr: NeedRoute[] = [
-          {
-            ip: withLocalInfo.value!.virtual_ip,
-            rt: "0",
-            channel: "本机",
-          },
-        ];
+        let arr: NeedRoute[] = [];
 
         d.forEach((i) => {
-          arr.push({
-            ip: i.ip,
-            rt: i.routes[0].rt,
-            channel:
-              (i.routes[0].is_tcp ? "tcp" : "udp") +
-              (i.ip === withLocalInfo.value!.virtual_gateway ? "(网关)" : ""),
-          });
+          if (i.ip === withLocalInfo.value!.virtual_gateway) {
+            withGatewayRoute.value = {
+              ip: i.ip,
+              rt: i.routes[0].rt,
+              channel: i.routes[0].is_tcp ? "tcp" : "udp",
+            };
+          } else {
+            arr.push({
+              ip: i.ip,
+              rt: i.routes[0].rt,
+              channel: i.routes[0].is_tcp ? "tcp" : "udp",
+            });
+          }
         });
         withRoutes.value = arr;
         break;
