@@ -361,7 +361,7 @@ dependencies = [
 [[package]]
 name = "cipher"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#43958ec52d34d98c3ccea4fce0476bbfe4aa4c74"
+source = "git+https://github.com/m1m1sha/with?branch=dev#7d4c4e10c3e7f40ed452090a3930ff781874e007"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -1774,7 +1774,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c2a198fb6b0eada2a8df47933734e6d35d350665a33a3593d7164fa52c75c19"
 dependencies = [
  "cfg-if",
- "windows-targets 0.52.4",
+ "windows-targets 0.48.5",
 ]
 
 [[package]]
@@ -1797,7 +1797,7 @@ dependencies = [
 [[package]]
 name = "libsm"
 version = "0.5.1"
-source = "git+https://github.com/m1m1sha/with?branch=dev#43958ec52d34d98c3ccea4fce0476bbfe4aa4c74"
+source = "git+https://github.com/m1m1sha/with?branch=dev#7d4c4e10c3e7f40ed452090a3930ff781874e007"
 dependencies = [
  "byteorder",
  "getrandom 0.2.12",
@@ -1957,7 +1957,7 @@ checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
 [[package]]
 name = "nat"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#43958ec52d34d98c3ccea4fce0476bbfe4aa4c74"
+source = "git+https://github.com/m1m1sha/with?branch=dev#7d4c4e10c3e7f40ed452090a3930ff781874e007"
 dependencies = [
  "crossbeam-utils",
  "encoding",
@@ -2267,7 +2267,7 @@ checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
 [[package]]
 name = "packet"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#43958ec52d34d98c3ccea4fce0476bbfe4aa4c74"
+source = "git+https://github.com/m1m1sha/with?branch=dev#7d4c4e10c3e7f40ed452090a3930ff781874e007"
 dependencies = [
  "byteorder",
 ]
@@ -2691,7 +2691,7 @@ dependencies = [
 [[package]]
 name = "protocol"
 version = "0.0.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#43958ec52d34d98c3ccea4fce0476bbfe4aa4c74"
+source = "git+https://github.com/m1m1sha/with?branch=dev#7d4c4e10c3e7f40ed452090a3930ff781874e007"
 
 [[package]]
 name = "quick-xml"
@@ -4175,7 +4175,7 @@ checksum = "09cc8ee72d2a9becf2f2febe0205bbed8fc6615b7cb429ad062dc7b7ddd036a9"
 [[package]]
 name = "utils"
 version = "0.0.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#43958ec52d34d98c3ccea4fce0476bbfe4aa4c74"
+source = "git+https://github.com/m1m1sha/with?branch=dev#7d4c4e10c3e7f40ed452090a3930ff781874e007"
 dependencies = [
  "parking_lot",
  "tokio",
@@ -4839,7 +4839,7 @@ dependencies = [
 [[package]]
 name = "with"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#43958ec52d34d98c3ccea4fce0476bbfe4aa4c74"
+source = "git+https://github.com/m1m1sha/with?branch=dev#7d4c4e10c3e7f40ed452090a3930ff781874e007"
 dependencies = [
  "bytes",
  "cipher 0.1.0",
