@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{os::windows::process::CommandExt, path::PathBuf, process::Command};
 
 use encoding::{all::GBK, DecoderTrap, Encoding};
 
@@ -52,4 +52,18 @@ impl CurrentPath {
 
         path
     }
+}
+
+pub fn kill_process_force(pid: String) -> Result<(), String> {
+    if pid.is_empty() {
+        return Err("Pid cannot be empty".to_owned());
+    }
+
+    tracing::info!("ctrlc: [pid: {}]", pid);
+    let _ = Command::new("cmd")
+        .creation_flags(0x08000000)
+        .args(["/C", "tskill", pid.as_str(), "/A"])
+        .spawn()
+        .unwrap();
+    Ok(())
 }

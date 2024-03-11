@@ -5,10 +5,12 @@ use std::sync::Mutex;
 use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu};
 
 mod core;
+mod tool;
 mod util;
 
 fn main() {
     tracing_subscriber::fmt::init();
+    tool::win_ip_broadcast();
     let quit = CustomMenuItem::new("quit".to_string(), "退出");
     let tray_menu = SystemTrayMenu::new().add_item(quit); // insert the menu items here
     let system_tray = SystemTray::new().with_menu(tray_menu);

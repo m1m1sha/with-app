@@ -12,8 +12,6 @@ tauri-build = { version = "1.5", features = [] }
 
 [dependencies]
 tauri = { version = "1.6", features = [ "system-tray",
-  "shell-execute",
-  "shell-open",
   "updater",
   "path-all",
   "fs-all",

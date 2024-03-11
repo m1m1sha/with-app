@@ -31,13 +31,6 @@
       "fs": {
         "all": true,
         "scope": ["**/*"]
-      },
-      "shell": {
-        "all": false,
-        "execute": true,
-        "sidecar": false,
-        "open": true,
-        "scope": []
       }
     },
     "windows": [
