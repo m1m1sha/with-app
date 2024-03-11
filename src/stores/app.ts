@@ -9,8 +9,8 @@ export interface Route {
   is_tcp: boolean;
   index: number;
   addr: string;
-  metric: string;
-  rt: string;
+  metric: number;
+  rt: number;
 }
 
 export interface NeedRoute {
@@ -39,6 +39,7 @@ export const useAppStore = defineStore("app", () => {
   const withStatus = ref(WithStatus.Stopped);
 
   const withRoutes = ref<NeedRoute[]>([]);
+  const withTryConnect = ref(0);
 
   const withLocalInfo = ref<WithLocalInfo | null>();
   const withGatewayRoute = ref<NeedRoute | null>();
@@ -50,5 +51,6 @@ export const useAppStore = defineStore("app", () => {
     withRoutes,
     withLocalInfo,
     withGatewayRoute,
+    withTryConnect,
   };
 });

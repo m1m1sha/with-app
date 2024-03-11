@@ -79,21 +79,13 @@ pub async fn with_start(
         Some("./bin/wintun.dll".to_owned()),
         None,
         100,
+        None,
     )
     .unwrap();
 
-    let with = tokio::time::timeout(Duration::from_secs(5), async move {
-        with::core::With::new(AppCallback { window }, cfg)
-            .await
-            .unwrap()
-    })
-    .await;
-    let with = match with {
-        Ok(with) => with,
-        Err(_) => {
-            return Err("timeout".to_owned());
-        }
-    };
+    let with = with::core::With::new(AppCallback { window }, cfg)
+        .await
+        .unwrap();
 
     let with_c = with.clone();
 
@@ -289,5 +281,16 @@ impl callback::Callback for AppCallback {
             },
         );
         tracing::warn!("stop");
+    }
+
+    fn timeout(&self) {
+        let _ = self.window.emit(
+            "with_event_connect",
+            EventPayload {
+                flag: "timeout".to_owned(),
+                data: "".to_owned(),
+            },
+        );
+        tracing::warn!("timeout");
     }
 }

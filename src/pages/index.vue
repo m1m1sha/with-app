@@ -6,7 +6,7 @@ const configStore = useConfigStore()
 const { config } = storeToRefs(configStore)
 
 const appStore = useAppStore()
-const { withStatus, withRoutes, withGatewayRoute, withLocalInfo } = storeToRefs(appStore)
+const { withStatus, withRoutes, withGatewayRoute, withLocalInfo, withTryConnect } = storeToRefs(appStore)
 const visible = ref(false);
 
 const columns: TableProps['columns'] = [
@@ -55,11 +55,11 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
         </t-form-item>
       </t-form>
       <div flex items-center justify-center>
-        <t-button w-120px @click="start" v-show="withStatus !== WithStatus.Connected"
+        <t-button @click="start" v-show="withStatus !== WithStatus.Connected"
           :loading="withStatus === WithStatus.Connecting">
-          {{ withStatus === WithStatus.Connecting ? "启动中..." : "启动" }}
+          {{ withStatus === WithStatus.Connecting ? withTryConnect ? `正在尝试第${withTryConnect}次连接` : '启动中...' : "启动" }}
         </t-button>
-        <t-button theme="danger" w-120px @click="stop" v-show="withStatus === WithStatus.Connected"
+        <t-button theme="danger" @click="stop" v-show="withStatus === WithStatus.Connected"
           :loading="withStatus === WithStatus.Stopping">
           {{ withStatus === WithStatus.Stopping ? "关闭中..." : "关闭" }}
         </t-button>
