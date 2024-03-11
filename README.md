@@ -1,5 +1,8 @@
 # With app
 
+![GitHub Tag](https://img.shields.io/github/v/tag/m1m1sha/with-app) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/m1m1sha/with-app)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/m1m1sha/with-app/publish-to-auto-release.yml)
+
 An open source, magic-modified [`vnt`](https://github.com/lbl8603/vnt)-based visual interface for virtual LAN formation
 
 # Download Prerelease
