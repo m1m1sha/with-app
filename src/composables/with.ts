@@ -52,7 +52,7 @@ enum metricType {
 }
 
 export async function withEventConnect(): Promise<UnlistenFn> {
-  return listen<eventPayload>(WITH_EVENT_CONNECT, (event) => {
+  return listen<eventPayload>(WITH_EVENT_CONNECT, async (event) => {
     let data = {};
 
     try {
@@ -78,6 +78,12 @@ export async function withEventConnect(): Promise<UnlistenFn> {
         break;
       case eventFlag.connecting:
         withTryConnect.value = (data as eventConnecting).count;
+        if (withTryConnect.value >= 5) {
+          MessagePlugin.error({
+            content: "连接超时，请检查服务器是否在线后重试",
+          });
+          await withStop();
+        }
         break;
       case eventFlag.route:
         if (withStatus.value !== WithStatus.Connected) {

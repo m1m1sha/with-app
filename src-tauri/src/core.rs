@@ -79,16 +79,13 @@ pub async fn with_start(
         Some("./bin/wintun.dll".to_owned()),
         None,
         100,
-        None,
     )
     .unwrap();
 
     let with = with::core::With::new(AppCallback { window }, cfg)
         .await
         .unwrap();
-
     let with_c = with.clone();
-
     tauri::async_runtime::spawn(async move {
         with_c.wait();
     });
