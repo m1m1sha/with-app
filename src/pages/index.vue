@@ -15,7 +15,7 @@ const columns: TableProps['columns'] = [
     title: 'ip',
   }, {
     colKey: 'channel',
-    title: '类型',
+    title: '连接/通道',
   }, {
     colKey: 'rt',
     title: '延迟(ms)',
@@ -57,15 +57,20 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
       <div flex items-center justify-center>
         <t-button w-120px @click="start" v-show="withStatus !== WithStatus.Connected"
           :loading="withStatus === WithStatus.Connecting">
-          启动！
+          {{ withStatus === WithStatus.Connecting ? "启动中..." : "启动" }}
         </t-button>
         <t-button theme="danger" w-120px @click="stop" v-show="withStatus === WithStatus.Connected"
           :loading="withStatus === WithStatus.Stopping">
-          关闭
+          {{ withStatus === WithStatus.Stopping ? "关闭中..." : "关闭" }}
         </t-button>
       </div>
     </t-space>
-    <t-sticky-tool type="compact" v-if="withStatus === WithStatus.Connected" @click="handleClick">
+    <t-sticky-tool type="compact" @click="handleClick">
+      <t-sticky-item popup="邀请加入（未完成）" v-if="false">
+        <template #icon>
+          <t-icon name="share" />
+        </template>
+      </t-sticky-item>
       <t-sticky-item popup="组用户">
         <template #icon>
           <t-icon name="user-list" />
@@ -80,7 +85,8 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
           延迟：${withGatewayRoute!.rt}ms` : '' }}
         </div>
       </div>
-      <t-table :stripe="true" size="small" maxHeight="50%" :data="withRoutes" :columns="columns" row-key="ip">
+      <t-table :stripe="true" size="small" headerAffixedTop maxHeight="50%" :data="withRoutes" :columns="columns"
+        row-key="ip">
         <template #empty>
           <span
             style="display: flex; align-items: center; justify-content: center; height: 38px; color: var(--td-text-color-placeholder)">
@@ -94,8 +100,8 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
 
 <style scoped lang="postcss">
 .t-sticky-tool {
-  right: 1rem !important;
-  bottom: 2.5rem !important;
+  right: 0.5rem !important;
+  bottom: 2rem !important;
 }
 
 :global(.t-dialog) {
@@ -108,5 +114,13 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
 
 :global(.t-table__empty) {
   min-height: auto;
+}
+
+:global(.t-sticky-tool .t-sticky-item) {
+  @apply w-32px h-32px flex items-center justify-center;
+}
+
+:global(.t-sticky-tool .t-sticky-item .t-icon) {
+  @apply m-0;
 }
 </style>
