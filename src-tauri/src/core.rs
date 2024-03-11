@@ -95,8 +95,10 @@ pub async fn with_start(
 
 #[tauri::command]
 pub async fn with_stop(state: tauri::State<'_, WithState>) -> Result<(), String> {
-    state.0.lock().unwrap().as_ref().unwrap().stop();
-    *state.0.lock().unwrap() = None;
+    if state.0.lock().unwrap().is_some() {
+        state.0.lock().unwrap().as_ref().unwrap().stop();
+        *state.0.lock().unwrap() = None;
+    }
     Ok(())
 }
 

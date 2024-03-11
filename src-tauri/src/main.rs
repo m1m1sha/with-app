@@ -29,12 +29,13 @@ fn main() {
             }
             SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
                 "quit" => {
-                    let window = app.get_window("main").unwrap();
-                    let state = window.state::<WithState>();
-                    state.0.lock().unwrap().as_ref().unwrap().stop();
-                    *state.0.lock().unwrap() = None;
-                    let pids = util::get_process_list("with_winIPBroadcast".to_owned());
+                    let state = app.state::<WithState>();
+                    if state.0.lock().unwrap().is_some() {
+                        state.0.lock().unwrap().as_ref().unwrap().stop();
+                        *state.0.lock().unwrap() = None;
+                    }
 
+                    let pids = util::get_process_list("with_winIPBroadcast".to_owned());
                     if pids.len() > 0 {
                         for p in pids {
                             let _ = util::kill_process_force(p.to_string());
@@ -52,13 +53,6 @@ fn main() {
             core::with_route,
             core::with_status
         ])
-        .on_window_event(|event| match event.event() {
-            tauri::WindowEvent::CloseRequested { api, .. } => {
-                event.window().hide().unwrap();
-                api.prevent_close();
-            }
-            _ => {}
-        })
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|_app_handle, event| match event {
