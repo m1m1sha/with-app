@@ -1,6 +1,6 @@
-use std::{os::windows::process::CommandExt, path::PathBuf, process::Command};
-
 use encoding::{all::GBK, DecoderTrap, Encoding};
+use std::{os::windows::process::CommandExt, path::PathBuf, process::Command};
+use sysinfo::{Pid, Process, System};
 
 #[derive(Debug, Clone)]
 pub struct CurrentPath {
@@ -66,4 +66,24 @@ pub fn kill_process_force(pid: String) -> Result<(), String> {
         .spawn()
         .unwrap();
     Ok(())
+}
+
+pub fn get_process_list(name: String) -> Vec<Pid> {
+    if name.is_empty() {
+        return vec![];
+    }
+
+    System::new_all()
+        .processes()
+        .values()
+        .filter(move |val: &&Process| {
+            let mut flag = false;
+
+            if val.name().contains(&name) {
+                flag = true;
+            }
+            flag
+        })
+        .map(|p| p.pid())
+        .collect()
 }

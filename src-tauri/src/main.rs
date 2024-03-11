@@ -33,6 +33,13 @@ fn main() {
                     let state = window.state::<WithState>();
                     state.0.lock().unwrap().as_ref().unwrap().stop();
                     *state.0.lock().unwrap() = None;
+                    let pids = util::get_process_list("with_winIPBroadcast".to_owned());
+
+                    if pids.len() > 0 {
+                        for p in pids {
+                            let _ = util::kill_process_force(p.to_string());
+                        }
+                    }
                     std::process::exit(0);
                 }
                 _ => {}
