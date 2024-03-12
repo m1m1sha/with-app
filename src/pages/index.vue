@@ -69,7 +69,8 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
       <div w-full flex items-center justify-center>
         <t-button @click="start" v-if="withStatus !== WithStatus.Connected"
           :loading="withStatus === WithStatus.Connecting">
-          {{ withStatus === WithStatus.Connecting ? withTryConnect ? `正在尝试第${withTryConnect}次连接` : '启动中...' : "启动" }}
+          {{ withStatus === WithStatus.Connecting ? withTryConnect > 1 ? `正在尝试第${withTryConnect - 1}次重连` : '启动中...' :
+            "启动" }}
         </t-button>
         <div v-if="(withStatus === WithStatus.Connecting && withTryConnect >= 1)" mx-2></div>
         <t-button theme="danger" @click="stop"
