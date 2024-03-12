@@ -37,6 +37,10 @@
       },
       "process": {
         "all": true
+      },
+      "shell": {
+        "all": false,
+        "open": true
       }
     },
     "windows": [

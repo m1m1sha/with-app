@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { UnlistenFn } from '@tauri-apps/api/event';
 import type { MenuProps } from 'tdesign-vue-next'
-
+import pkg from "../../package.json"
 const router = useRouter()
 const route = useRoute()
 const appStore = useAppStore()
@@ -26,6 +26,8 @@ onUnmounted(() => {
   if (unlisten !== null)
     unlisten()
 })
+
+console.log(pkg.version)
 </script>
 
 <template>
@@ -51,8 +53,14 @@ onUnmounted(() => {
         <RouterView />
       </t-content>
       <t-footer>
-        Copyright @ 2024-{{ new Date().getFullYear() }} m1m1sha. All Rights
-        Reserved
+        <t-space>
+          <t-link @click="checkForUpdates">
+            当前版本: v{{ pkg.version }}
+          </t-link>
+          <t-link @click="openExternal('https://github.com/m1m1sha/with-app/issues')">
+            有Bug或想法？请提交Issue来帮助完善
+          </t-link>
+        </t-space>
       </t-footer>
     </t-layout>
   </t-layout>

@@ -13,6 +13,7 @@ declare global {
   const WithStatus: typeof import('./stores/app')['WithStatus']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const channelMode: typeof import('./composables/config')['channelMode']
+  const checkForUpdates: typeof import('./composables/updater')['checkForUpdates']
   const cipherMode: typeof import('./composables/config')['cipherMode']
   const computed: typeof import('vue')['computed']
   const config: typeof import('./composables/path')['config']
@@ -57,6 +58,7 @@ declare global {
   const onServerPrefetch: typeof import('vue')['onServerPrefetch']
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
+  const openExternal: typeof import('./composables/util')['openExternal']
   const provide: typeof import('vue')['provide']
   const punchMode: typeof import('./composables/config')['punchMode']
   const reactive: typeof import('vue')['reactive']
@@ -113,6 +115,7 @@ declare module 'vue' {
     readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
+    readonly checkForUpdates: UnwrapRef<typeof import('./composables/updater')['checkForUpdates']>
     readonly cipherMode: UnwrapRef<typeof import('./composables/config')['cipherMode']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -155,6 +158,7 @@ declare module 'vue' {
     readonly onServerPrefetch: UnwrapRef<typeof import('vue')['onServerPrefetch']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
+    readonly openExternal: UnwrapRef<typeof import('./composables/util')['openExternal']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly punchMode: UnwrapRef<typeof import('./composables/config')['punchMode']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
@@ -203,6 +207,7 @@ declare module '@vue/runtime-core' {
     readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
+    readonly checkForUpdates: UnwrapRef<typeof import('./composables/updater')['checkForUpdates']>
     readonly cipherMode: UnwrapRef<typeof import('./composables/config')['cipherMode']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -245,6 +250,7 @@ declare module '@vue/runtime-core' {
     readonly onServerPrefetch: UnwrapRef<typeof import('vue')['onServerPrefetch']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
+    readonly openExternal: UnwrapRef<typeof import('./composables/util')['openExternal']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly punchMode: UnwrapRef<typeof import('./composables/config')['punchMode']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
