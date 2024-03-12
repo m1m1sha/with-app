@@ -2,8 +2,11 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use core::WithState;
+use encoding::{all::GBK, DecoderTrap, Encoding};
 use std::sync::Mutex;
-use tauri::{CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu};
+use tauri::{
+    CustomMenuItem, Manager, PackageInfo, PathResolver, SystemTray, SystemTrayEvent, SystemTrayMenu,
+};
 
 mod core;
 mod tool;
@@ -13,14 +16,12 @@ pub struct DeeplinkState(pub Mutex<String>);
 
 fn main() {
     tracing_subscriber::fmt().init();
-    tool::win_ip_broadcast();
 
     let quit = CustomMenuItem::new("quit".to_string(), "退出");
     let tray_menu = SystemTrayMenu::new().add_item(quit); // insert the menu items here
     let system_tray = SystemTray::new().with_menu(tray_menu);
 
     tauri_plugin_deep_link::prepare("cn.smjb.with");
-
     tauri::Builder::default()
         .manage(core::WithState(Mutex::new(None)))
         .manage(DeeplinkState(Mutex::new(String::new())))
@@ -33,6 +34,7 @@ fn main() {
                 handle.emit_all("deeplink", request).unwrap();
             })
             .unwrap();
+
             Ok(())
         })
         .on_system_tray_event(|app, event| match event {
@@ -68,7 +70,9 @@ fn main() {
             core::with_start,
             core::with_stop,
             core::with_route,
-            core::with_status
+            core::with_status,
+            tool::win_ip_broadcast_start,
+            tool::win_ip_broadcast_stop,
         ])
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::CloseRequested { api, .. } => {

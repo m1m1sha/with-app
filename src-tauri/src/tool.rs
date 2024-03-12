@@ -2,16 +2,33 @@ use std::{os::windows::process::CommandExt, process::Command};
 
 use crate::util;
 
-pub fn win_ip_broadcast() {
-    tauri::async_runtime::spawn(async {
-        let mut child = Command::new("cmd")
-            .creation_flags(0x08000000)
-            .args(["/C", "with_winIPBroadcast.exe", "run"])
-            .current_dir(util::CurrentPath::default().bin_string())
-            .spawn()
-            .unwrap();
-        tracing::info!("winIPBroadcast start");
+#[tauri::command]
+pub fn win_ip_broadcast_start() -> Result<(), String> {
+    let mut child = match Command::new("cmd")
+        .creation_flags(0x08000000)
+        .args(["/C", "with_winIPBroadcast.exe", "run"])
+        .spawn()
+    {
+        Ok(c) => c,
+        Err(e) => {
+            tracing::error!("winIPBroadcast failed to start");
+            return Err(e.to_string());
+        }
+    };
+
+    tauri::async_runtime::spawn(async move {
         child.wait().unwrap();
         tracing::info!("winIPBroadcast stop");
     });
+    Ok(())
+}
+
+#[tauri::command]
+pub fn win_ip_broadcast_stop() {
+    let pids = util::get_process_list("with_winIPBroadcast".to_owned());
+    if pids.len() > 0 {
+        for p in pids {
+            let _ = util::kill_process_force(p.to_string());
+        }
+    }
 }
