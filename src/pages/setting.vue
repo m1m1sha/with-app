@@ -3,10 +3,18 @@ import type { TabValue, TabsProps } from 'tdesign-vue-next'
 
 const configStore = useConfigStore()
 const appStore = useAppStore()
-const { settingTab } = storeToRefs(appStore)
+const { settingTab, winIPBroadcastStatus } = storeToRefs(appStore)
 const { config } = storeToRefs(configStore)
 const changeHandler: TabsProps['onChange'] = (val: TabValue) => {
   settingTab.value = val.toString()
+}
+
+const toggleIPBroadcast = async () => {
+  if (!winIPBroadcastStatus.value) {
+    await winIPBroadcastStart();
+  } else {
+    await winIPBroadcastStop();
+  }
 }
 
 onUnmounted(async () => {
@@ -18,6 +26,11 @@ onUnmounted(async () => {
   <t-tabs v-model="settingTab" h-full @change="changeHandler">
     <t-tab-panel value="basic" label="基本">
       <t-form>
+        <t-form-item label="ip广播" help="默认启用">
+          <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{ winIPBroadcastStatus
+    ? '停用' : '启用'
+            }}</t-tag>
+        </t-form-item>
         <t-form-item label="强制TCP" help="建议仅在UDP丢包严重时启用">
           <t-switch v-model="config.with.tcp" />
         </t-form-item>

@@ -17,6 +17,7 @@ pub fn win_ip_broadcast_start() -> Result<(), String> {
     };
 
     tauri::async_runtime::spawn(async move {
+        tracing::info!("winIPBroadcast start");
         child.wait().unwrap();
         tracing::info!("winIPBroadcast stop");
     });

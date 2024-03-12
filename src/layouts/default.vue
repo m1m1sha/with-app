@@ -2,6 +2,7 @@
 import { UnlistenFn } from '@tauri-apps/api/event';
 import type { MenuProps } from 'tdesign-vue-next'
 import pkg from "../../package.json"
+import { winIPBroadcastStart } from '~/composables/tool';
 const router = useRouter()
 const route = useRoute()
 const appStore = useAppStore()
@@ -20,6 +21,7 @@ let unlisten: null | UnlistenFn = null
 let unlistenDeeplink: null | UnlistenFn = null
 
 onMounted(async () => {
+  winIPBroadcastStart();
   unlisten = await withEventConnect()
   unlistenDeeplink = await listenForDeeplink()
 })

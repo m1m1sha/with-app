@@ -43,6 +43,7 @@ export const useAppStore = defineStore("app", () => {
 
   const withLocalInfo = ref<WithLocalInfo | null>();
   const withGatewayRoute = ref<NeedRoute | null>();
+  const winIPBroadcastStatus = ref(false);
 
   return {
     menu,
@@ -52,5 +53,6 @@ export const useAppStore = defineStore("app", () => {
     withLocalInfo,
     withGatewayRoute,
     withTryConnect,
+    winIPBroadcastStatus,
   };
 });

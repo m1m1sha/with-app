@@ -93,6 +93,8 @@ declare global {
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
   const watchSyncEffect: typeof import('vue')['watchSyncEffect']
+  const winIPBroadcastStart: typeof import('./composables/tool')['winIPBroadcastStart']
+  const winIPBroadcastStop: typeof import('./composables/tool')['winIPBroadcastStop']
   const withEventConnect: typeof import('./composables/with')['withEventConnect']
   const withStart: typeof import('./composables/with')['withStart']
   const withStop: typeof import('./composables/with')['withStop']
@@ -195,6 +197,8 @@ declare module 'vue' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly winIPBroadcastStart: UnwrapRef<typeof import('./composables/tool')['winIPBroadcastStart']>
+    readonly winIPBroadcastStop: UnwrapRef<typeof import('./composables/tool')['winIPBroadcastStop']>
     readonly withEventConnect: UnwrapRef<typeof import('./composables/with')['withEventConnect']>
     readonly withStart: UnwrapRef<typeof import('./composables/with')['withStart']>
     readonly withStop: UnwrapRef<typeof import('./composables/with')['withStop']>
@@ -289,6 +293,8 @@ declare module '@vue/runtime-core' {
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly winIPBroadcastStart: UnwrapRef<typeof import('./composables/tool')['winIPBroadcastStart']>
+    readonly winIPBroadcastStop: UnwrapRef<typeof import('./composables/tool')['winIPBroadcastStop']>
     readonly withEventConnect: UnwrapRef<typeof import('./composables/with')['withEventConnect']>
     readonly withStart: UnwrapRef<typeof import('./composables/with')['withStart']>
     readonly withStop: UnwrapRef<typeof import('./composables/with')['withStop']>
