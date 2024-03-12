@@ -29,7 +29,7 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.8.0",
+    "@antfu/eslint-config": "^2.8.1",
     "@tauri-apps/cli": "^1.5.11",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.11.26",
