@@ -17,17 +17,19 @@ const changeHandler: MenuProps['onChange'] = (active) => {
   router.push(active.toString())
 }
 let unlisten: null | UnlistenFn = null
+let unlistenDeeplink: null | UnlistenFn = null
 
 onMounted(async () => {
   unlisten = await withEventConnect()
+  unlistenDeeplink = await listenForDeeplink()
 })
 
 onUnmounted(() => {
   if (unlisten !== null)
     unlisten()
+  if (unlistenDeeplink !== null)
+    unlistenDeeplink()
 })
-
-console.log(pkg.version)
 </script>
 
 <template>

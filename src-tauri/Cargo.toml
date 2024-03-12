@@ -11,7 +11,9 @@ edition = "2021"
 tauri-build = { version = "1.5", features = [] }
 
 [dependencies]
-tauri = { version = "1.6", features = [ "shell-open", "process-all",
+tauri = { version = "1.6", features = [ "clipboard-all",
+  "shell-open",
+  "process-all",
   "objc-exception",
   "wry",
   "system-tray",
@@ -22,6 +24,7 @@ tauri = { version = "1.6", features = [ "shell-open", "process-all",
 ], default-features = false }
 tracing = "0.1"
 tracing-subscriber = "0.3"
+tauri-plugin-deep-link = "^0.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 encoding = "^0.2"

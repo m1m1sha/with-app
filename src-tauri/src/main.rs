@@ -9,15 +9,32 @@ mod core;
 mod tool;
 mod util;
 
+pub struct DeeplinkState(pub Mutex<String>);
+
 fn main() {
     tracing_subscriber::fmt().init();
     tool::win_ip_broadcast();
+
     let quit = CustomMenuItem::new("quit".to_string(), "退出");
     let tray_menu = SystemTrayMenu::new().add_item(quit); // insert the menu items here
     let system_tray = SystemTray::new().with_menu(tray_menu);
+
+    tauri_plugin_deep_link::prepare("cn.smjb.with");
+
     tauri::Builder::default()
         .manage(core::WithState(Mutex::new(None)))
+        .manage(DeeplinkState(Mutex::new(String::new())))
         .system_tray(system_tray)
+        .setup(|app| {
+            let handle = app.handle();
+            tauri_plugin_deep_link::register("withApp", move |request| {
+                let state = handle.state::<DeeplinkState>();
+                *state.0.lock().unwrap() = request.clone();
+                handle.emit_all("deeplink", request).unwrap();
+            })
+            .unwrap();
+            Ok(())
+        })
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::LeftClick {
                 position: _,
@@ -62,9 +79,16 @@ fn main() {
         })
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
-        .run(|_app_handle, event| match event {
+        .run(|handle, event| match event {
             tauri::RunEvent::ExitRequested { api, .. } => {
                 api.prevent_exit();
+            }
+            tauri::RunEvent::Ready => {
+                let state = handle.state::<DeeplinkState>();
+                if !state.0.lock().unwrap().is_empty() {
+                    let request = state.0.lock().unwrap().clone();
+                    handle.emit_all("deeplink", request).unwrap();
+                }
             }
             _ => {}
         });

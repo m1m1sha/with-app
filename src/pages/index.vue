@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { StickyToolProps, TableProps } from 'tdesign-vue-next';
 import { WithStatus } from '~/stores/app';
+import { writeText } from '@tauri-apps/api/clipboard';
+import { MessagePlugin } from "tdesign-vue-next";
 
 const configStore = useConfigStore()
 const { config } = storeToRefs(configStore)
@@ -30,9 +32,19 @@ async function stop() {
   await withStop()
 }
 
-const handleClick: StickyToolProps['onClick'] = (context) => {
-  if (context.item.popup === "组用户") {
-    visible.value = true
+const handleClick: StickyToolProps['onClick'] = async (context) => {
+
+
+  switch (context.item.popup) {
+    case "组用户":
+      visible.value = true
+      break;
+    case "分享":
+      let share = shareForDeeplink();
+      console.log(share.length)
+      await writeText(share);
+      MessagePlugin.success("分享链接已复制到剪贴板!");
+      break;
   }
 };
 </script>
@@ -67,7 +79,7 @@ const handleClick: StickyToolProps['onClick'] = (context) => {
       </div>
     </t-space>
     <t-sticky-tool type="compact" @click="handleClick" v-show="withStatus === WithStatus.Connected">
-      <t-sticky-item popup="邀请加入（未完成）" v-if="false">
+      <t-sticky-item popup="分享">
         <template #icon>
           <t-icon name="share" />
         </template>
