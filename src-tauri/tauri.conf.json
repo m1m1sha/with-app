@@ -13,7 +13,9 @@
     "updater": {
       "active": true,
       "dialog": true,
-      "endpoints": [],
+      "endpoints": [
+        "https://cdn.jsdelivr.net/gh/m1m1sha/with.github.io/latest.json"
+      ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM1MEVGNTZBODg1M0E4MzgKUldRNHFGT0lhdlVPeGRYKzJQNEpROEZKMzhrTFZYK0wrT3ozS01HRTBzZkZqNU9KUUxzS3pWbmkK",
       "windows": {
         "installMode": "passive",
@@ -21,7 +23,8 @@
       }
     },
     "systemTray": {
-      "iconPath": "icons/icon.png"
+      "iconPath": "icons/icon.png",
+      "title": "虚拟局域网组网"
     },
     "allowlist": {
       "all": false,
@@ -31,6 +34,9 @@
       "fs": {
         "all": true,
         "scope": ["**/*"]
+      },
+      "process": {
+        "all": true
       }
     },
     "windows": [
