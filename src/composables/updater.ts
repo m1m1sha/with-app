@@ -1,4 +1,4 @@
-import { checkUpdate, onUpdaterEvent } from "@tauri-apps/api/updater";
+import { checkUpdate } from "@tauri-apps/api/updater";
 import { MessagePlugin } from "tdesign-vue-next";
 
 const appStore = useAppStore();
