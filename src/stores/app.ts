@@ -37,7 +37,7 @@ export const useAppStore = defineStore("app", () => {
   const menu = ref("/");
   const settingTab = ref("basic");
 
-  const appUpdaterVisible = ref(true);
+  const appUpdaterVisible = ref(false);
   const appUpdaterInfo = ref<UpdateManifest | undefined>();
   const appUpdaterLoading = ref(false);
 
