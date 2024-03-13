@@ -2,14 +2,12 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use core::WithState;
-use encoding::{all::GBK, DecoderTrap, Encoding};
 use std::sync::Mutex;
-use tauri::{
-    CustomMenuItem, Manager, PackageInfo, PathResolver, SystemTray, SystemTrayEvent, SystemTrayMenu,
-};
+use tauri::Manager;
 
 mod core;
 mod tool;
+mod tray;
 mod util;
 
 pub struct DeeplinkState(pub Mutex<String>);
@@ -17,15 +15,11 @@ pub struct DeeplinkState(pub Mutex<String>);
 fn main() {
     tracing_subscriber::fmt().init();
 
-    let quit = CustomMenuItem::new("quit".to_string(), "退出");
-    let tray_menu = SystemTrayMenu::new().add_item(quit); // insert the menu items here
-    let system_tray = SystemTray::new().with_menu(tray_menu);
-
     tauri_plugin_deep_link::prepare("cn.smjb.with");
     tauri::Builder::default()
         .manage(core::WithState(Mutex::new(None)))
         .manage(DeeplinkState(Mutex::new(String::new())))
-        .system_tray(system_tray)
+        .system_tray(tray::menu())
         .setup(|app| {
             let handle = app.handle();
             tauri_plugin_deep_link::register("withApp", move |request| {
@@ -37,29 +31,8 @@ fn main() {
 
             Ok(())
         })
-        .on_system_tray_event(|app, event| match event {
-            SystemTrayEvent::LeftClick {
-                position: _,
-                size: _,
-                ..
-            } => {
-                let window = app.get_window("main").unwrap();
-                window.show().unwrap();
-            }
-            SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
-                "quit" => {
-                    let state = app.state::<WithState>();
-                    if state.0.lock().unwrap().is_some() {
-                        state.0.lock().unwrap().as_ref().unwrap().stop();
-                        *state.0.lock().unwrap() = None;
-                    }
-
-                    util::kill_win_ip_broadcast();
-                    std::process::exit(0);
-                }
-                _ => {}
-            },
-            _ => {}
+        .on_system_tray_event(|app, event| {
+            tray::event(app, event);
         })
         .invoke_handler(tauri::generate_handler![
             core::with_start,
