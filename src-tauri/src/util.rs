@@ -87,3 +87,12 @@ pub fn get_process_list(name: String) -> Vec<Pid> {
         .map(|p| p.pid())
         .collect()
 }
+
+pub fn kill_win_ip_broadcast() {
+    let pids = get_process_list("with_winIPBroadcast".to_owned());
+    if pids.len() > 0 {
+        for p in pids {
+            let _ = kill_process_force(p.to_string());
+        }
+    }
+}

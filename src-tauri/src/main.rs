@@ -54,12 +54,7 @@ fn main() {
                         *state.0.lock().unwrap() = None;
                     }
 
-                    let pids = util::get_process_list("with_winIPBroadcast".to_owned());
-                    if pids.len() > 0 {
-                        for p in pids {
-                            let _ = util::kill_process_force(p.to_string());
-                        }
-                    }
+                    util::kill_win_ip_broadcast();
                     std::process::exit(0);
                 }
                 _ => {}
