@@ -10,6 +10,8 @@ export async function checkForUpdates() {
 
     if (shouldUpdate) {
       appUpdaterVisible.value = true;
+    } else {
+      MessagePlugin.info(`当前已是最新版本`);
     }
   } catch (error) {
     MessagePlugin.error(`获取更新信息失败`);
