@@ -13,7 +13,7 @@ const toggleIPBroadcast = async () => {
   if (!winIPBroadcastStatus.value) {
     await winIPBroadcastStart(true);
   } else {
-    await winIPBroadcastStop();
+    await winIPBroadcastStop(true);
   }
 }
 

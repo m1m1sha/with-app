@@ -11,10 +11,9 @@ async function update() {
     const { shouldUpdate } = await checkUpdate();
 
     if (shouldUpdate) {
-        // appUpdaterVisible.value = true;
-        MessagePlugin.info(
-            `当前即将开始更新`
-        );
+        await winIPBroadcastStop(false)
+        MessagePlugin.info(`当前即将开始更新`);
+        appUpdaterLoading.value = true;
         // Install the update. This will also restart the app on Windows!
         await installUpdate();
         MessagePlugin.info(`更新完毕, 软件准备重启`);
@@ -43,7 +42,7 @@ onMounted(async () => {
                 <div> {{ `最新版本号: ${appUpdaterInfo ? 'v' + appUpdaterInfo!.version : ''} ---- 当前(v${pkg.version})` }}
                 </div>
                 <div>发布日期: {{ appUpdaterInfo?.date }}</div>
-                <div>更新内容: {{ appUpdaterInfo?.body }}</div>
+                <div>更新简介: {{ appUpdaterInfo?.body }}</div>
             </t-space>
         </div>
     </t-dialog>

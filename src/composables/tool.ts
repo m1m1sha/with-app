@@ -14,8 +14,8 @@ export async function winIPBroadcastStart(successShow: boolean) {
   if (successShow) MessagePlugin.success("winIPBroadcast 启动成功");
 }
 
-export async function winIPBroadcastStop() {
+export async function winIPBroadcastStop(successShow: boolean) {
   await invoke("win_ip_broadcast_stop");
   winIPBroadcastStatus.value = false;
-  MessagePlugin.success("winIPBroadcast 关闭成功");
+  if (successShow) MessagePlugin.success("winIPBroadcast 关闭成功");
 }
