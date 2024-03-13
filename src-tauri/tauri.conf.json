@@ -14,7 +14,7 @@
       "active": true,
       "dialog": true,
       "endpoints": [
-        "https://cdn.jsdelivr.net/gh/m1m1sha/with.github.io/latest.json"
+        "https://hub.gitmirror.com/https://github.com/m1m1sha/with.github.io/blob/main/latest.json"
       ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM1MEVGNTZBODg1M0E4MzgKUldRNHFGT0lhdlVPeGRYKzJQNEpROEZKMzhrTFZYK0wrT3ozS01HRTBzZkZqNU9KUUxzS3pWbmkK",
       "windows": {
