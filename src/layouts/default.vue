@@ -21,7 +21,7 @@ let unlisten: null | UnlistenFn = null
 let unlistenDeeplink: null | UnlistenFn = null
 
 onMounted(async () => {
-  winIPBroadcastStart();
+  winIPBroadcastStart(false);
   unlisten = await withEventConnect()
   unlistenDeeplink = await listenForDeeplink()
 })

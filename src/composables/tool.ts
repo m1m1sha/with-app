@@ -4,14 +4,14 @@ const appStore = useAppStore();
 
 const { winIPBroadcastStatus } = storeToRefs(appStore);
 
-export async function winIPBroadcastStart() {
+export async function winIPBroadcastStart(successShow: boolean) {
   let rep = await invoke("win_ip_broadcast_start");
   if (rep !== null) {
     MessagePlugin.warning(`winIPBroadcast 启动失败: ${rep}`);
     return;
   }
   winIPBroadcastStatus.value = true;
-  MessagePlugin.success("winIPBroadcast 启动成功");
+  if (successShow) MessagePlugin.success("winIPBroadcast 启动成功");
 }
 
 export async function winIPBroadcastStop() {

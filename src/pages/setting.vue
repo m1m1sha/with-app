@@ -11,7 +11,7 @@ const changeHandler: TabsProps['onChange'] = (val: TabValue) => {
 
 const toggleIPBroadcast = async () => {
   if (!winIPBroadcastStatus.value) {
-    await winIPBroadcastStart();
+    await winIPBroadcastStart(true);
   } else {
     await winIPBroadcastStop();
   }
