@@ -64,7 +64,7 @@ onUnmounted(async () => {
         </t-form-item>
       </t-form>
     </t-tab-panel>
-    <t-tab-panel v-if="false" value="tool" label="工具">
+    <t-tab-panel value="tool" label="工具">
       <t-form>
         <t-form-item label="IP广播" help="winIPBroadcast, 默认启用">
           <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{ winIPBroadcastStatus
