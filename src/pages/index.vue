@@ -109,6 +109,8 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
         </template>
       </t-table>
     </t-dialog>
+
+    <updater />
   </div>
 </template>
 

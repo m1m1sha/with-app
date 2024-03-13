@@ -33,5 +33,6 @@ declare module 'vue' {
     TTabPanel: typeof import('tdesign-vue-next')['TabPanel']
     TTabs: typeof import('tdesign-vue-next')['Tabs']
     TTag: typeof import('tdesign-vue-next')['Tag']
+    Updater: typeof import('./components/Updater.vue')['default']
   }
 }

@@ -1,3 +1,4 @@
+import { UpdateManifest } from "@tauri-apps/api/updater";
 import { defineStore } from "pinia";
 
 export interface WithRoute {
@@ -36,6 +37,10 @@ export const useAppStore = defineStore("app", () => {
   const menu = ref("/");
   const settingTab = ref("basic");
 
+  const appUpdaterVisible = ref(true);
+  const appUpdaterInfo = ref<UpdateManifest | undefined>();
+  const appUpdaterLoading = ref(false);
+
   const withStatus = ref<WithStatus>(WithStatus.Stopped);
 
   const withRoutes = ref<NeedRoute[]>([]);
@@ -54,5 +59,8 @@ export const useAppStore = defineStore("app", () => {
     withGatewayRoute,
     withTryConnect,
     winIPBroadcastStatus,
+    appUpdaterVisible,
+    appUpdaterInfo,
+    appUpdaterLoading,
   };
 });

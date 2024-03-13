@@ -1,10 +1,8 @@
-import {
-  checkUpdate,
-  installUpdate,
-  onUpdaterEvent,
-} from "@tauri-apps/api/updater";
-import { relaunch } from "@tauri-apps/api/process";
+import { checkUpdate, onUpdaterEvent } from "@tauri-apps/api/updater";
 import { MessagePlugin } from "tdesign-vue-next";
+
+const appStore = useAppStore();
+const { appUpdaterVisible } = storeToRefs(appStore);
 
 export async function checkForUpdates() {
   const unlisten = await onUpdaterEvent(({ error, status }) => {
@@ -13,6 +11,7 @@ export async function checkForUpdates() {
         MessagePlugin.info("当前已是最新版本");
         break;
       case "DONE":
+        MessagePlugin.info("更新完成");
         break;
       case "PENDING":
         MessagePlugin.info(`正在等待更新中...`);
@@ -24,23 +23,13 @@ export async function checkForUpdates() {
   });
 
   try {
-    const { shouldUpdate, manifest } = await checkUpdate();
+    const { shouldUpdate } = await checkUpdate();
 
     if (shouldUpdate) {
-      MessagePlugin.info(
-        `当前即将更新 v${manifest?.version}, ${manifest?.date}`
-      );
-      // Install the update. This will also restart the app on Windows!
-      await installUpdate();
-      MessagePlugin.info(`更新完毕, 软件准备重启`);
-      // On macOS and Linux you will need to restart the app manually.
-      // You could use this step to display another confirmation dialog.
-      await relaunch();
+      appUpdaterVisible.value = true;
     }
   } catch (error) {
-    MessagePlugin.error(`更新发生错误: ${error}`);
+    MessagePlugin.error(`获取更新信息失败`);
   }
-
-  // you need to call unlisten if your handler goes out of scope, for example if the component is unmounted.
   unlisten();
 }
