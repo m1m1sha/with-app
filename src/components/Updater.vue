@@ -35,11 +35,11 @@ onMounted(async () => {
         :header="`发现新版本${appUpdaterInfo ? ': v' + appUpdaterInfo!.version : ''}`" v-model:visible="appUpdaterVisible">
         <div px-8>
             <t-space direction="vertical" size="small">
-                <div>当前自动更新存在bug, 更新将自动打开Github Release页面</div>
+                <div>当前自动更新存在bug, 更新将打开Github Release</div>
                 <div> {{ `最新版本号: ${appUpdaterInfo ? 'v' + appUpdaterInfo!.version : ''} ---- 当前(v${pkg.version})` }}
                 </div>
                 <div>发布日期: {{ appUpdaterInfo?.date }}</div>
-                <div>更新简介: {{ appUpdaterInfo?.body }}</div>
+                <div w-full truncate>更新简介: {{ appUpdaterInfo?.body }}...</div>
             </t-space>
         </div>
     </t-dialog>
