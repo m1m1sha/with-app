@@ -117,7 +117,6 @@ declare module 'vue' {
     readonly CONFIG_FILE: UnwrapRef<typeof import('./composables/path')['CONFIG_FILE']>
     readonly DEFAULT_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_CONFIG']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly MessagePlugin: UnwrapRef<typeof import('tdesign-vue-next')['MessagePlugin']>
     readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
@@ -214,7 +213,6 @@ declare module '@vue/runtime-core' {
     readonly CONFIG_FILE: UnwrapRef<typeof import('./composables/path')['CONFIG_FILE']>
     readonly DEFAULT_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_CONFIG']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly MessagePlugin: UnwrapRef<typeof import('tdesign-vue-next')['MessagePlugin']>
     readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
