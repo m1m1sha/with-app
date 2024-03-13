@@ -26,7 +26,7 @@ onUnmounted(async () => {
   <t-tabs v-model="settingTab" h-full @change="changeHandler">
     <t-tab-panel value="basic" label="基本">
       <t-form>
-        <t-form-item label="ip广播" help="默认启用">
+        <t-form-item label="IP广播" help="winIPBroadcast, 默认启用">
           <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{ winIPBroadcastStatus
     ? '停用' : '启用'
             }}</t-tag>
