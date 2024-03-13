@@ -20,6 +20,7 @@ pub struct FrontConfig {
     pub name: String,         // 组网昵称
     pub proxy: bool,          // 内置代理
     pub server_encrypt: bool, // 服务端加密
+    pub metric: u16,          // 网卡跃点
     pub tcp: bool,            // 强制tcp
     pub ip: String,           // 自定义 ip
     pub latency: bool,        // 延迟优先
@@ -69,6 +70,7 @@ pub async fn with_start(
         mtu,
         config.tcp,
         None,
+        config.metric,
         vec![],
         vec![],
         config.latency,

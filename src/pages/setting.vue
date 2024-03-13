@@ -26,10 +26,8 @@ onUnmounted(async () => {
   <t-tabs v-model="settingTab" h-full @change="changeHandler">
     <t-tab-panel value="basic" label="基本">
       <t-form>
-        <t-form-item label="IP广播" help="winIPBroadcast, 默认启用">
-          <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{ winIPBroadcastStatus
-    ? '停用' : '启用'
-            }}</t-tag>
+        <t-form-item label="网卡跃点" help="默认为0(自动), 1(最高优先)">
+          <t-input-number v-model="config.with.metric" theme="column"></t-input-number>
         </t-form-item>
         <t-form-item label="强制TCP" help="建议仅在UDP丢包严重时启用">
           <t-switch v-model="config.with.tcp" />
@@ -66,8 +64,19 @@ onUnmounted(async () => {
         </t-form-item>
       </t-form>
     </t-tab-panel>
-    <t-tab-panel v-if="false" value="server" label="服务器">
-      <div />
+    <t-tab-panel v-if="false" value="tool" label="工具">
+      <t-form>
+        <t-form-item label="IP广播" help="winIPBroadcast, 默认启用">
+          <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{ winIPBroadcastStatus
+    ? '停用' : '启用'
+            }}</t-tag>
+        </t-form-item>
+        <t-form-item label="强制IP绑定" help="forceBindIP, 强制绑定IP到某个进程" v-if="false">
+          <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{ winIPBroadcastStatus
+    ? '停用' : '启用'
+            }}</t-tag>
+        </t-form-item>
+      </t-form>
     </t-tab-panel>
   </t-tabs>
 </template>
