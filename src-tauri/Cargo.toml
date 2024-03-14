@@ -32,7 +32,8 @@ encoding = "^0.2"
 uuid = { version = "1", features = ["v4"] }
 tokio = { version = "1", features = ["full"] }
 sysinfo = "^0.30"
-with = { git = "https://github.com/m1m1sha/with", tag = "v0.1.0" }
+winreg = "^0.52"
+vnt = { git = "https://github.com/m1m1sha/vnt" }
 
 [features]
 custom-protocol = ["tauri/custom-protocol"]
