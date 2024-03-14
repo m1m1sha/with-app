@@ -5223,7 +5223,7 @@ dependencies = [
 
 [[package]]
 name = "with-app"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "encoding",
  "serde",
