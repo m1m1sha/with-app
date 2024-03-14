@@ -357,7 +357,7 @@ dependencies = [
 [[package]]
 name = "cipher"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#1aa0d682bea7f31aab59fea31a0ffaf80eb2a976"
+source = "git+https://github.com/m1m1sha/with?tag=v0.1.0#389ce3b9bc9425b56ef0d7dfd91cadd35edea99d"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -1926,7 +1926,7 @@ dependencies = [
 [[package]]
 name = "libsm"
 version = "0.5.1"
-source = "git+https://github.com/m1m1sha/with?branch=dev#1aa0d682bea7f31aab59fea31a0ffaf80eb2a976"
+source = "git+https://github.com/m1m1sha/with?tag=v0.1.0#389ce3b9bc9425b56ef0d7dfd91cadd35edea99d"
 dependencies = [
  "byteorder",
  "getrandom 0.2.12",
@@ -2092,7 +2092,7 @@ checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
 [[package]]
 name = "nat"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#1aa0d682bea7f31aab59fea31a0ffaf80eb2a976"
+source = "git+https://github.com/m1m1sha/with?tag=v0.1.0#389ce3b9bc9425b56ef0d7dfd91cadd35edea99d"
 dependencies = [
  "crossbeam-utils",
  "encoding",
@@ -2462,7 +2462,7 @@ checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
 [[package]]
 name = "packet"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#1aa0d682bea7f31aab59fea31a0ffaf80eb2a976"
+source = "git+https://github.com/m1m1sha/with?tag=v0.1.0#389ce3b9bc9425b56ef0d7dfd91cadd35edea99d"
 dependencies = [
  "byteorder",
 ]
@@ -2892,7 +2892,7 @@ dependencies = [
 [[package]]
 name = "protocol"
 version = "0.0.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#1aa0d682bea7f31aab59fea31a0ffaf80eb2a976"
+source = "git+https://github.com/m1m1sha/with?tag=v0.1.0#389ce3b9bc9425b56ef0d7dfd91cadd35edea99d"
 
 [[package]]
 name = "quick-xml"
@@ -4425,7 +4425,7 @@ checksum = "09cc8ee72d2a9becf2f2febe0205bbed8fc6615b7cb429ad062dc7b7ddd036a9"
 [[package]]
 name = "utils"
 version = "0.0.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#1aa0d682bea7f31aab59fea31a0ffaf80eb2a976"
+source = "git+https://github.com/m1m1sha/with?tag=v0.1.0#389ce3b9bc9425b56ef0d7dfd91cadd35edea99d"
 dependencies = [
  "parking_lot",
  "tokio",
@@ -5225,7 +5225,7 @@ dependencies = [
 [[package]]
 name = "with"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/with?branch=dev#1aa0d682bea7f31aab59fea31a0ffaf80eb2a976"
+source = "git+https://github.com/m1m1sha/with?tag=v0.1.0#389ce3b9bc9425b56ef0d7dfd91cadd35edea99d"
 dependencies = [
  "bytes",
  "cipher 0.1.0",
