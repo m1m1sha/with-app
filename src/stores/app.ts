@@ -2,25 +2,6 @@ import { UpdateManifest } from "@tauri-apps/api/updater";
 import { defineStore } from "pinia";
 import { DeviceItem } from "~/composables/with";
 
-export interface WithRoute {
-  ip: string;
-  routes: Route[];
-}
-
-export interface Route {
-  is_tcp: boolean;
-  index: number;
-  addr: string;
-  metric: number;
-  rt: number;
-}
-
-export interface NeedRoute {
-  ip: string;
-  rt: string;
-  channel: string;
-}
-
 export enum WithStatus {
   Stopping = "stopping",
   Stopped = "stopped",
