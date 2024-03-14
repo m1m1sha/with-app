@@ -7,8 +7,9 @@ const columns: TableProps['columns'] = [
     {
         colKey: 'name',
         title: '设备名称',
+        width: 100,
     }, {
-        colKey: 'virtual_ip',
+        colKey: 'ip',
         title: '虚拟IP',
     }, {
         colKey: 'channel',
@@ -21,7 +22,7 @@ const columns: TableProps['columns'] = [
 
 interface DeviceItemColumn {
     name: String;
-    virtual_ip: String;
+    ip: String;
 
     channel: string
     rt: string;
@@ -59,9 +60,10 @@ const tableData = computed(() => {
         }
 
         let itemColumn: DeviceItemColumn = {
-            channel: `${item.tcp ? "tcp" : "udp"} / ${metric}`,
+            channel: `${item.tcp ? "TCP" : "UDP"} / ${metric}`,
             nat,
             ...item,
+            ip: item.virtual_ip,
             rt,
         }
         if (item.same_secret && item.online) {
@@ -81,6 +83,20 @@ const tableData = computed(() => {
                 style="display: flex; align-items: center; justify-content: center; height: 38px; color: var(--td-text-color-placeholder)">
                 😊 暂时还未发现其他组网设备
             </span>
+        </template>
+        <template #name="{ row }">
+            <div w-full truncate>{{ row.name }}</div>
+        </template>
+        <template #ip="{ row }">
+            <t-popup trigger="hover">
+                <div>{{ row.ip }}</div>
+                <template #content>
+                    <p>设备网络信息：</p>
+                    <p>nat: {{ row.nat }}</p>
+                    <p>ip: {{ row.local_ip }}</p>
+                    <p>ipv6: {{ row.ipv6 }}</p>
+                </template>
+            </t-popup>
         </template>
         <template #rt="{ row }">
             <t-tag v-if="row.online" :theme="row.rt >= 80 || row.rt < 1 ? 'warning' : 'success'">{{ row.rt }}</t-tag>
