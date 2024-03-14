@@ -100,4 +100,9 @@ onUnmounted(async () => {
 .t-list {
   @apply h-202px;
 }
+
+.t-tabs,
+.t-list {
+  background-color: transparent;
+}
 </style>
