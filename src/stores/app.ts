@@ -1,5 +1,6 @@
 import { UpdateManifest } from "@tauri-apps/api/updater";
 import { defineStore } from "pinia";
+import { DeviceItem } from "~/composables/with";
 
 export interface WithRoute {
   ip: string;
@@ -43,20 +44,18 @@ export const useAppStore = defineStore("app", () => {
 
   const withStatus = ref<WithStatus>(WithStatus.Stopped);
 
-  const withRoutes = ref<NeedRoute[]>([]);
+  const withDeviceItems = ref<DeviceItem[]>([]);
   const withTryConnect = ref(0);
 
   const withLocalInfo = ref<WithLocalInfo | null>();
-  const withGatewayRoute = ref<NeedRoute | null>();
   const winIPBroadcastStatus = ref(false);
 
   return {
     menu,
     settingTab,
     withStatus,
-    withRoutes,
+    withDeviceItems,
     withLocalInfo,
-    withGatewayRoute,
     withTryConnect,
     winIPBroadcastStatus,
     appUpdaterVisible,

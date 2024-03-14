@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { StickyToolProps, TableProps } from 'tdesign-vue-next';
+import { StickyToolProps } from 'tdesign-vue-next';
 import { WithStatus } from '~/stores/app';
 import { writeText } from '@tauri-apps/api/clipboard';
 import { MessagePlugin } from "tdesign-vue-next";
@@ -8,21 +8,9 @@ const configStore = useConfigStore()
 const { config } = storeToRefs(configStore)
 
 const appStore = useAppStore()
-const { withStatus, withRoutes, withGatewayRoute, withLocalInfo, withTryConnect } = storeToRefs(appStore)
+const { withStatus, withLocalInfo, withTryConnect } = storeToRefs(appStore)
 const visible = ref(false);
 
-const columns: TableProps['columns'] = [
-  {
-    colKey: 'ip',
-    title: 'ip',
-  }, {
-    colKey: 'channel',
-    title: '连接/通道',
-  }, {
-    colKey: 'rt',
-    title: '延迟(ms)',
-  }
-];
 async function start() {
   const cfg = JSON.parse(JSON.stringify(config.value.with))
   await configStore.saveConfig();
@@ -95,21 +83,10 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
       v-model:visible="visible">
       <div flex justify-between>
         <div>{{ withLocalInfo ? `本机：${withLocalInfo!.virtual_ip}` : '本机信息获取中' }}</div>
-        <div>{{ withGatewayRoute ? `网关：${withGatewayRoute!.ip}, 类型：${withGatewayRoute!.channel},
-          延迟：${withGatewayRoute!.rt}ms` : '网关信息获取中' }}
-        </div>
+        <div>{{ `本机名称：${config.with.name ? config.with.name : '设备识别码'}` }}</div>
       </div>
-      <t-table :stripe="true" size="small" headerAffixedTop maxHeight="50%" :data="withRoutes" :columns="columns"
-        row-key="ip">
-        <template #empty>
-          <span
-            style="display: flex; align-items: center; justify-content: center; height: 38px; color: var(--td-text-color-placeholder)">
-            😊 暂时还未发现其他组网设备
-          </span>
-        </template>
-      </t-table>
+      <DeviceItems />
     </t-dialog>
-
     <updater />
   </div>
 </template>

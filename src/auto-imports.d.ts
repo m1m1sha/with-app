@@ -8,8 +8,10 @@ declare global {
   const APP_CONFIG_DIR: typeof import('./composables/path')['APP_CONFIG_DIR']
   const CONFIG_FILE: typeof import('./composables/path')['CONFIG_FILE']
   const DEFAULT_CONFIG: typeof import('./composables/config')['DEFAULT_CONFIG']
+  const DeviceMetric: typeof import('./composables/with')['DeviceMetric']
   const EffectScope: typeof import('vue')['EffectScope']
   const MessagePlugin: typeof import('tdesign-vue-next')['MessagePlugin']
+  const NatType: typeof import('./composables/with')['NatType']
   const WITH_EVENT_CONNECT: typeof import('./composables/with')['WITH_EVENT_CONNECT']
   const WithStatus: typeof import('./stores/app')['WithStatus']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
@@ -26,6 +28,7 @@ declare global {
   const defineLoader: typeof import('vue-router/auto')['defineLoader']
   const definePage: typeof import('unplugin-vue-router/runtime')['definePage']
   const defineStore: typeof import('pinia')['defineStore']
+  const deviceMetric: typeof import('./composables/with')['deviceMetric']
   const effectScope: typeof import('vue')['effectScope']
   const existsConfig: typeof import('./composables/path')['existsConfig']
   const getActivePinia: typeof import('pinia')['getActivePinia']
@@ -116,7 +119,9 @@ declare module 'vue' {
     readonly APP_CONFIG_DIR: UnwrapRef<typeof import('./composables/path')['APP_CONFIG_DIR']>
     readonly CONFIG_FILE: UnwrapRef<typeof import('./composables/path')['CONFIG_FILE']>
     readonly DEFAULT_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_CONFIG']>
+    readonly DeviceMetric: UnwrapRef<typeof import('./composables/with')['DeviceMetric']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly NatType: UnwrapRef<typeof import('./composables/with')['NatType']>
     readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
@@ -212,7 +217,9 @@ declare module '@vue/runtime-core' {
     readonly APP_CONFIG_DIR: UnwrapRef<typeof import('./composables/path')['APP_CONFIG_DIR']>
     readonly CONFIG_FILE: UnwrapRef<typeof import('./composables/path')['CONFIG_FILE']>
     readonly DEFAULT_CONFIG: UnwrapRef<typeof import('./composables/config')['DEFAULT_CONFIG']>
+    readonly DeviceMetric: UnwrapRef<typeof import('./composables/with')['DeviceMetric']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly NatType: UnwrapRef<typeof import('./composables/with')['NatType']>
     readonly WithStatus: UnwrapRef<typeof import('./stores/app')['WithStatus']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly channelMode: UnwrapRef<typeof import('./composables/config')['channelMode']>
