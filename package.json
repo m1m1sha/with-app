@@ -1,7 +1,7 @@
 {
   "name": "with-app",
   "type": "module",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "packageManager": "pnpm@8.15.3",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.5.3",
-    "@unhead/vue": "^1.8.16",
+    "@unhead/vue": "^1.8.18",
     "@unocss/reset": "^0.58.5",
     "@vueuse/core": "^10.9.0",
     "@vueuse/head": "^2.0.0",
@@ -48,7 +48,7 @@
     "unplugin-vue-markdown": "^0.26.0",
     "unplugin-vue-router": "^0.8.4",
     "vite": "^5.1.6",
-    "vite-bundle-visualizer": "^1.0.1",
+    "vite-bundle-visualizer": "^1.1.0",
     "vite-plugin-inspect": "^0.8.3",
     "vite-plugin-pages": "^0.32.0",
     "vite-plugin-vue-devtools": "7.0.17",
