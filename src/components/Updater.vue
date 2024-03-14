@@ -25,6 +25,8 @@ async function update() {
         //     await openExternal(`https://hub.gitmirror.com/https://github.com/m1m1sha/with-app/releases/download/v${appUpdaterInfo.value!.version}/with_${appUpdaterInfo.value!.version}_x64-setup.exe`);
         // }
         // await openExternal(`https://github.com/m1m1sha/with-app/releases`);
+    } else {
+        await openExternal(`https://github.com/m1m1sha/with-app/releases`);
     }
 }
 
@@ -39,15 +41,20 @@ onMounted(async () => {
 
 </script>
 <template>
-    <t-dialog preventScrollThrough :closeBtn="false" confirmBtn="更新" :onConfirm="update"
-        :confirmLoading="appUpdaterLoading" showOverlay showInAttachedElement theme="info"
-        :header="`发现新版本${appUpdaterInfo ? ': v' + appUpdaterInfo!.version : ''}`" v-model:visible="appUpdaterVisible">
+    <t-dialog preventScrollThrough :closeBtn="false" :confirmBtn="appUpdaterInfo ? '更新' : 'Release页面'"
+        :onConfirm="update" :confirmLoading="appUpdaterLoading" showOverlay showInAttachedElement theme="info"
+        :header="`${appUpdaterInfo ? ': v' + appUpdaterInfo!.version : '当前已经是最新版本'}`"
+        v-model:visible="appUpdaterVisible">
         <div px-8>
             <t-space direction="vertical" size="small">
-                <div>当前自动更新存在bug, 更新将打开Github Release</div>
-                <t-link @click="openExternal(`https://github.com/m1m1sha/with-app/releases`)">{{ `最新版本号:
-                    ${appUpdaterInfo ? 'v' + appUpdaterInfo!.version : ''} ---- 当前(v${pkg.version})`
-                    }}</t-link>
+                <div>
+                    最新版本号:
+                    <t-link @click="openExternal(`https://github.com/m1m1sha/with-app/releases`)">
+                        <t-icon name="link"></t-icon>
+                        {{ `${appUpdaterInfo ? 'v' + appUpdaterInfo!.version : '前往Release页面'}` }}
+                    </t-link>
+                    ---- 当前(v{{ pkg.version }})
+                </div>
                 <div>发布日期: {{ appUpdaterInfo?.date }}</div>
                 <div w-full truncate>更新简介: {{ appUpdaterInfo?.body }}...</div>
             </t-space>
