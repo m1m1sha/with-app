@@ -3,11 +3,12 @@ import { UnlistenFn } from '@tauri-apps/api/event';
 import type { MenuProps } from 'tdesign-vue-next'
 import pkg from "../../package.json"
 import { winIPBroadcastStart } from '~/composables/tool';
+import { checkUpdate } from '@tauri-apps/api/updater';
 const router = useRouter()
 const route = useRoute()
 const appStore = useAppStore()
 const configStore = useConfigStore()
-const { menu } = storeToRefs(appStore)
+const { menu, appUpdaterInfo, appUpdaterVisible } = storeToRefs(appStore)
 
 if (route.path !== menu.value)
   menu.value = route.path
@@ -26,11 +27,17 @@ onMounted(async () => {
   unlistenDeeplink = await listenForDeeplink()
 })
 
-onUnmounted(() => {
+onUnmounted(async () => {
   if (unlisten !== null)
     unlisten()
   if (unlistenDeeplink !== null)
     unlistenDeeplink()
+
+  try {
+    const { manifest } = await checkUpdate();
+    appUpdaterInfo.value = manifest
+    appUpdaterVisible.value = true
+  } catch { }
 })
 </script>
 
