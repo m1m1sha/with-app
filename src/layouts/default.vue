@@ -90,5 +90,13 @@ onUnmounted(async () => {
   & :deep(.t-layout__footer) {
     @apply p-2 text-center;
   }
+
+  & :deep(.t-layout__sider) {
+    background: none;
+  }
+
+  & :deep(.t-default-menu) {
+    background: none;
+  }
 }
 </style>

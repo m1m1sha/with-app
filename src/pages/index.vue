@@ -55,15 +55,15 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
         </t-form-item>
       </t-form>
       <div w-full flex items-center justify-center>
-        <t-button @click="start" v-if="withStatus !== WithStatus.Connected"
+        <t-button class="action start" @click="start" v-if="withStatus !== WithStatus.Connected"
           :loading="withStatus === WithStatus.Connecting">
           {{ withStatus === WithStatus.Connecting ? withTryConnect > 1 ? `正在尝试第${withTryConnect - 1}次重连` : '启动中...' :
             "启动" }}
         </t-button>
         <div v-if="(withStatus === WithStatus.Connecting && withTryConnect >= 1)" mx-2></div>
-        <t-button theme="danger" @click="stop"
+        <t-button class="action stop" theme="danger" @click="stop"
           v-if="withStatus === WithStatus.Connected || (withStatus === WithStatus.Connecting && withTryConnect >= 1)">
-          "关闭"
+          关闭
         </t-button>
       </div>
     </t-space>
@@ -115,5 +115,18 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
 
 :global(.t-sticky-tool .t-sticky-item .t-icon) {
   @apply m-0;
+}
+
+.action {
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.start:hover {
+  filter: drop-shadow(0 0 2em #699ef5aa);
+}
+
+.stop:hover {
+  filter: drop-shadow(0 0 2em #de6670aa);
 }
 </style>
