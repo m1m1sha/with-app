@@ -4,7 +4,7 @@
 use core::with_stop;
 use std::sync::Mutex;
 use tauri::Manager;
-use tool::win_ip_broadcast_stop;
+use util;
 
 mod core;
 mod tool;
@@ -48,7 +48,7 @@ fn main() {
                 // event.window().hide().unwrap();
                 // api.prevent_close();
                 let state = event.window().state::<core::WithState>();
-                win_ip_broadcast_stop();
+                kill_win_ip_broadcast();
                 with_stop(state)
             }
             _ => {}
@@ -59,7 +59,7 @@ fn main() {
             tauri::RunEvent::ExitRequested { api, .. } => {
                 // api.prevent_exit();
                 let state = handle.state::<core::WithState>();
-                win_ip_broadcast_stop();
+                kill_win_ip_broadcast();
                 with_stop(state)
             }
             tauri::RunEvent::Ready => {
