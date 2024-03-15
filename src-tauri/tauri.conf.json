@@ -57,7 +57,8 @@
         "title": "虚拟局域网组网",
         "width": 475,
         "height": 320,
-        "resizable": false
+        "resizable": false,
+        "decorations": false
       }
     ],
     "security": {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { StickyToolProps } from 'tdesign-vue-next';
 import { WithStatus } from '~/stores/app';
-import { writeText } from '@tauri-apps/api/clipboard';
+import { readText, writeText } from '@tauri-apps/api/clipboard';
 import { MessagePlugin } from "tdesign-vue-next";
 
 const configStore = useConfigStore()
@@ -20,16 +20,22 @@ async function stop() {
   await withStop()
 }
 
+const getShareHandler = async () => {
+  let content = await readText();
+  if (!content || !content.toLocaleLowerCase().startsWith("withapp://join/")) {
+    MessagePlugin.warning("剪贴板中不存在分享链接!");
+  } else {
+    getShareFromUrl(content);
+  }
+}
+
 const handleClick: StickyToolProps['onClick'] = async (context) => {
-
-
   switch (context.item.popup) {
     case "组用户":
       visible.value = true
       break;
     case "分享":
       let share = shareForDeeplink();
-      console.log(share.length)
       await writeText(share);
       MessagePlugin.success("分享链接已复制到剪贴板!");
       break;
@@ -70,8 +76,12 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
     <t-sticky-tool type="compact" placement="left-bottom" @click="handleClick">
       <t-sticky-item popup="求求了">
         <template #icon>
-          <t-icon name="gesture-applause" />
+          <t-popconfirm placement="right" content="读取粘贴板分享？" confirmBtn="读取" cancelBtn="我再想想"
+            :onConfirm="getShareHandler">
+            <t-icon name="gesture-applause" />
+          </t-popconfirm>
         </template>
+
       </t-sticky-item>
       <t-sticky-item popup="分享">
         <template #icon>

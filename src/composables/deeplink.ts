@@ -21,28 +21,7 @@ export async function listenForDeeplink() {
     console.log(event.payload);
 
     // withapp://join/base64
-    try {
-      let action = event.payload.replaceAll("withapp://", "").split("/");
-      let flag = action[0];
-      let base64 = action[1];
-
-      if (flag === "join") {
-        let json = JSON.parse(atob(base64)) as share;
-        if (withStatus.value !== WithStatus.Stopped) {
-          MessagePlugin.warning("请停止组网后, 再使用分享链接", 3000);
-          return;
-        }
-        config.value.with.server = json.a;
-        config.value.with.token = json.b;
-        config.value.with.passwd = json.c;
-        config.value.with.cipher = json.d;
-        config.value.with.punch = json.e;
-        config.value.with.channel = json.f;
-        MessagePlugin.success("导入分享链接成功!", 3000);
-      }
-    } catch {
-      return;
-    }
+    getShareFromUrl(event.payload);
   });
 }
 
@@ -57,4 +36,33 @@ export function shareForDeeplink() {
     f: cfg.channel,
   };
   return `withApp://join/${btoa(JSON.stringify(json))}`;
+}
+
+export function getShareFromUrl(url: string): boolean {
+  try {
+    let action = url
+      .replaceAll("withapp://", "")
+      .replaceAll("withApp://", "")
+      .split("/");
+    let flag = action[0];
+    let base64 = action[1];
+    if (flag === "join") {
+      let json = JSON.parse(atob(base64)) as share;
+      if (withStatus.value !== WithStatus.Stopped) {
+        MessagePlugin.warning("请停止组网后, 再使用分享链接", 3000);
+        return false;
+      }
+      config.value.with.server = json.a;
+      config.value.with.token = json.b;
+      config.value.with.passwd = json.c;
+      config.value.with.cipher = json.d;
+      config.value.with.punch = json.e;
+      config.value.with.channel = json.f;
+      MessagePlugin.success("导入分享链接成功!", 3000);
+    }
+    return true;
+  } catch {
+    MessagePlugin.warning("解析分享链接失败", 3000);
+    return false;
+  }
 }

@@ -39,54 +39,53 @@ onUnmounted(async () => {
     unlistenDeeplink()
 
   try {
-    const { manifest } = await checkUpdate();
+    const { shouldUpdate, manifest } = await checkUpdate();
     appUpdaterInfo.value = manifest
-    appUpdaterVisible.value = true
+    if (shouldUpdate)
+      appUpdaterVisible.value = true
   } catch { }
 })
 </script>
 
 <template>
   <t-layout h-full>
-    <t-layout>
-      <t-header data-tauri-drag-region>
-        <t-head-menu data-tauri-drag-region v-model="menu" :collapsed="true" @change="changeHandler">
-          <t-menu-item value="/">
-            <template #icon>
-              <t-icon name="precise-monitor" />
-            </template>
-            启动
-          </t-menu-item>
-          <t-menu-item value="/setting">
-            <template #icon>
-              <t-icon name="setting" />
-            </template>
-            设置
-          </t-menu-item>
-          <template #operations>
-            <t-button variant="text" shape="square" @click="appWindow.minimize()">
-              <template #icon><t-icon name="minus" /></template>
-            </t-button>
-            <t-button variant="text" shape="square">
-              <template #icon><t-icon name="close" /></template>
-            </t-button>
+    <t-header data-tauri-drag-region>
+      <t-head-menu v-model="menu" :collapsed="true" @change="changeHandler">
+        <t-menu-item value="/">
+          <template #icon>
+            <t-icon name="precise-monitor" />
           </template>
-        </t-head-menu>
-      </t-header>
-      <t-content data-tauri-drag-region>
-        <RouterView />
-      </t-content>
-      <t-footer>
-        <t-space>
-          <t-link @click="checkForUpdates">
-            当前版本: v{{ pkg.version }}
-          </t-link>
-          <t-link @click="openExternal('https://github.com/m1m1sha/with-app/issues')">
-            有Bug或想法？请提交Issue来帮助完善
-          </t-link>
-        </t-space>
-      </t-footer>
-    </t-layout>
+          启动
+        </t-menu-item>
+        <t-menu-item value="/setting">
+          <template #icon>
+            <t-icon name="setting" />
+          </template>
+          设置
+        </t-menu-item>
+        <template #operations>
+          <t-button variant="text" shape="square" @click="appWindow.minimize()">
+            <template #icon><t-icon name="minus" /></template>
+          </t-button>
+          <t-button variant="text" shape="square" @click="appWindow.close()">
+            <template #icon><t-icon name="close" /></template>
+          </t-button>
+        </template>
+      </t-head-menu>
+    </t-header>
+    <t-content data-tauri-drag-region>
+      <RouterView />
+    </t-content>
+    <t-footer data-tauri-drag-region>
+      <t-space>
+        <t-link @click="checkForUpdates">
+          当前版本: v{{ pkg.version }}
+        </t-link>
+        <t-link @click="openExternal('https://github.com/m1m1sha/with-app/issues')">
+          有Bug或想法？请提交Issue来帮助完善
+        </t-link>
+      </t-space>
+    </t-footer>
   </t-layout>
 </template>
 
@@ -109,14 +108,10 @@ onUnmounted(async () => {
     height: auto;
   }
 
-  & :deep(.t-head-menu) {
-    background: none;
-  }
-
-
   & :deep(.t-head-menu__inner),
   :global(.t-menu__operations) {
     height: var(--td-comp-size-l);
+    margin: 4px 0;
   }
 
 }
