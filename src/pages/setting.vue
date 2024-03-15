@@ -48,7 +48,7 @@ onUnmounted(async () => {
     <t-tab-panel value="mode" label="模式">
       <t-list :scroll="{ type: 'virtual' }">
         <t-form>
-          <t-form-item label="加密模式" help="需要选择相同加密模式">
+          <t-form-item label="加密模式" help="需要选择相同加密模式, 建议无加密">
             <t-select v-model="config.with.cipher">
               <t-option key="aes-gcm" label="aes-gcm" value="AesGcm" />
               <t-option key="aes-cbc" label="aes-cbc" value="AesCbc" />
@@ -85,9 +85,9 @@ onUnmounted(async () => {
           </t-form-item>
           <t-form-item label="强制IP绑定" help="forceBindIP, 强制绑定IP到某个进程" v-if="false">
             <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{
-    winIPBroadcastStatus
-      ? '停用' : '启用'
-  }}</t-tag>
+              winIPBroadcastStatus
+              ? '停用' : '启用'
+              }}</t-tag>
           </t-form-item>
         </t-form>
       </t-list>
