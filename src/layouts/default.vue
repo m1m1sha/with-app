@@ -22,10 +22,6 @@ const changeHandler: MenuProps['onChange'] = (active) => {
 let unlisten: null | UnlistenFn = null
 let unlistenDeeplink: null | UnlistenFn = null
 
-const minimizeHandler = () => {
-
-}
-
 onMounted(async () => {
   winIPBroadcastStart(false);
   unlisten = await withEventConnect()

@@ -31,10 +31,10 @@ const getShareHandler = async () => {
 
 const handleClick: StickyToolProps['onClick'] = async (context) => {
   switch (context.item.popup) {
-    case "组用户":
+    case "偷窥（组网列表）":
       visible.value = true
       break;
-    case "分享":
+    case "大发善心（分享）":
       let share = shareForDeeplink();
       await writeText(share);
       MessagePlugin.success("分享链接已复制到剪贴板!");
@@ -74,7 +74,7 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
       </div>
     </t-space>
     <t-sticky-tool type="compact" placement="left-bottom" @click="handleClick">
-      <t-sticky-item popup="求求了">
+      <t-sticky-item popup="求求了（导入配置）">
         <template #icon>
           <t-popconfirm placement="right" content="读取粘贴板分享？" confirmBtn="读取" cancelBtn="我再想想"
             :onConfirm="getShareHandler">
@@ -83,12 +83,12 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
         </template>
 
       </t-sticky-item>
-      <t-sticky-item popup="分享">
+      <t-sticky-item popup="大发善心（分享）">
         <template #icon>
           <t-icon name="share" />
         </template>
       </t-sticky-item>
-      <t-sticky-item popup="组用户" v-show="withStatus === WithStatus.Connected">
+      <t-sticky-item popup="偷窥（组网列表）" v-if="withStatus === WithStatus.Connected">
         <template #icon>
           <t-icon name="user-list" />
         </template>
