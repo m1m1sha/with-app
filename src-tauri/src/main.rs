@@ -1,10 +1,8 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use core::with_stop;
 use std::sync::Mutex;
 use tauri::Manager;
-use util;
 
 mod core;
 mod tool;
@@ -44,23 +42,29 @@ fn main() {
             tool::win_ip_broadcast_stop,
         ])
         .on_window_event(|event| match event.event() {
-            tauri::WindowEvent::CloseRequested { api, .. } => {
+            tauri::WindowEvent::CloseRequested { .. } => {
                 // event.window().hide().unwrap();
                 // api.prevent_close();
                 let state = event.window().state::<core::WithState>();
-                kill_win_ip_broadcast();
-                with_stop(state)
+                util::kill_win_ip_broadcast();
+                if state.0.lock().unwrap().is_some() {
+                    state.0.lock().unwrap().as_ref().unwrap().stop();
+                    *state.0.lock().unwrap() = None;
+                }
             }
             _ => {}
         })
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|handle, event| match event {
-            tauri::RunEvent::ExitRequested { api, .. } => {
+            tauri::RunEvent::ExitRequested { .. } => {
                 // api.prevent_exit();
                 let state = handle.state::<core::WithState>();
-                kill_win_ip_broadcast();
-                with_stop(state)
+                util::kill_win_ip_broadcast();
+                if state.0.lock().unwrap().is_some() {
+                    state.0.lock().unwrap().as_ref().unwrap().stop();
+                    *state.0.lock().unwrap() = None;
+                }
             }
             tauri::RunEvent::Ready => {
                 let state = handle.state::<DeeplinkState>();
