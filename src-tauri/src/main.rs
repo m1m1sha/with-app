@@ -1,8 +1,10 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use core::with_stop;
 use std::sync::Mutex;
 use tauri::Manager;
+use tool::win_ip_broadcast_stop;
 
 mod core;
 mod tool;
@@ -45,6 +47,9 @@ fn main() {
             tauri::WindowEvent::CloseRequested { api, .. } => {
                 // event.window().hide().unwrap();
                 // api.prevent_close();
+                let state = event.window().state::<core::WithState>();
+                win_ip_broadcast_stop();
+                with_stop(state)
             }
             _ => {}
         })
@@ -53,6 +58,9 @@ fn main() {
         .run(|handle, event| match event {
             tauri::RunEvent::ExitRequested { api, .. } => {
                 // api.prevent_exit();
+                let state = handle.state::<core::WithState>();
+                win_ip_broadcast_stop();
+                with_stop(state)
             }
             tauri::RunEvent::Ready => {
                 let state = handle.state::<DeeplinkState>();
