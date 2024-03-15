@@ -18,7 +18,7 @@ fn main() {
     tauri::Builder::default()
         .manage(core::WithState(Mutex::new(None)))
         .manage(DeeplinkState(Mutex::new(String::new())))
-        .system_tray(tray::menu())
+        // .system_tray(tray::menu())
         .setup(|app| {
             let handle = app.handle();
             tauri_plugin_deep_link::register("withApp", move |request| {
@@ -43,8 +43,8 @@ fn main() {
         ])
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::CloseRequested { api, .. } => {
-                event.window().hide().unwrap();
-                api.prevent_close();
+                // event.window().hide().unwrap();
+                // api.prevent_close();
             }
             _ => {}
         })
@@ -52,7 +52,7 @@ fn main() {
         .expect("error while running tauri application")
         .run(|handle, event| match event {
             tauri::RunEvent::ExitRequested { api, .. } => {
-                api.prevent_exit();
+                // api.prevent_exit();
             }
             tauri::RunEvent::Ready => {
                 let state = handle.state::<DeeplinkState>();

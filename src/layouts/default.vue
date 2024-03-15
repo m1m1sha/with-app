@@ -22,6 +22,12 @@ const changeHandler: MenuProps['onChange'] = (active) => {
 let unlisten: null | UnlistenFn = null
 let unlistenDeeplink: null | UnlistenFn = null
 
+const closeApp = async () => {
+  await winIPBroadcastStop(false)
+  await withStop()
+  appWindow.close()
+}
+
 onMounted(async () => {
   winIPBroadcastStart(false);
   unlisten = await withEventConnect()
@@ -64,7 +70,7 @@ onUnmounted(async () => {
           <t-button variant="text" shape="square" @click="appWindow.minimize()">
             <template #icon><t-icon name="minus" /></template>
           </t-button>
-          <t-button variant="text" shape="square" @click="appWindow.close()">
+          <t-button variant="text" shape="square" @click="closeApp">
             <template #icon><t-icon name="close" /></template>
           </t-button>
         </template>
