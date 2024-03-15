@@ -31,7 +31,7 @@ onUnmounted(async () => {
             <t-input v-model="config.with.name"></t-input>
           </t-form-item>
           <t-form-item label="网卡跃点" help="默认为0(自动), 1(最高优先)">
-            <t-input-number v-model="config.with.metric" theme="column"></t-input-number>
+            <t-input-number :min="0" v-model="config.with.metric" theme="column"></t-input-number>
           </t-form-item>
           <t-form-item label="强制TCP" help="建议仅在UDP丢包严重时启用">
             <t-switch v-model="config.with.tcp" />
@@ -49,9 +49,9 @@ onUnmounted(async () => {
             <t-select v-model="config.with.cipher">
               <t-option key="aes-gcm" label="aes-gcm" value="AesGcm" />
               <t-option key="aes-cbc" label="aes-cbc" value="AesCbc" />
-              <t-option key="aes-ecb" label="aes-ecb" value="AesEcb" />
+              <t-option key="aes-ecb" label="aes-ecb(速度损失小)" value="AesEcb" />
               <t-option key="sm4-cbc" label="sm4-cbc" value="Sm4Cbc" />
-              <t-option key="none" label="无加密" value="None" />
+              <t-option key="none" label="无加密(推荐)" value="None" />
             </t-select>
           </t-form-item>
           <t-form-item label="打洞模式" help="按实际情况选择">

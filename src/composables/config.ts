@@ -62,7 +62,7 @@ export const DEFAULT_CONFIG: config = {
     metric: 0,
     tcp: false,
     ip: "",
-    parallel: 2,
+    parallel: 4,
     cipher: cipherMode.None,
     punch: punchMode.All,
     channel: channelMode.All,
