@@ -45,6 +45,7 @@ onUnmounted(async () => {
 
 <template>
   <t-layout h-full>
+    <div data-tauri-drag-region h-40px w-210px fixed right-64px top-0 z-999></div>
     <t-header data-tauri-drag-region>
       <t-head-menu v-model="menu" :collapsed="true" @change="changeHandler">
         <t-menu-item value="/">
@@ -106,8 +107,7 @@ onUnmounted(async () => {
 
   & :deep(.t-head-menu__inner),
   :global(.t-menu__operations) {
-    height: var(--td-comp-size-l);
-    margin: 4px 0;
+    height: var(--td-comp-size-xl);
   }
 
 }
