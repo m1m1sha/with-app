@@ -67,13 +67,18 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
         </t-button>
       </div>
     </t-space>
-    <t-sticky-tool type="compact" @click="handleClick" v-show="withStatus === WithStatus.Connected">
+    <t-sticky-tool type="compact" placement="left-bottom" @click="handleClick">
+      <t-sticky-item popup="求求了">
+        <template #icon>
+          <t-icon name="gesture-applause" />
+        </template>
+      </t-sticky-item>
       <t-sticky-item popup="分享">
         <template #icon>
           <t-icon name="share" />
         </template>
       </t-sticky-item>
-      <t-sticky-item popup="组用户">
+      <t-sticky-item popup="组用户" v-show="withStatus === WithStatus.Connected">
         <template #icon>
           <t-icon name="user-list" />
         </template>
@@ -93,8 +98,9 @@ const handleClick: StickyToolProps['onClick'] = async (context) => {
 
 <style scoped lang="postcss">
 .t-sticky-tool {
-  right: 0.5rem !important;
+  left: 0.5rem !important;
   bottom: 2rem !important;
+  z-index: 999;
 }
 
 :global(.t-dialog) {

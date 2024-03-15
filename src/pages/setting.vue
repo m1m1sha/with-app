@@ -30,8 +30,11 @@ onUnmounted(async () => {
           <t-form-item label="名称" help="本机名称标识">
             <t-input v-model="config.with.name"></t-input>
           </t-form-item>
-          <t-form-item label="网卡跃点" help="默认为0(自动), 1(最高优先)">
-            <t-input-number :min="0" v-model="config.with.metric" theme="column"></t-input-number>
+          <t-form-item label="网卡跃点" help="默认为自动, 最高优先(可选)">
+            <t-radio-group v-model="config.with.metric">
+              <t-radio :value="0">自动</t-radio>
+              <t-radio :value="1">最高优先</t-radio>
+            </t-radio-group>
           </t-form-item>
           <t-form-item label="强制TCP" help="建议仅在UDP丢包严重时启用">
             <t-switch v-model="config.with.tcp" />
@@ -83,8 +86,8 @@ onUnmounted(async () => {
           <t-form-item label="强制IP绑定" help="forceBindIP, 强制绑定IP到某个进程" v-if="false">
             <t-tag @click="toggleIPBroadcast" :theme="winIPBroadcastStatus ? 'danger' : 'success'">{{
     winIPBroadcastStatus
-              ? '停用' : '启用'
-              }}</t-tag>
+      ? '停用' : '启用'
+  }}</t-tag>
           </t-form-item>
         </t-form>
       </t-list>
@@ -98,7 +101,11 @@ onUnmounted(async () => {
 }
 
 .t-list {
-  @apply h-202px;
+  @apply h-164px;
+}
+
+:global(.t-tabs__nav-item.t-size-m) {
+  height: var(--td-comp-size-l);
 }
 
 .t-tabs,
