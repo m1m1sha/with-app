@@ -1881,7 +1881,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c2a198fb6b0eada2a8df47933734e6d35d350665a33a3593d7164fa52c75c19"
 dependencies = [
  "cfg-if",
- "windows-targets 0.48.5",
+ "windows-targets 0.52.4",
 ]
 
 [[package]]
@@ -2416,7 +2416,7 @@ checksum = "b15813163c1d831bf4a13c3610c05c0d03b39feb07f7e09fa234dac9b15aaf39"
 [[package]]
 name = "packet"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/vnt#c5e73fb28ca18bc89ee167504408e50137d38930"
+source = "git+https://github.com/m1m1sha/vnt#ad1df41029a2906db0b8e7643e5e78d183f49943"
 dependencies = [
  "byteorder",
 ]
@@ -4350,7 +4350,7 @@ checksum = "e421abadd41a4225275504ea4d6566923418b7f05506fbc9c0fe86ba7396114b"
 [[package]]
 name = "tun"
 version = "0.1.0"
-source = "git+https://github.com/m1m1sha/vnt#c5e73fb28ca18bc89ee167504408e50137d38930"
+source = "git+https://github.com/m1m1sha/vnt#ad1df41029a2906db0b8e7643e5e78d183f49943"
 dependencies = [
  "ioctl-sys",
  "libc",
@@ -4464,7 +4464,7 @@ checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
 [[package]]
 name = "vnt"
 version = "1.2.9"
-source = "git+https://github.com/m1m1sha/vnt#c5e73fb28ca18bc89ee167504408e50137d38930"
+source = "git+https://github.com/m1m1sha/vnt#ad1df41029a2906db0b8e7643e5e78d183f49943"
 dependencies = [
  "aes",
  "aes-gcm",
@@ -4485,7 +4485,6 @@ dependencies = [
  "protoc-bin-vendored",
  "rand 0.8.5",
  "rsa",
- "serde",
  "sha2",
  "socket2",
  "spki",
