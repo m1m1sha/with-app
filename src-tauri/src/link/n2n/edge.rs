@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use crate::link::n2n;
 use crate::utils::string::{self};
 use anyhow::anyhow;

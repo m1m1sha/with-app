@@ -1,7 +1,6 @@
-use serde::{Deserializer, Serializer};
-
 pub mod edge;
 
+#[allow(dead_code)]
 pub const N2N_VERSION: &str = "3.1.1";
 
 /// 来源：https://github.com/ntop/n2n/blob/3.1.1

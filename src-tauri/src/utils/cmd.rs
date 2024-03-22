@@ -1,4 +1,6 @@
-use std::{io::Result, os::windows::process::CommandExt, path::PathBuf, process::Command};
+#![allow(dead_code)]
+
+use std::{io::Result, os::windows::process::CommandExt, process::Command};
 use sysinfo::{Pid, Process, System};
 
 pub fn kill_process_force(pid: String) -> Result<()> {
@@ -35,13 +37,11 @@ pub fn get_process_list(name: String) -> Vec<Pid> {
         .collect()
 }
 
-pub fn kill_win_ip_broadcast() {
-    let pids = get_process_list("with_winIPBroadcast".to_owned());
-    if pids.len() > 0 {
-        for p in pids {
-            let _ = kill_process_force(p.to_string());
-        }
+pub fn kill_process(name: String) -> Result<()> {
+    for p in get_process_list(name) {
+        kill_process_force(p.to_string())?;
     }
+    Ok(())
 }
 
 pub fn clear_network_profiles() -> Result<()> {

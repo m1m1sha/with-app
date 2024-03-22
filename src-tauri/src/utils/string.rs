@@ -1,13 +1,3 @@
-pub trait ToString {
-    fn to_string(&self) -> String;
-}
-
-impl ToString for [u8] {
-    fn to_string(&self) -> String {
-        from_utf8_or_gbk(self)
-    }
-}
-
 pub fn from_utf8_or_gbk(v: &[u8]) -> String {
     use encoding::{all::GBK, DecoderTrap, Encoding};
     match String::from_utf8(v.to_vec()) {
