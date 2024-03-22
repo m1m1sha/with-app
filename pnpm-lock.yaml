@@ -80,8 +80,8 @@ devDependencies:
     specifier: ^0.26.0
     version: 0.26.0(vue@3.4.21)
   unplugin-vue-macros:
-    specifier: ^2.7.10
-    version: 2.7.10(@vueuse/core@10.9.0)(typescript@5.4.2)(vite@5.1.6)(vue@3.4.21)
+    specifier: ^2.7.12
+    version: 2.7.12(@vueuse/core@10.9.0)(typescript@5.4.2)(vite@5.1.6)(vue@3.4.21)
   unplugin-vue-markdown:
     specifier: ^0.26.0
     version: 0.26.0(vite@5.1.6)
@@ -2324,8 +2324,8 @@ packages:
       - vue
     dev: true
 
-  /@vue-macros/jsx-directive@0.8.8(vue@3.4.21):
-    resolution: {integrity: sha512-gx7UaaHQ25hauh11PC5C5j6FUNDDCKpXTgh7yTDc4cLKSgqc575kXvJTzqmV9/p/QFF06/OKValxmOa5pH/wUg==}
+  /@vue-macros/jsx-directive@0.8.10(vue@3.4.21):
+    resolution: {integrity: sha512-I5wYb/9CxMocmxpQjMb43sC2wp47NONdY3p8RstQFoYVjmP9ZvIineaZZFXaiX5fmZn5m6IasR/F8/xR1lN4kw==}
     engines: {node: '>=16.14.0'}
     dependencies:
       '@vue-macros/common': 1.10.1(vue@3.4.21)
@@ -6426,8 +6426,8 @@ packages:
       - vue
     dev: true
 
-  /unplugin-vue-macros@2.7.10(@vueuse/core@10.9.0)(typescript@5.4.2)(vite@5.1.6)(vue@3.4.21):
-    resolution: {integrity: sha512-4saYre3PEX2yL7CTAf4yvQ5Aq/qygTDxRXGnIoe4Lvg2IabMRlx4QiaKLNRuMY3kYLYKhXhxOcJKGy2O/iOfBg==}
+  /unplugin-vue-macros@2.7.12(@vueuse/core@10.9.0)(typescript@5.4.2)(vite@5.1.6)(vue@3.4.21):
+    resolution: {integrity: sha512-9rQbmJLi/VRnp4e0+xzO2PYqYQOuljJdpd+6xvC2GWE4wtwAi9VjMqMc89xJ4pTA9uVI3rG4xNKd3bgT0FHEhQ==}
     engines: {node: '>=16.14.0'}
     peerDependencies:
       vue: ^2.7.0 || ^3.2.25
@@ -6448,7 +6448,7 @@ packages:
       '@vue-macros/export-props': 0.4.2(vue@3.4.21)
       '@vue-macros/export-render': 0.2.2(vue@3.4.21)
       '@vue-macros/hoist-static': 1.5.2(vue@3.4.21)
-      '@vue-macros/jsx-directive': 0.8.8(vue@3.4.21)
+      '@vue-macros/jsx-directive': 0.8.10(vue@3.4.21)
       '@vue-macros/named-template': 0.4.2(vue@3.4.21)
       '@vue-macros/reactivity-transform': 0.4.3(vue@3.4.21)
       '@vue-macros/setup-block': 0.3.2(vue@3.4.21)
