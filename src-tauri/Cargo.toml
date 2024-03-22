@@ -19,6 +19,11 @@ serde_json = "^1"
 encoding = "^0.2"
 anyhow = "^1"
 sysinfo = "^0.30"
+tokio = { version = "^1", features = ["full"] }
+tracing = "^0.1"
+tracing-subscriber = "^0.3"
+fastrand = "^2"
+winreg = "^0.52"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
