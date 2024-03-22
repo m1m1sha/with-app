@@ -1,46 +1,26 @@
 [package]
 name = "with-app"
-version = "0.1.8"
-description = "with-app"
+version = "0.2.0"
+description = "with-0.2.0"
 authors = ["m1m1sha"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.5", features = [] }
+tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
-tauri = { version = "1.6", features = [ "window-all",
-  "clipboard-all",
-  "shell-open",
-  "process-all",
-  "objc-exception",
-  "wry",
-  "system-tray",
-  "updater",
-  "path-all",
-  "fs-all",
-  "process-command-api",
-], default-features = false }
-tracing = "0.1"
-tracing-subscriber = "0.3"
-tauri-plugin-deep-link = "^0.1"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+tauri = { version = "2.0.0-beta", features = [] }
+tauri-plugin-shell = "2.0.0-beta.3"
+
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "^1"
 encoding = "^0.2"
-uuid = { version = "1", features = ["v4"] }
-tokio = { version = "1", features = ["full"] }
+anyhow = "^1"
 sysinfo = "^0.30"
-winreg = "^0.52"
-vnt = { git = "https://github.com/m1m1sha/vnt" }
 
 [features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
 custom-protocol = ["tauri/custom-protocol"]
-
-[profile.release]
-panic = "abort"   # Strip expensive panic clean-up logic
-codegen-units = 1 # Compile crates one after another so the compiler can optimize better
-lto = true        # Enables link to optimizations
-opt-level = "s"   # Optimize for binary size
-strip = true      # Remove debug symbols

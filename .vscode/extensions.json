@@ -1,12 +1,15 @@
 {
   "recommendations": [
     "tauri-apps.tauri-vscode",
-    "serayuzgur.crates",
-    "redjue.git-commit-plugin",
-    "github.vscode-github-actions",
-    "antfu.unocss",
     "csstools.postcss",
+    "cpylua.language-postcss",
+    "barbosshack.crates-io",
+    "ambar.bundle-size",
+    "streetsidesoftware.code-spell-checker",
     "vadimcn.vscode-lldb",
-    "dbaeumer.vscode-eslint"
+    "serayuzgur.crates",
+    "vunguyentuan.vscode-postcss",
+    "vue.volar",
+    "antfu.unocss"
   ]
 }

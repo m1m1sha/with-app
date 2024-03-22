@@ -5,7 +5,6 @@
     "jsx": "preserve",
     "lib": [
       "ES2020",
-      "ESNext",
       "DOM",
       "DOM.Iterable"
     ],
@@ -43,7 +42,6 @@
   },
   "references": [],
   "include": [
-    "node_modules/tdesign-vue-next/global.d.ts",
     "vite.config.ts",
     "typed-router.d.ts",
     "vite-plugin-pages/client",

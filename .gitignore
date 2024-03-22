@@ -1,3 +1,10 @@
+
+#Generated Auto
+src/auto-imports.d.ts
+src/components.d.ts
+src/typed-router.d.ts
+src/vite-env.d.ts
+
 # Logs
 logs
 *.log
@@ -11,13 +18,9 @@ node_modules
 dist
 dist-ssr
 *.local
-vite.config.ts.timestamp*
-tsconfig.tsbuildinfo
+
 # Editor directories and files
 .vscode/*
-!.vscode/extensions.json
-!.vscode/launch.json
-!.vscode/tasks.json
 .idea
 .DS_Store
 *.suo
@@ -25,5 +28,3 @@ tsconfig.tsbuildinfo
 *.njsproj
 *.sln
 *.sw?
-
-src-tauri/vnt/src/proto

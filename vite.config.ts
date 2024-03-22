@@ -10,7 +10,6 @@ import UnoCSS from "unocss/vite";
 import VueDevTools from "vite-plugin-vue-devtools";
 import VueRouter from "unplugin-vue-router/vite";
 import { VueRouterAutoImports } from "unplugin-vue-router";
-import { TDesignResolver } from "unplugin-vue-components/resolvers";
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
@@ -36,15 +35,11 @@ export default defineConfig(async () => ({
     }),
 
     Components({
-      resolvers: [
-        TDesignResolver({
-          library: "vue-next",
-        }),
-      ],
+      resolvers: [],
       // allow auto load markdown components under `./src/components/`
       extensions: ["vue", "md"],
       // allow auto import and register components used in markdown
-      include: [/\.vue$/, /\.vue\?vue/],
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: "src/components.d.ts",
     }),
 
@@ -63,11 +58,7 @@ export default defineConfig(async () => ({
       dts: "src/auto-imports.d.ts",
       dirs: ["src/components", "src/composables", "src/contants", "src/stores"],
       vueTemplate: true,
-      resolvers: [
-        TDesignResolver({
-          library: "vue-next",
-        }),
-      ],
+      resolvers: [],
     }),
 
     UnoCSS(),

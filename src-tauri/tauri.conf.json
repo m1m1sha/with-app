@@ -2,80 +2,34 @@
   "build": {
     "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
   },
-  "package": {
-    "productName": "with",
-    "version": "0.1.8"
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
   },
-  "tauri": {
-    "updater": {
-      "active": true,
-      "dialog": false,
-      "endpoints": [
-        "https://hub.gitmirror.com/https://github.com/m1m1sha/with.github.io/blob/main/latest.json",
-        "https://cdn.jsdelivr.net/gh/m1m1sha/with.github.io/latest.json"
-      ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEM1MEVGNTZBODg1M0E4MzgKUldRNHFGT0lhdlVPeGRYKzJQNEpROEZKMzhrTFZYK0wrT3ozS01HRTBzZkZqNU9KUUxzS3pWbmkK",
-      "windows": {
-        "installMode": "basicUi"
-      }
-    },
-    "systemTray": {
-      "iconPath": "icons/icon.png",
-      "title": "虚拟局域网组网"
-    },
-    "allowlist": {
-      "all": false,
-      "path": {
-        "all": true
-      },
-      "fs": {
-        "all": true,
-        "scope": ["**/*"]
-      },
-      "process": {
-        "all": true,
-        "relaunch": true
-      },
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "window": {
-        "all": true
-      },
-      "clipboard": {
-        "all": true,
-        "writeText": true,
-        "readText": true
-      }
-    },
-    "windows": [
-      {
-        "title": "虚拟局域网组网",
-        "width": 475,
-        "height": 320,
-        "resizable": false,
-        "decorations": false
-      }
-    ],
+  "productName": "with",
+  "version": "0.2.0",
+  "identifier": "cn.smjb.with",
+  "plugins": {},
+  "app": {
     "security": {
       "csp": null
     },
-    "bundle": {
-      "active": true,
-      "resources": ["./bin"],
-      "targets": ["nsis", "updater"],
-      "identifier": "cn.smjb.with",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ]
-    }
+    "windows": [
+      {
+        "title": "with",
+        "width": 800,
+        "height": 600
+      }
+    ]
   }
 }
