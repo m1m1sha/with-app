@@ -1,7 +1,11 @@
+use self::args::EdgeArgs;
+
+pub mod args;
 pub mod edge;
 
 #[allow(dead_code)]
 pub const N2N_VERSION: &str = "3.1.1";
+pub const EDGE_EXE: &str = "with_n2n_edge_v3.1.1.exe";
 
 /// 来源：https://github.com/ntop/n2n/blob/3.1.1
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -49,4 +53,9 @@ impl Action {
             Action::Read => "r",
         }
     }
+}
+
+#[tauri::command]
+pub fn edge_start(args: EdgeArgs) {
+    println!("{:#?}", args.to_args());
 }

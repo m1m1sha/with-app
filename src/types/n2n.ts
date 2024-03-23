@@ -39,7 +39,7 @@ export interface EdgeArgs {
   /// 通过组转发数据
   r: boolean;
   /// 接受多播
-  E: boolean;
+  E: boolean; //
   /// 设备描述|昵称
   I: string; //
   /// 服务节点认证密码

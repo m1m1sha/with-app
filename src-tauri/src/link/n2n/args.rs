@@ -139,6 +139,8 @@ impl EdgeArgs {
         if let Some(s) = self.relay_mode.clone() {
             match s {
                 EdgeRelayMode::S1 => args.push("-S1".to_owned()),
+                #[cfg(not(target_os = "windows"))]
+                EdgeRelayMode::S2 => args.push("-S2".to_owned()),
                 _ => {}
             }
         }

@@ -1,14 +1,14 @@
 use std::{os::windows::process::CommandExt, process::Command};
 
 use crate::utils;
-const WIN_IP_BROADCAST_NAME: &str = "with_winIPBroadcast.exe";
+const WIN_IP_BROADCAST_EXE: &str = "with_winIPBroadcast.exe";
 
 #[tauri::command]
 pub fn win_ip_broadcast_start() -> Result<(), String> {
-    let _ = utils::cmd::kill_process(WIN_IP_BROADCAST_NAME.to_owned());
+    let _ = utils::cmd::kill_process(WIN_IP_BROADCAST_EXE.to_owned());
     let mut child = match Command::new("cmd")
         .creation_flags(0x08000000)
-        .args(["/C", WIN_IP_BROADCAST_NAME, "run"])
+        .args(["/C", WIN_IP_BROADCAST_EXE, "run"])
         .current_dir(utils::path::CurrentPath::default().bin())
         .spawn()
     {
@@ -29,9 +29,5 @@ pub fn win_ip_broadcast_start() -> Result<(), String> {
 
 #[tauri::command]
 pub fn win_ip_broadcast_stop() {
-    let _ = utils::cmd::kill_process(WIN_IP_BROADCAST_NAME.to_owned());
-}
-
-pub fn kill_win_ip_broadcast() {
-    let _ = utils::cmd::kill_process(WIN_IP_BROADCAST_NAME.to_owned());
+    let _ = utils::cmd::kill_process(WIN_IP_BROADCAST_EXE.to_owned());
 }

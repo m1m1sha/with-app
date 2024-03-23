@@ -82,7 +82,6 @@ pub fn unique() -> Option<String> {
 
 #[cfg(target_os = "macos")]
 pub fn unique() -> Option<String> {
-    use std::process::Command;
     let output = match Command::new("ioreg")
         .args(&["-rd1", "-c", "IOPlatformExpertDevice"])
         .output()
@@ -108,7 +107,6 @@ pub fn unique() -> Option<String> {
 
 #[cfg(target_os = "linux")]
 pub fn unique() -> Option<String> {
-    use std::process::Command;
     let output = match Command::new("dmidecode")
         .arg("-s")
         .arg("system-uuid")

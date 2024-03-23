@@ -1,0 +1,6 @@
+html,
+body,
+#app,
+.n-config-provider {
+  @apply bg-#101014 h-full max-h-full;
+}

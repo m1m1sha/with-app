@@ -2,10 +2,11 @@ import { setupLayouts } from "virtual:generated-layouts";
 import { createRouter, createWebHistory } from "vue-router/auto";
 import { RouteRecordRaw } from "vue-router";
 
-import App from "./App.vue";
+import App from "~/App.vue";
 
 import "@unocss/reset/tailwind.css";
 import "uno.css";
+import "vfonts/FiraCode.css";
 import "~/styles/main.css";
 
 const app = createApp(App);
@@ -17,4 +18,9 @@ const router = createRouter({
 
 app.use(router);
 app.use(createPinia());
+
+const meta = document.createElement("meta");
+meta.name = "naive-ui-style";
+document.head.appendChild(meta);
+
 app.mount("#app");
