@@ -1,26 +1,31 @@
-use self::args::EdgeArgs;
+use serde::{Deserialize, Serialize};
 
 pub mod args;
 pub mod edge;
+pub mod supernode;
 
-#[allow(dead_code)]
-pub const N2N_VERSION: &str = "3.1.1";
-pub const EDGE_EXE: &str = "with_n2n_edge_v3.1.1.exe";
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PingRequest {
+    pub value: Option<String>,
+}
 
-/// 来源：https://github.com/ntop/n2n/blob/3.1.1
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PingResponse {
+    pub value: Option<String>,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Cmd {
     // ReloadCommunities,
-    Stop, // 停止
+    Stop,
     Verbose,
     Communities,
     Edges,
     Supernodes,
     Timestamps,
     PacketStats,
-    // PostTest,
-    // Help,
-    // HelpEvents,
 }
 
 impl Cmd {
@@ -34,9 +39,6 @@ impl Cmd {
             Cmd::Supernodes => "supernodes",
             Cmd::Timestamps => "timestamps",
             Cmd::PacketStats => "packetstats",
-            // Cmd::PostTest => "post.test",
-            // Cmd::Help => "help",
-            // Cmd::HelpEvents => "help.events",
         }
     }
 }
@@ -44,6 +46,7 @@ impl Cmd {
 pub enum Action {
     Write,
     Read,
+    Sub,
 }
 
 impl Action {
@@ -51,11 +54,16 @@ impl Action {
         match self {
             Action::Write => "w",
             Action::Read => "r",
+            Action::Sub => "s",
         }
     }
 }
 
-#[tauri::command]
-pub fn edge_start(args: EdgeArgs) {
-    println!("{:#?}", args.to_args());
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "_type", rename_all = "lowercase")]
+pub enum Resp {
+    Begin { cmd: String },
+    Row {},
+    End { cmd: String },
+    Error { error: String },
 }
