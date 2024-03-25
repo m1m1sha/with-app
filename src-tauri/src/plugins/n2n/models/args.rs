@@ -1,6 +1,8 @@
-use std::net::Ipv4Addr;
+use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 use serde::{Deserialize, Serialize};
+
+use crate::plugins::n2n::manager::edge::EdgeSocketConfig;
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct EdgeArgs {
@@ -62,6 +64,16 @@ pub struct EdgeArgs {
     manager_passwd: Option<String>,
     #[serde(rename = "v")]
     trace: Option<EdgeTraceMode>,
+}
+
+impl EdgeArgs {
+    pub fn to_socket_config(&self) -> EdgeSocketConfig {
+        EdgeSocketConfig {
+            addr: SocketAddr::new(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1)), 5644),
+            auth: self.manager_passwd.clone(),
+            timeout: None,
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]

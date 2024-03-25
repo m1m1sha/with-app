@@ -6,21 +6,14 @@ mod tools;
 mod utils;
 
 use plugins::n2n::commands::{self, EdgeState};
-use tauri::Manager;
 
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![
-            commands::edge_community,
-            commands::edge_edges,
-            commands::edge_status,
-            commands::edge_packet_stats,
-            commands::edge_supernodes,
-            commands::edge_timestamps,
-            commands::edge_verbose,
-        ])
+        .invoke_handler(tauri::generate_handler![commands::edge_action])
         .setup(|app| {
+            use tauri::Manager;
+
             app.manage(EdgeState::default());
             Ok(())
         })

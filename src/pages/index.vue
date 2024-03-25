@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import { status } from '~/composables/n2nEdge';
 
+
+const pay = async () => {
+  await status().then((res) => {
+    console.log(res)
+  }).catch((e) => {
+    console.log(e)
+  })
+}
 </script>
 
 <template>
@@ -23,7 +32,7 @@
           </n-input-group>
         </n-form-item>
         <n-form-item>
-          <n-button strong secondary>启动</n-button>
+          <n-button strong secondary @click="pay">启动</n-button>
         </n-form-item>
       </n-form>
     </div>

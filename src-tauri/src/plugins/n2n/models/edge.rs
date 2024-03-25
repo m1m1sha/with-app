@@ -151,3 +151,28 @@ pub enum PacketStatsType {
     #[serde(rename = "super_broadcast")]
     SupernodeBroadcast { tx_pkt: u32, rx_pkt: u32 },
 }
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum EdgeFlagPayload {
+    Stop(Stop),
+    Status(Stop),
+    Verbose(Verbose),
+    Timestamps(Timestamps),
+    Community(Community),
+    SupernodeInfo(SupernodeInfo),
+    PacketStats(PacketStats),
+    EdgeInfo(Vec<EdgeInfo>),
+    Error(String),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum EdgeFlag {
+    Stop,
+    Status,
+    Verbose,
+    Timestamps,
+    Community,
+    SupernodeInfo,
+    PacketStats,
+    EdgeInfo,
+}

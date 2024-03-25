@@ -137,3 +137,15 @@ export interface EdgeRespTimestamps {
 export interface EdgeRespVerbose {
   traceLevel: number;
 }
+
+export enum EdgeFlag {
+  Stop = "Stop",
+  Status = "Status",
+  Verbose = "Verbose",
+  Timestamps = "Timestamps",
+  Community = "Timestamps",
+  SupernodeInfo = "SupernodeInfo",
+  PacketStats = "PacketStats",
+  EdgeInfo = "EdgeInfo",
+  Error = "Error",
+}

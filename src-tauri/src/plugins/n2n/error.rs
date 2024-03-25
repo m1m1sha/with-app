@@ -1,7 +1,7 @@
 use serde::{ser::Serializer, Serialize};
 use thiserror::Error;
 
-#[derive(Error, Debug)]
+#[derive(Error, Debug, Clone, PartialEq, Eq)]
 pub enum N2nError {
     #[error("授权错误")]
     BadAuth,
@@ -36,6 +36,8 @@ pub enum N2nError {
     ConnectFailed,
     #[error("发送失败")]
     SendFailed,
+    #[error("接收失败")]
+    RecvFailed,
     #[error("等待读取失败")]
     Readable,
     #[error("解析失败")]
@@ -44,6 +46,8 @@ pub enum N2nError {
     InvalidData,
     #[error("未知错误")]
     Unknown,
+    #[error("边缘节点未启动")]
+    EdgeStopped,
 }
 
 impl Serialize for N2nError {
