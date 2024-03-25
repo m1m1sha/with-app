@@ -102,7 +102,13 @@ pub async fn edge_action(
     if let Some(tx) = state.tx.lock().await.clone() {
         return match tx.try_send((flag, _tx)) {
             Ok(_) => match _rx.try_recv() {
-                Ok(p) => Ok(p),
+                Ok(p) => match p {
+                    EdgeFlagPayload::Stop(_) => {
+                        *state.tx.lock().await = None;
+                        Ok(p)
+                    }
+                    _ => Ok(p),
+                },
                 Err(_) => Err(N2nError::RecvFailed),
             },
             Err(_) => Err(N2nError::SendFailed),
