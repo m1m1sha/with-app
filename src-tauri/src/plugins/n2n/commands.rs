@@ -8,10 +8,7 @@ use crate::plugins::n2n::{
     manager::edge::{EdgeSocketConfig, Manager},
     models::{
         args::EdgeArgs,
-        edge::{
-            Community, EdgeFlag, EdgeFlagPayload, EdgeInfo, PacketStats, Stop, SupernodeInfo,
-            Timestamps, Verbose,
-        },
+        edge::{EdgeFlag, EdgeFlagPayload},
     },
 };
 
@@ -33,6 +30,7 @@ impl EdgeState {
     }
 }
 
+#[tauri::command]
 pub async fn edge_start(
     args: EdgeArgs,
     state: tauri::State<'_, EdgeState>,
@@ -46,11 +44,11 @@ pub async fn edge_start(
             match rx.try_recv() {
                 Ok((flag, send)) => {
                     let payload = match flag {
-                        EdgeFlag::Stop => match manager.stop(false).await {
+                        EdgeFlag::Stop => match manager.stop(true).await {
                             Ok(r) => EdgeFlagPayload::Stop(r),
                             Err(e) => EdgeFlagPayload::Error(e.to_string()),
                         },
-                        EdgeFlag::Status => match manager.stop(true).await {
+                        EdgeFlag::Status => match manager.stop(false).await {
                             Ok(r) => EdgeFlagPayload::Status(r),
                             Err(e) => EdgeFlagPayload::Error(e.to_string()),
                         },
@@ -101,15 +99,20 @@ pub async fn edge_action(
 
     if let Some(tx) = state.tx.lock().await.clone() {
         return match tx.try_send((flag, _tx)) {
-            Ok(_) => match _rx.try_recv() {
-                Ok(p) => match p {
-                    EdgeFlagPayload::Stop(_) => {
-                        *state.tx.lock().await = None;
-                        Ok(p)
-                    }
-                    _ => Ok(p),
-                },
-                Err(_) => Err(N2nError::RecvFailed),
+            Ok(_) => loop {
+                match _rx.try_recv() {
+                    Ok(p) => match p {
+                        EdgeFlagPayload::Stop(_) => {
+                            *state.tx.lock().await = None;
+                            return Ok(p);
+                        }
+                        _ => return Ok(p),
+                    },
+                    Err(e) => match e {
+                        async_channel::TryRecvError::Empty => continue,
+                        async_channel::TryRecvError::Closed => return Err(N2nError::RecvFailed),
+                    },
+                }
             },
             Err(_) => Err(N2nError::SendFailed),
         };
