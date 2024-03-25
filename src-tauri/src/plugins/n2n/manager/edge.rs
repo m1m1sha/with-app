@@ -9,7 +9,8 @@ use crate::utils::string;
 use std::{io::ErrorKind, net::SocketAddr, time::Duration};
 use tokio::{net::UdpSocket, time::timeout};
 
-const EDGE_MSG__TYPE_ROW: &str = "\"_type\":\"row\",";
+const EDGE_MSG_TYPE_ROW: &str = "\"_type\":\"row\",";
+const SOCKET_TIMEOUT_MILLIS: u64 = 1000;
 
 #[derive(Clone)]
 pub struct EdgeSocketConfig {
@@ -48,7 +49,7 @@ impl Manager {
         Ok(Self {
             socket,
             auth,
-            timeout: config.timeout.unwrap_or(2000),
+            timeout: config.timeout.unwrap_or(SOCKET_TIMEOUT_MILLIS),
         })
     }
 
@@ -115,7 +116,7 @@ impl Manager {
                             break;
                         }
                         models::Resp::Row {} => {
-                            recv_vec.push(str.replace(&_flag, "").replace(EDGE_MSG__TYPE_ROW, ""));
+                            recv_vec.push(str.replace(&_flag, "").replace(EDGE_MSG_TYPE_ROW, ""));
                         }
                     }
                 }

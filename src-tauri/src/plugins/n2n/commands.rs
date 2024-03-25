@@ -14,7 +14,8 @@ use crate::plugins::n2n::{
 
 pub struct EdgeState {
     pub config: Mutex<EdgeSocketConfig>,
-    pub tx: Mutex<Option<async_channel::Sender<(EdgeFlag, Sender<EdgeFlagPayload>)>>>,
+    pub tx:
+        Mutex<Option<async_channel::Sender<(EdgeFlag, Sender<Result<EdgeFlagPayload, N2nError>>)>>>,
 }
 
 impl EdgeState {
@@ -37,7 +38,8 @@ pub async fn edge_start(
 ) -> Result<(), N2nError> {
     // n2n 启动
     let mut manager = Manager::new(args.to_socket_config()).await?;
-    let (tx, rx) = async_channel::bounded::<(EdgeFlag, Sender<EdgeFlagPayload>)>(20);
+    let (tx, rx) =
+        async_channel::bounded::<(EdgeFlag, Sender<Result<EdgeFlagPayload, N2nError>>)>(20);
     *state.tx.lock().await = Some(tx.clone());
     tauri::async_runtime::spawn(async move {
         loop {
@@ -45,36 +47,36 @@ pub async fn edge_start(
                 Ok((flag, send)) => {
                     let payload = match flag {
                         EdgeFlag::Stop => match manager.stop(true).await {
-                            Ok(r) => EdgeFlagPayload::Stop(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::Stop(r)),
+                            Err(e) => Err(e),
                         },
                         EdgeFlag::Status => match manager.stop(false).await {
-                            Ok(r) => EdgeFlagPayload::Status(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::Status(r)),
+                            Err(e) => Err(e),
                         },
                         EdgeFlag::Verbose => match manager.verbose().await {
-                            Ok(r) => EdgeFlagPayload::Verbose(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::Verbose(r)),
+                            Err(e) => Err(e),
                         },
                         EdgeFlag::Timestamps => match manager.timestamps().await {
-                            Ok(r) => EdgeFlagPayload::Timestamps(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::Timestamps(r)),
+                            Err(e) => Err(e),
                         },
                         EdgeFlag::Community => match manager.community().await {
-                            Ok(r) => EdgeFlagPayload::Community(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::Community(r)),
+                            Err(e) => Err(e),
                         },
                         EdgeFlag::SupernodeInfo => match manager.supernodes().await {
-                            Ok(r) => EdgeFlagPayload::SupernodeInfo(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::SupernodeInfo(r)),
+                            Err(e) => Err(e),
                         },
                         EdgeFlag::PacketStats => match manager.packet_stats().await {
-                            Ok(r) => EdgeFlagPayload::PacketStats(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::PacketStats(r)),
+                            Err(e) => Err(e),
                         },
                         EdgeFlag::EdgeInfo => match manager.edges().await {
-                            Ok(r) => EdgeFlagPayload::EdgeInfo(r),
-                            Err(e) => EdgeFlagPayload::Error(e.to_string()),
+                            Ok(r) => Ok(EdgeFlagPayload::EdgeInfo(r)),
+                            Err(e) => Err(e),
                         },
                     };
                     let _ = send.send(payload).await;
@@ -95,18 +97,21 @@ pub async fn edge_action(
     flag: EdgeFlag,
     state: tauri::State<'_, EdgeState>,
 ) -> Result<EdgeFlagPayload, N2nError> {
-    let (_tx, _rx) = async_channel::bounded::<EdgeFlagPayload>(1);
+    let (_tx, _rx) = async_channel::bounded::<Result<EdgeFlagPayload, N2nError>>(1);
 
     if let Some(tx) = state.tx.lock().await.clone() {
         return match tx.try_send((flag, _tx)) {
             Ok(_) => loop {
                 match _rx.try_recv() {
                     Ok(p) => match p {
-                        EdgeFlagPayload::Stop(_) => {
-                            *state.tx.lock().await = None;
-                            return Ok(p);
-                        }
-                        _ => return Ok(p),
+                        Ok(p) => match p {
+                            EdgeFlagPayload::Stop(_) => {
+                                *state.tx.lock().await = None;
+                                return Ok(p);
+                            }
+                            _ => return Ok(p),
+                        },
+                        Err(e) => return Err(e),
                     },
                     Err(e) => match e {
                         async_channel::TryRecvError::Empty => continue,

@@ -10,7 +10,10 @@ use plugins::n2n::commands::{self, EdgeState};
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![commands::edge_action])
+        .invoke_handler(tauri::generate_handler![
+            commands::edge_action,
+            commands::edge_start
+        ])
         .setup(|app| {
             use tauri::Manager;
 
