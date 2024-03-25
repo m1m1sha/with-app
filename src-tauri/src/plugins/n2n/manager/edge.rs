@@ -48,7 +48,7 @@ impl Manager {
         Ok(Self {
             socket,
             auth,
-            timeout: config.timeout.unwrap_or(1000),
+            timeout: config.timeout.unwrap_or(2000),
         })
     }
 
@@ -67,15 +67,6 @@ impl Manager {
 
     /// 接收数据
     async fn recv(&mut self, flag: u16) -> Result<Vec<String>, N2nError> {
-        // 超时处理, 以防edge已经关闭
-        if let Err(_) = timeout(Duration::from_millis(self.timeout), async {
-            self.socket.readable().await.unwrap()
-        })
-        .await
-        {
-            return Err(N2nError::Timeout.into());
-        }
-
         let flag = format!("{}", flag);
         let _flag = format!("\"_tag\":\"{}\",", flag);
         let mut recv_vec = vec![];
@@ -83,7 +74,18 @@ impl Manager {
         let mut recv_cmd = String::new();
 
         loop {
+            // 超时处理, 以防edge已经关闭
+            if let Err(e) = timeout(Duration::from_millis(self.timeout), async {
+                self.socket.readable().await.unwrap()
+            })
+            .await
+            {
+                println!("{:?}", e.to_string());
+                return Err(N2nError::Timeout);
+            }
+
             let mut buf = vec![0; 2048];
+
             match self.socket.try_recv(&mut buf[..]) {
                 Ok(n) => {
                     let str = string::from_utf8_or_gbk(&buf[..n]).trim().to_string();
@@ -139,7 +141,6 @@ impl Manager {
         action: models::Action,
     ) -> Result<Vec<String>, N2nError> {
         let flag = self.send(cmd.clone(), action).await?;
-
         Ok(self.recv(flag).await?)
     }
 
@@ -163,7 +164,6 @@ impl Manager {
                 },
             )
             .await?;
-
         match serde_json::from_str::<edge::Stop>(&req[0]) {
             Ok(s) => Ok(s),
             Err(_) => Err(N2nError::Parse),
@@ -254,7 +254,6 @@ impl Manager {
                 Ok(s) => s,
                 Err(_) => return Err(N2nError::Parse),
             };
-
             match tmp {
                 edge::PacketStatsType::Transport { tx_pkt, rx_pkt } => {
                     stats.transport = edge::PacketStatsPkt { tx_pkt, rx_pkt }

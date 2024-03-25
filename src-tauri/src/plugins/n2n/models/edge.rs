@@ -1,6 +1,5 @@
+use crate::{plugins::n2n::error::N2nError, utils::serde::deserialize_i32_to_bool};
 use serde::{Deserialize, Serialize};
-
-use crate::plugins::n2n::error::N2nError;
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum RespError {
     /// 授权错误
@@ -62,8 +61,9 @@ impl RespError {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Stop {
-    #[serde(rename = "keep_running")]
-    pub status: i32,
+    #[serde(rename(serialize = "running", deserialize = "keep_running"))]
+    #[serde(deserialize_with = "deserialize_i32_to_bool")]
+    pub status: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -74,20 +74,23 @@ pub struct Verbose {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Community {
-    #[serde(rename = "name")]
+    #[serde(rename(deserialize = "community"))]
     pub name: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all(serialize = "camelCase"))]
 pub struct EdgeInfo {
     pub mode: String,
-    #[serde(rename = "ip4addr")]
+    #[serde(rename(deserialize = "ip4addr"))]
     pub ipv4: String,
-    pub purgeable: i32,
-    pub local: i32,
-    #[serde(rename = "macaddr")]
+    #[serde(deserialize_with = "deserialize_i32_to_bool")]
+    pub purgeable: bool,
+    #[serde(deserialize_with = "deserialize_i32_to_bool")]
+    pub local: bool,
+    #[serde(rename(deserialize = "macaddr"))]
     pub mac: String,
-    #[serde(rename = "sockaddr")]
+    #[serde(rename(deserialize = "sockaddr", serialize = "addr"))]
     pub socket: String,
     pub desc: String,
     pub last_p2p: u64,
@@ -96,13 +99,16 @@ pub struct EdgeInfo {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all(serialize = "camelCase"))]
 pub struct SupernodeInfo {
     pub version: String,
-    pub purgeable: i32,
-    pub current: i32,
-    #[serde(rename = "macaddr")]
+    #[serde(deserialize_with = "deserialize_i32_to_bool")]
+    pub purgeable: bool,
+    #[serde(deserialize_with = "deserialize_i32_to_bool")]
+    pub current: bool,
+    #[serde(rename(deserialize = "macaddr"))]
     pub mac: String,
-    #[serde(rename = "sockaddr")]
+    #[serde(rename(deserialize = "sockaddr", serialize = "addr"))]
     pub socket: String,
     pub selection: String,
     pub last_seen: u64,
@@ -110,6 +116,7 @@ pub struct SupernodeInfo {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all(serialize = "camelCase"))]
 pub struct Timestamps {
     pub start_time: u64,
     pub last_super: u64,
@@ -117,12 +124,14 @@ pub struct Timestamps {
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all(serialize = "camelCase"))]
 pub struct PacketStatsPkt {
     pub tx_pkt: u32,
     pub rx_pkt: u32,
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all(serialize = "camelCase"))]
 pub struct PacketStats {
     pub transport: PacketStatsPkt,
     pub p2p: PacketStatsPkt,
@@ -131,6 +140,7 @@ pub struct PacketStats {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "type")]
 pub enum PacketStatsType {
     #[serde(rename = "transop")]
     Transport { tx_pkt: u32, rx_pkt: u32 },

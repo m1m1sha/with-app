@@ -5,21 +5,22 @@ mod plugins;
 mod tools;
 mod utils;
 
-use plugins::n2n::commands::{edge_status, EdgeState};
+use plugins::n2n::commands::{self, EdgeState};
 use tauri::Manager;
-
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
 
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![edge_status])
+        .invoke_handler(tauri::generate_handler![
+            commands::edge_community,
+            commands::edge_edges,
+            commands::edge_status,
+            commands::edge_packet_stats,
+            commands::edge_supernodes,
+            commands::edge_timestamps,
+            commands::edge_verbose,
+        ])
         .setup(|app| {
-            // manage state so it is accessible by the commands
             app.manage(EdgeState::default());
             Ok(())
         })

@@ -30,7 +30,7 @@ pub enum N2nError {
 
     #[error("地址已被使用")]
     AddrInUse,
-    #[error("超时")]
+    #[error("连接超时")]
     Timeout,
     #[error("连接失败")]
     ConnectFailed,
