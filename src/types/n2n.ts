@@ -84,3 +84,56 @@ export enum EdgeTraceMode {
   Detailed,
   Brief,
 }
+
+export interface EdgeRespStatus {
+  running: boolean;
+}
+
+export interface EdgeRespCommunity {
+  name: string;
+}
+
+export interface EdgeRespEdges {
+  desc: string;
+  ipv4: string;
+  lastP2p: number;
+  lastSeen: number;
+  lastSentQuery: number;
+  local: boolean;
+  mac: string;
+  mode: string;
+  purgeable: boolean;
+  addr: string;
+}
+
+export interface EdgeRespPacketStats {
+  p2p: EdgeRespPkt;
+  supernode: EdgeRespPkt;
+  supernodeBroadcast: EdgeRespPkt;
+  transport: EdgeRespPkt;
+}
+
+export interface EdgeRespPkt {
+  rxPkt: number;
+  txPkt: number;
+}
+
+export interface EdgeRespSupernodes {
+  current: boolean;
+  lastSeen: number;
+  mac: string;
+  purgeable: boolean;
+  selection: string;
+  addr: string; // ip
+  uptime: number;
+  version: string;
+}
+export interface EdgeRespTimestamps {
+  lastP2p: number;
+  lastSuper: number;
+  startTime: number;
+}
+
+export interface EdgeRespVerbose {
+  traceLevel: number;
+}
