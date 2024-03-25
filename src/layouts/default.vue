@@ -6,7 +6,6 @@ const router = useRouter()
 
 if (route.path !== activeMenu.value)
   activeMenu.value = route.path
-console.log(route.path)
 
 const handleUpdateValue = (value: string) => {
   router.push(value)
