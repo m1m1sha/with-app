@@ -1,32 +1,32 @@
-use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Serialize_repr, Deserialize_repr)]
 #[repr(u8)]
 pub enum N2nError {
     // n2n error
-    ///授权错误
+    /// 授权错误
     BadAuth = 0,
-    ///方法错误
+    /// 方法错误
     BadType,
-    ///无法访问
+    /// 无法访问
     NoAccess,
-    ///命令不存在
+    /// 命令不存在
     NoCmd,
-    ///文件不存在
+    /// 文件不存在
     NoFile,
-    ///选项不存在
+    /// 选项不存在
     NoOptions,
-    ///方式不存在
+    /// 方式不存在
     NoType,
-    ///只读
+    /// 只读
     ReadOnly,
-    ///只写
+    /// 只写
     WriteOnly,
-    ///未实现
+    /// 未实现
     UnImplemented,
-    ///未知命令
+    /// 未知命令
     UnknownCmd,
-    ///未知细目
+    /// 未知细目
     UnknownTopic,
 
     /// 边缘节点未启动
@@ -34,7 +34,7 @@ pub enum N2nError {
     /// 边缘节点启动失败
     EdgeStartFailed,
 
-    ///未知错误
+    /// 未知错误
     Unknown,
 
     // UDP socket error
