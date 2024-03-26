@@ -29,10 +29,10 @@ impl Manager {
     pub async fn new(config: EdgeSocketConfig) -> Result<Self, N2nError> {
         let socket = match UdpSocket::bind("127.0.0.1:0").await {
             Ok(s) => s,
-            Err(_) => return Err(N2nError::AddrInUse),
+            Err(_) => return Err(N2nError::SocketAddrInUse),
         };
         if socket.connect(config.addr).await.is_err() {
-            return Err(N2nError::ConnectFailed);
+            return Err(N2nError::SocketConnectFailed);
         }
 
         let auth = match config.auth {
@@ -60,7 +60,7 @@ impl Manager {
         let flag = fastrand::u16(..);
         let content = format!("{} {}:{} {}", action.to_str(), flag, auth, cmd.to_str());
         if self.socket.send(content.as_bytes()).await.is_err() {
-            return Err(N2nError::SendFailed);
+            return Err(N2nError::SocketSendFailed);
         }
 
         Ok(flag)
@@ -81,7 +81,7 @@ impl Manager {
             })
             .await
             {
-                return Err(N2nError::Timeout);
+                return Err(N2nError::SocketReadableTimeout);
             }
 
             let mut buf = vec![0; 2048];
@@ -97,7 +97,7 @@ impl Manager {
 
                     let resp = match serde_json::from_str::<models::Resp>(str.as_str()) {
                         Ok(r) => r,
-                        Err(_) => return Err(N2nError::Parse),
+                        Err(_) => return Err(N2nError::SocketParseFailed),
                     };
 
                     match resp {
@@ -166,7 +166,7 @@ impl Manager {
             .await?;
         match serde_json::from_str::<edge::Stop>(&req[0]) {
             Ok(s) => Ok(s),
-            Err(_) => Err(N2nError::Parse),
+            Err(_) => Err(N2nError::SocketParseFailed),
         }
     }
 
@@ -179,7 +179,7 @@ impl Manager {
             .await?;
         match serde_json::from_str::<edge::Verbose>(&req[0]) {
             Ok(s) => Ok(s),
-            Err(_) => Err(N2nError::Parse),
+            Err(_) => Err(N2nError::SocketParseFailed),
         }
     }
 
@@ -192,7 +192,7 @@ impl Manager {
             .await?;
         match serde_json::from_str::<edge::Community>(&req[0]) {
             Ok(s) => Ok(s),
-            Err(_) => Err(N2nError::Parse),
+            Err(_) => Err(N2nError::SocketParseFailed),
         }
     }
 
@@ -207,7 +207,7 @@ impl Manager {
         for r in req {
             match serde_json::from_str::<edge::EdgeInfo>(&r) {
                 Ok(s) => edges.push(s),
-                Err(_) => return Err(N2nError::Parse),
+                Err(_) => return Err(N2nError::SocketParseFailed),
             }
         }
         Ok(edges)
@@ -224,7 +224,7 @@ impl Manager {
             .await?;
         match serde_json::from_str::<edge::SupernodeInfo>(&req[0]) {
             Ok(s) => Ok(s),
-            Err(_) => Err(N2nError::Parse),
+            Err(_) => Err(N2nError::SocketParseFailed),
         }
     }
 
@@ -237,7 +237,7 @@ impl Manager {
             .await?;
         match serde_json::from_str::<edge::Timestamps>(&req[0]) {
             Ok(s) => Ok(s),
-            Err(_) => Err(N2nError::Parse),
+            Err(_) => Err(N2nError::SocketParseFailed),
         }
     }
 
@@ -252,7 +252,7 @@ impl Manager {
         for r in req {
             let tmp = match serde_json::from_str::<edge::PacketStatsType>(&r) {
                 Ok(s) => s,
-                Err(_) => return Err(N2nError::Parse),
+                Err(_) => return Err(N2nError::SocketParseFailed),
             };
             match tmp {
                 edge::PacketStatsType::Transport { tx_pkt, rx_pkt } => {

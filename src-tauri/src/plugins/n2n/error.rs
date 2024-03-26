@@ -1,60 +1,71 @@
-use serde::{ser::Serializer, Serialize};
-use thiserror::Error;
+use serde::{Deserialize, Serialize};
 
-#[derive(Error, Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[repr(u8)]
 pub enum N2nError {
-    #[error("授权错误")]
-    BadAuth,
-    #[error("方法错误")]
+    // n2n error
+    ///授权错误
+    BadAuth = 0,
+    ///方法错误
     BadType,
-    #[error("无法访问")]
+    ///无法访问
     NoAccess,
-    #[error("命令不存在")]
+    ///命令不存在
     NoCmd,
-    #[error("文件不存在")]
+    ///文件不存在
     NoFile,
-    #[error("选项不存在")]
+    ///选项不存在
     NoOptions,
-    #[error("方式不存在")]
+    ///方式不存在
     NoType,
-    #[error("只读")]
+    ///只读
     ReadOnly,
-    #[error("只写")]
+    ///只写
     WriteOnly,
-    #[error("未实现")]
+    ///未实现
     UnImplemented,
-    #[error("未知命令")]
+    ///未知命令
     UnknownCmd,
-    #[error("未知细目")]
+    ///未知细目
     UnknownTopic,
 
-    #[error("地址已被使用")]
-    AddrInUse,
-    #[error("连接超时")]
-    Timeout,
-    #[error("连接失败")]
-    ConnectFailed,
-    #[error("发送失败")]
-    SendFailed,
-    #[error("接收失败")]
-    RecvFailed,
-    #[error("等待读取失败")]
-    Readable,
-    #[error("解析失败")]
-    Parse,
-    #[error("无法校验数据")]
-    InvalidData,
-    #[error("未知错误")]
-    Unknown,
-    #[error("边缘节点未启动")]
-    EdgeStopped,
-}
+    /// 边缘节点未启动
+    EdgeIsStopped,
+    /// 边缘节点启动失败
+    EdgeStartFailed,
 
-impl Serialize for N2nError {
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        serializer.serialize_str(self.to_string().as_ref())
-    }
+    ///未知错误
+    Unknown,
+
+    // UDP socket error
+    /// UDP端口已被使用
+    SocketAddrInUse,
+    /// UDP连接超时
+    SocketConnectTimeout,
+    /// UDP连接失败
+    SocketConnectFailed,
+    /// UDP发送失败
+    SocketSendFailed,
+    /// UDP接收失败
+    SocketRecvFailed,
+    /// UDP读等待超时
+    SocketReadableTimeout,
+    /// UDP解析数据失败
+    SocketParseFailed,
+
+    // action error
+    /// action 接收失败
+    ActionChannelRecvFailed,
+    /// action 接收通道已关闭
+    ActionChannelRecvClosed,
+    /// action 发送通道已满
+    ActionChannelSendFull,
+    /// action 发送失败
+    ActionChannelSendFailed,
+    /// action 发送通道已关闭
+    ActionChannelSendClosed,
+
+    // arg error
+    /// arg 无效数据
+    ArgsInvalid,
 }
