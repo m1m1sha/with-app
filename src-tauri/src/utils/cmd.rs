@@ -3,19 +3,7 @@
 use std::{io::Result, os::windows::process::CommandExt, process::Command};
 use sysinfo::{Pid, Process, System};
 
-pub fn kill_process_force(pid: String) -> Result<()> {
-    if pid.is_empty() {
-        return Ok(());
-    }
-
-    tracing::info!("ctrlc: [pid: {}]", pid);
-    let _ = Command::new("cmd")
-        .creation_flags(0x08000000)
-        .args(["/C", "tskill", pid.as_str(), "/A"])
-        .spawn()
-        .unwrap();
-    Ok(())
-}
+use crate::utils::path::CurrentPath;
 
 pub fn get_process_list(name: String) -> Vec<Pid> {
     if name.is_empty() {
@@ -25,21 +13,34 @@ pub fn get_process_list(name: String) -> Vec<Pid> {
     System::new_all()
         .processes()
         .values()
-        .filter(move |val: &&Process| {
-            let mut flag = false;
-
-            if val.name().contains(&name) {
-                flag = true;
-            }
-            flag
-        })
+        .filter(move |val: &&Process| val.name().contains(&name))
         .map(|p| p.pid())
         .collect()
 }
 
-pub fn kill_process(name: String) -> Result<()> {
-    for p in get_process_list(name) {
-        kill_process_force(p.to_string())?;
+pub fn kill_process(name: String, force: bool) -> Result<()> {
+    for pid in get_process_list(name) {
+        let pid = pid.to_string();
+        if pid.is_empty() {
+            continue;
+        }
+
+        if force {
+            tracing::info!("kill: [pid: {}]", pid);
+            let _ = Command::new("cmd")
+                .creation_flags(0x08000000)
+                .args(["/C", "tskill", pid.as_str(), "/A"])
+                .spawn()
+                .unwrap();
+        } else {
+            tracing::info!("ctrlc: [pid: {}]", pid);
+            let _ = Command::new("cmd")
+                .creation_flags(0x08000000)
+                .args(["/C", "ctrlc.exe", pid.as_str()])
+                .current_dir(CurrentPath::default().bin())
+                .spawn()
+                .unwrap();
+        }
     }
     Ok(())
 }

@@ -4564,6 +4564,7 @@ dependencies = [
  "fastrand",
  "serde",
  "serde_json",
+ "serde_repr",
  "sysinfo",
  "tauri",
  "tauri-build",

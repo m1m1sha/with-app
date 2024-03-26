@@ -73,8 +73,8 @@ pub async fn edge_start(
     {
         Ok(c) => c,
         Err(_) => {
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
             return Err(N2nError::EdgeStartFailed);
         }
     };
@@ -110,19 +110,22 @@ pub async fn edge_start(
     let mut manager = Manager::new(args.to_socket_config()).await?;
 
     // 最长等待连接
-    let _ = timeout(N2N_EDGE_CONNECT_TIMEOUT, async {
+    if let Err(_) = timeout(N2N_EDGE_CONNECT_TIMEOUT, async {
         loop {
             if let Ok(_) = n_rx.recv().await {
                 break;
             }
         }
     })
-    .await;
+    .await
+    {
+        return Err(N2nError::EdgeStartFailed);
+    };
 
     if let Err(_) = manager.stop(false).await {
         *state.tx.lock().await = None;
-        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
-        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
+        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
         return Err(N2nError::SocketConnectTimeout);
     }
     let (tx, rx) =
@@ -254,8 +257,8 @@ pub async fn edge_action(
         }
     } else {
         if flag == EdgeFlag::Stop {
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
         }
         Err(N2nError::EdgeIsStopped)
     }
