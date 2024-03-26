@@ -29,7 +29,7 @@ const N2N_EDGE_EXECUTABLE: &str = "with_n2n_edge_v3.1.1.exe";
 
 const N2N_EDGE_EVENT_NAME: &str = "n2n_edge_event";
 
-const N2N_EDGE_CONNECT_TIMEOUT: Duration = Duration::from_secs(3000);
+const N2N_EDGE_CONNECT_TIMEOUT: Duration = Duration::from_millis(3000);
 
 pub struct EdgeState {
     pub config: Mutex<EdgeSocketConfig>,
@@ -72,7 +72,11 @@ pub async fn edge_start(
         .spawn()
     {
         Ok(c) => c,
-        Err(_) => return Err(N2nError::EdgeStartFailed),
+        Err(_) => {
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            return Err(N2nError::EdgeStartFailed);
+        }
     };
 
     let (n_tx, n_rx) = async_channel::bounded::<bool>(1);
@@ -91,7 +95,8 @@ pub async fn edge_start(
                         if out.contains("[OK] edge <<< ================ >>> supernode") {
                             let _ = n_tx.send(true).await;
                         }
-                        let _ = app.emit(N2N_EDGE_EVENT_NAME, out);
+                        let _ = app.emit(N2N_EDGE_EVENT_NAME, out.clone());
+                        println!("{}", out);
                     }
                 }
                 _ => break,
