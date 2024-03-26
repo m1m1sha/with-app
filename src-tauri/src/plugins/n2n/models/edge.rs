@@ -162,7 +162,6 @@ pub enum EdgeFlagPayload {
     SupernodeInfo(SupernodeInfo),
     PacketStats(PacketStats),
     EdgeInfo(Vec<EdgeInfo>),
-    Error(String),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

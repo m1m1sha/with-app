@@ -121,7 +121,7 @@ impl EdgeArgs {
             return Err(std::io::ErrorKind::InvalidData.into());
         }
 
-        self.server.parse::<Ipv4Addr>().unwrap();
+        self.server.parse::<SocketAddr>().unwrap();
 
         let mut args = Vec::new();
 

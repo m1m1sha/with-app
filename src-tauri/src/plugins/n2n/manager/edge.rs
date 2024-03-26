@@ -76,12 +76,11 @@ impl Manager {
 
         loop {
             // 超时处理, 以防edge已经关闭
-            if let Err(e) = timeout(Duration::from_millis(self.timeout), async {
+            if let Err(_) = timeout(Duration::from_millis(self.timeout), async {
                 self.socket.readable().await.unwrap()
             })
             .await
             {
-                println!("{:?}", e.to_string());
                 return Err(N2nError::Timeout);
             }
 

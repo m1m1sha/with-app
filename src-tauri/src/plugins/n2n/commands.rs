@@ -1,7 +1,7 @@
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 use async_channel::Sender;
-use tokio::sync::Mutex;
+use tokio::{process::Command, sync::Mutex};
 
 use crate::plugins::n2n::{
     error::N2nError,
@@ -37,6 +37,7 @@ pub async fn edge_start(
     state: tauri::State<'_, EdgeState>,
 ) -> Result<(), N2nError> {
     // n2n 启动
+
     let mut manager = Manager::new(args.to_socket_config()).await?;
     let (tx, rx) =
         async_channel::bounded::<(EdgeFlag, Sender<Result<EdgeFlagPayload, N2nError>>)>(20);
@@ -79,11 +80,24 @@ pub async fn edge_start(
                             Err(e) => Err(e),
                         },
                     };
+
+                    if let Err(e) = payload.clone() {
+                        if e == N2nError::Timeout
+                            || e == N2nError::ConnectFailed
+                            || e == N2nError::EdgeStopped
+                        {
+                            rx.close();
+                            break;
+                        }
+                    }
                     let _ = send.send(payload).await;
                 }
                 Err(e) => match e {
                     async_channel::TryRecvError::Empty => continue,
-                    async_channel::TryRecvError::Closed => break,
+                    async_channel::TryRecvError::Closed => {
+                        rx.close();
+                        break;
+                    }
                 },
             };
         }
