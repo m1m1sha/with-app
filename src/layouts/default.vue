@@ -12,8 +12,8 @@
         <RouterView />
       </div>
     </n-layout-content>
-    <n-watermark v-if="true" content="Dev-0.2.0.alpha" cross fullscreen :font-size="16" :line-height="16" :x-offset="12"
-      :width="384" :height="256" :y-offset="60" :rotate="-15" />
+    <n-watermark v-if="isDev()" :content="`Dev-${PKG().version}`" cross fullscreen :font-size="16" :line-height="16"
+      :x-offset="12" :width="384" :height="256" :y-offset="60" :rotate="-15" />
   </n-layout>
 </template>
 
