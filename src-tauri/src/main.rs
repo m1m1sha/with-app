@@ -2,17 +2,22 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod plugins;
-mod tools;
 mod utils;
 
-use plugins::n2n::commands::{self, EdgeState};
+use plugins::{
+    n2n::{self, commands::EdgeState},
+    tools,
+};
 
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![
-            commands::edge_action,
-            commands::edge_start
+            n2n::commands::edge_action,
+            n2n::commands::edge_start,
+            tools::broadcast::win_ip_broadcast_start,
+            tools::broadcast::win_ip_broadcast_stop,
+            tools::tap::install
         ])
         .setup(|app| {
             use tauri::Manager;
