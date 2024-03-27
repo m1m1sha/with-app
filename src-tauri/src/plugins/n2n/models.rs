@@ -4,18 +4,6 @@ pub mod args;
 pub mod edge;
 pub mod supernode;
 
-#[derive(Debug, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct PingRequest {
-    pub value: Option<String>,
-}
-
-#[derive(Debug, Clone, Default, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct PingResponse {
-    pub value: Option<String>,
-}
-
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Cmd {
     // ReloadCommunities,
