@@ -63,6 +63,7 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const start: typeof import('./composables/n2nEdge')['start']
   const status: typeof import('./composables/n2nEdge')['status']
   const stop: typeof import('./composables/n2nEdge')['stop']
   const storeToRefs: typeof import('pinia')['storeToRefs']
@@ -159,6 +160,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly start: UnwrapRef<typeof import('./composables/n2nEdge')['start']>
     readonly status: UnwrapRef<typeof import('./composables/n2nEdge')['status']>
     readonly stop: UnwrapRef<typeof import('./composables/n2nEdge')['stop']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
@@ -248,6 +250,7 @@ declare module '@vue/runtime-core' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly start: UnwrapRef<typeof import('./composables/n2nEdge')['start']>
     readonly status: UnwrapRef<typeof import('./composables/n2nEdge')['status']>
     readonly stop: UnwrapRef<typeof import('./composables/n2nEdge')['stop']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>

@@ -1,41 +1,93 @@
 <script setup lang="ts">
-import { status } from '~/composables/n2nEdge';
 
-
-const pay = async () => {
-  await status().then((res) => {
-    console.log(res)
-  }).catch((e) => {
-    console.log(e)
-  })
-}
+const options = [
+  {
+    label: '分享配置',
+    key: 'share config'
+  },
+]
 </script>
 
 <template>
-  <div flex flex-col>
-    <div flex-1>
-      <n-form label-placement="left" label-align="right" label-width="auto">
-        <n-form-item id="server" label="服务器" path="inputValue">
-          <n-input type="text" placeholder="服务器" />
-        </n-form-item>
-        <n-form-item id="group" label="组" path="inputValue">
-          <n-input-group>
-            <n-input type="text" :style="{ width: '60%' }" placeholder="组名" />
-            <n-input type="text" :style="{ width: '40%' }" placeholder="组密码" />
-          </n-input-group>
-        </n-form-item>
-        <n-form-item id="personal" label="个人" path="inputValue">
-          <n-input-group>
-            <n-input type="text" :style="{ width: '40%' }" placeholder="昵称" />
-            <n-input type="text" :style="{ width: '35%' }" placeholder="虚拟ip" />
-            <n-checkbox class="input-group">自动</n-checkbox>
-          </n-input-group>
-        </n-form-item>
-        <n-form-item>
-          <n-button strong secondary @click="pay">启动</n-button>
-        </n-form-item>
-      </n-form>
-    </div>
+  <div>
+    <n-grid :x-gap="12" :y-gap="12" cols="1 400:2">
+      <n-gi>
+        <n-card title="n2n">
+          <template #header-extra>
+            <n-switch />
+          </template>
+          <template #action>
+            <n-space align="baseline">
+              <n-button size="tiny" secondary strong>
+                快捷配置
+              </n-button>
+              <n-button size="tiny" secondary strong>
+                详细配置
+              </n-button>
+              <n-button size="tiny" secondary strong>
+                组成员
+              </n-button>
+              <n-dropdown placement="bottom-start" trigger="click" size="small" :options="options">
+                <n-button size="tiny" secondary strong>其他</n-button>
+              </n-dropdown>
+            </n-space>
+          </template>
+          <n-flex>
+            <n-tag size="small" type="success">
+              虚拟IP: 10.26.0.2
+            </n-tag>
+            <n-tag size="small" type="warning">
+              组名: 114514
+            </n-tag>
+            <n-tag size="small" type="warning">
+              成员数: 12
+            </n-tag>
+            <n-tag size="small" type="info">
+              状态: 已连接
+            </n-tag>
+          </n-flex>
+        </n-card>
+      </n-gi>
+      <n-gi>
+        <n-card title="组网通用优化">
+          <template #header-extra>
+            <n-switch />
+          </template>
+          <n-flex>
+            <n-tag size="small">
+              全局IP广播
+            </n-tag>
+            <n-tag size="small" type="success">
+              游戏通用
+            </n-tag>
+          </n-flex>
+        </n-card>
+      </n-gi>
+      <n-gi>
+        <n-card title="Vnt">
+          <template #header-extra>
+            <n-switch disabled />
+          </template>
+          <n-flex>
+            <n-tag size="small">
+              敬请期待
+            </n-tag>
+          </n-flex>
+        </n-card>
+      </n-gi>
+      <n-gi>
+        <n-card title="Zerotier">
+          <template #header-extra>
+            <n-switch disabled />
+          </template>
+          <n-flex>
+            <n-tag size="small">
+              敬请期待
+            </n-tag>
+          </n-flex>
+        </n-card>
+      </n-gi>
+    </n-grid>
   </div>
 
 </template>
@@ -49,5 +101,12 @@ const pay = async () => {
     border-radius: 3px;
     padding-left: 10px;
   }
+}
+
+.n-card> :deep(.n-card-header),
+.n-card> :deep(.n-card__content),
+.n-card> :deep(.n-card__footer),
+.n-card> :deep(.n-card__action) {
+  padding: 0.25rem 0.5rem;
 }
 </style>

@@ -1,31 +1,11 @@
 <script setup lang="ts">
-const { activeMenu } = storeToRefs(useTempAppStore())
 
-const route = useRoute()
-const router = useRouter()
-
-if (route.path !== activeMenu.value)
-  activeMenu.value = route.path
-
-const handleUpdateValue = (value: string) => {
-  router.push(value)
-}
 </script>
 
 <template>
   <n-layout>
-    <n-layout-header flex-none px-4>
-      <n-tabs type="line" v-model:value="activeMenu" @update:value="handleUpdateValue">
-        <n-tab name="/">
-          主页
-        </n-tab>
-        <n-tab name="/setting">
-          设置
-        </n-tab>
-      </n-tabs>
-    </n-layout-header>
     <n-layout-content flex-1 :native-scrollbar="false">
-      <div px-4 py-2>
+      <div p-2>
         <RouterView />
       </div>
     </n-layout-content>
