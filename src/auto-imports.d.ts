@@ -6,6 +6,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const PKG: typeof import('./composables/env')['PKG']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const action: typeof import('./composables/n2nEdge')['action']
   const community: typeof import('./composables/n2nEdge')['community']
@@ -108,6 +109,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly PKG: UnwrapRef<typeof import('./composables/env')['PKG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly community: UnwrapRef<typeof import('./composables/n2nEdge')['community']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -200,6 +202,7 @@ declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly PKG: UnwrapRef<typeof import('./composables/env')['PKG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly community: UnwrapRef<typeof import('./composables/n2nEdge')['community']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>

@@ -9,15 +9,15 @@ const options = [
 </script>
 
 <template>
-  <div>
-    <n-grid :x-gap="12" :y-gap="12" cols="1 550:2 820:3">
+  <n-flex>
+    <n-grid :y-gap="12" cols="1">
       <n-gi>
         <n-card title="n2n">
           <template #header-extra>
             <n-switch />
           </template>
           <template #action>
-            <n-space align="baseline">
+            <n-flex>
               <n-button size="tiny" secondary strong>
                 快捷配置
               </n-button>
@@ -30,7 +30,7 @@ const options = [
               <n-dropdown placement="bottom-start" trigger="click" size="small" :options="options">
                 <n-button size="tiny" secondary strong>其他</n-button>
               </n-dropdown>
-            </n-space>
+            </n-flex>
           </template>
           <n-flex>
             <n-tag size="small" type="success">
@@ -61,6 +61,14 @@ const options = [
               游戏通用
             </n-tag>
           </n-flex>
+          <template #action>
+            <n-flex>
+              <n-tag size="small">
+                最近使用
+              </n-tag>
+
+            </n-flex>
+          </template>
         </n-card>
       </n-gi>
       <n-gi>
@@ -68,11 +76,13 @@ const options = [
           <template #header-extra>
             <n-switch disabled />
           </template>
-          <n-flex>
-            <n-tag size="small">
-              敬请期待
-            </n-tag>
-          </n-flex>
+          <template #action>
+            <n-flex>
+              <n-tag size="small">
+                敬请期待
+              </n-tag>
+            </n-flex>
+          </template>
         </n-card>
       </n-gi>
       <n-gi>
@@ -80,15 +90,17 @@ const options = [
           <template #header-extra>
             <n-switch disabled />
           </template>
-          <n-flex>
-            <n-tag size="small">
-              敬请期待
-            </n-tag>
-          </n-flex>
+          <template #action>
+            <n-flex align="baseline">
+              <n-tag size="small">
+                敬请期待
+              </n-tag>
+            </n-flex>
+          </template>
         </n-card>
       </n-gi>
     </n-grid>
-  </div>
+  </n-flex>
 
 </template>
 
