@@ -8,7 +8,7 @@ const appWindow = getCurrent()
 </script>
 <template>
   <n-flex size=small justify="end">
-    <n-button size="tiny" quaternary strong>
+    <n-button size="tiny" quaternary :style="{ '--n-text-color-hover': '#f5d599' }">
       <template #icon>
         <n-icon size="20">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -18,7 +18,7 @@ const appWindow = getCurrent()
         </n-icon>
       </template>
     </n-button>
-    <n-button size="tiny" quaternary strong @click="appWindow.minimize()">
+    <n-button size="tiny" quaternary :style="{ '--n-text-color-hover': '#70c0e8' }" @click="appWindow.minimize()">
       <template #icon>
         <n-icon size="20">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -31,7 +31,7 @@ const appWindow = getCurrent()
     <n-popconfirm negative-text="离开" positive-text="最小化" @positive-click="appWindow.minimize()"
       @negative-click="appWindow.close()">
       <template #trigger>
-        <n-button size="tiny" quaternary strong>
+        <n-button size="tiny" quaternary :style="{ '--n-text-color-hover': '#e88080' }">
           <template #icon>
             <n-icon size="20">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
