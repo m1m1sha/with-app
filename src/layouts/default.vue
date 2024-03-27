@@ -4,6 +4,9 @@
 
 <template>
   <n-layout>
+    <n-layout-header p-2 data-tauri-drag-region>
+      <HeaderBar data-tauri-drag-region />
+    </n-layout-header>
     <n-layout-content flex-1 :native-scrollbar="false">
       <div p-2>
         <RouterView />

@@ -10,7 +10,7 @@ const options = [
 
 <template>
   <div>
-    <n-grid :x-gap="12" :y-gap="12" cols="1 400:2">
+    <n-grid :x-gap="12" :y-gap="12" cols="1 550:2 820:3">
       <n-gi>
         <n-card title="n2n">
           <template #header-extra>
@@ -49,7 +49,7 @@ const options = [
         </n-card>
       </n-gi>
       <n-gi>
-        <n-card title="组网通用优化">
+        <n-card title="组网通用广播">
           <template #header-extra>
             <n-switch />
           </template>

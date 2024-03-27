@@ -19,7 +19,9 @@
   "productName": "with",
   "version": "0.2.0",
   "identifier": "cn.smjb.with",
-  "plugins": {},
+  "plugins": {
+    
+  },
   "app": {
     "security": {
       "csp": null
@@ -28,7 +30,9 @@
       {
         "title": "with",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "transparent": true,
+        "decorations": false
       }
     ]
   }
