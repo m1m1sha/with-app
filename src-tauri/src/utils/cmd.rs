@@ -4,6 +4,8 @@ use std::io::Result;
 use sysinfo::{Pid, Process, System};
 use tokio::process::Command;
 
+use crate::utils;
+
 pub fn get_process_list(name: String) -> Vec<Pid> {
     if name.is_empty() {
         return vec![];
@@ -24,13 +26,22 @@ pub fn kill_process(name: String) -> Result<()> {
             continue;
         }
 
+        let pid = match pid.parse::<u32>() {
+            Ok(p) => p,
+            Err(_) => continue,
+        };
+
         tracing::info!("kill: [pid: {}]", pid);
-        let _ = Command::new("cmd")
-            .creation_flags(0x08000000)
-            .kill_on_drop(true)
-            .args(["/C", "tskill", pid.as_str(), "/A"])
-            .spawn()
-            .unwrap();
+        if let Ok(p) = utils::process::Process::open(pid) {
+            let _ = p.kill();
+        } else {
+            let _ = Command::new("cmd")
+                .creation_flags(0x08000000)
+                .kill_on_drop(true)
+                .args(["/C", "tskill", &format!("{}", pid), "/A"])
+                .spawn()
+                .unwrap();
+        }
     }
     Ok(())
 }
