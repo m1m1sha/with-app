@@ -61,7 +61,7 @@ const options = [
         </n-card>
       </n-gi>
       <n-gi>
-        <n-card title="组网通用广播">
+        <n-card title="通用转发广播">
           <template #header-extra>
             <n-switch />
           </template>
@@ -77,35 +77,6 @@ const options = [
             <n-flex>
               <n-tag size="small">
                 最近使用
-              </n-tag>
-
-            </n-flex>
-          </template>
-        </n-card>
-      </n-gi>
-      <n-gi>
-        <n-card title="Vnt">
-          <template #header-extra>
-            <n-switch disabled />
-          </template>
-          <template #action>
-            <n-flex>
-              <n-tag size="small">
-                敬请期待
-              </n-tag>
-            </n-flex>
-          </template>
-        </n-card>
-      </n-gi>
-      <n-gi>
-        <n-card title="Zerotier">
-          <template #header-extra>
-            <n-switch disabled />
-          </template>
-          <template #action>
-            <n-flex align="baseline">
-              <n-tag size="small">
-                敬请期待
               </n-tag>
             </n-flex>
           </template>
