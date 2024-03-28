@@ -23,6 +23,12 @@ fn main() {
         .setup(|app| {
             use tauri::Manager;
 
+            let app_config = app.path().app_config_dir().unwrap();
+
+            if !app_config.exists() {
+                std::fs::create_dir_all(app_config).unwrap();
+            }
+
             app.manage(EdgeState::default());
             Ok(())
         })
