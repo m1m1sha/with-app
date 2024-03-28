@@ -3,7 +3,9 @@
 const { appConfigVisible } = storeToRefs(useTempAppStore());
 const { appConfig } = storeToRefs(usePersistAppStore());
 
-
+async function changeConfig() {
+  await usePersistAppStore().updateAppConfig()
+}
 
 </script>
 <template>
@@ -11,16 +13,16 @@ const { appConfig } = storeToRefs(usePersistAppStore());
     <n-card title="设置" closable @close="appConfigVisible = false">
       <n-form label-placement="left" label-width="auto" size="small">
         <n-form-item label="开机启动">
-          <n-switch />
+          <n-switch v-model:value="appConfig.autoStart" @update:value="changeConfig" />
         </n-form-item>
         <n-form-item label="启动最小化">
-          <n-switch />
+          <n-switch v-model:value="appConfig.startMinimize" @update:value="changeConfig" />
         </n-form-item>
         <n-form-item label="自动检测更新">
-          <n-switch />
+          <n-switch v-model:value="appConfig.autoUpdate" @update:value="changeConfig" />
         </n-form-item>
         <n-form-item label="消息通知">
-          <n-switch />
+          <n-switch v-model:value="appConfig.systemNotification" @update:value="changeConfig" />
         </n-form-item>
       </n-form>
     </n-card>

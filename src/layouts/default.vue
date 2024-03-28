@@ -1,5 +1,6 @@
 <script setup lang="ts">
-
+const { syncAppConfig } = usePersistAppStore();
+await syncAppConfig();
 </script>
 
 <template>
