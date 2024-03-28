@@ -1,5 +1,5 @@
 [package]
-name = "with-app"
+name = "with"
 version = "0.2.0-alpha"
 description = "with-0.2.0-alpha"
 authors = ["m1m1sha"]
@@ -22,18 +22,20 @@ windows = { version = "0.54", features = [
   "Win32_System_Diagnostics_ToolHelp",
 ] }
 
+tokio = { version = "^1", features = ["full"] }
+async-channel = "^2.2"
+
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "^1"
 serde_repr = "0.1"
-encoding = "^0.2"
-anyhow = "^1"
-thiserror = "^1"
-tokio = { version = "^1", features = ["full"] }
+
 tracing = "^0.1"
 tracing-subscriber = "^0.3"
+
+encoding = "^0.2"
 fastrand = "^2"
-winreg = "^0.52"
-async-channel = "^2.2"
+anyhow = "^1"
+
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

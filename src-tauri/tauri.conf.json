@@ -28,7 +28,7 @@
     "windows": [
       {
         "title": "with",
-        "width": 800,
+        "width": 450,
         "height": 600,
         "transparent": true,
         "decorations": false

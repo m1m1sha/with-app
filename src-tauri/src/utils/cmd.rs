@@ -1,21 +1,6 @@
 #![allow(dead_code)]
 
-use std::io::Result;
 use tokio::process::Command;
-
-pub fn clear_network_profiles() -> Result<()> {
-    let hklm = winreg::RegKey::predef(winreg::enums::HKEY_LOCAL_MACHINE);
-    let network_list =
-        hklm.open_subkey("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList")?;
-
-    let profiles = network_list.open_subkey("Profiles")?;
-
-    for profile in profiles.enum_keys().map(|p| p.unwrap()) {
-        profiles.delete_subkey(profile)?;
-    }
-
-    Ok(())
-}
 
 #[cfg(target_os = "windows")]
 pub async fn unique() -> Option<String> {
