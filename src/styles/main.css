@@ -4,3 +4,7 @@ body,
 .n-config-provider {
   @apply bg-#101014 h-full max-h-full;
 }
+
+.n-modal-mask {
+  @apply backdrop-blur-sm;
+}

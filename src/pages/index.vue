@@ -1,18 +1,32 @@
 <script setup lang="ts">
 
+
+
 const options = [
   {
     label: '分享配置',
     key: 'share config'
+  },
+  {
+    label: '载入配置',
+    key: 'load config'
+  },
+  {
+    label: '详细配置',
+    key: 'detailed config'
+  },
+  {
+    label: '安装虚拟网卡',
+    key: 'tap install'
   },
 ]
 </script>
 
 <template>
   <n-flex>
-    <n-grid :y-gap="12" cols="1">
+    <n-grid :y-gap="12" :cols="1">
       <n-gi>
-        <n-card title="n2n">
+        <n-card title="n2n v3.1.1">
           <template #header-extra>
             <n-switch />
           </template>
@@ -21,9 +35,7 @@ const options = [
               <n-button size="tiny" secondary strong>
                 快捷配置
               </n-button>
-              <n-button size="tiny" secondary strong>
-                详细配置
-              </n-button>
+
               <n-button size="tiny" secondary strong>
                 组成员
               </n-button>

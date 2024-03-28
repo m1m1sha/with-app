@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { getCurrent, Window } from "@tauri-apps/api/window";
+import { getCurrent } from "@tauri-apps/api/window";
 
 const appWindow = getCurrent()
 
+const { appConfigVisible } = storeToRefs(useTempAppStore());
 
 
 </script>
 <template>
   <n-flex size=small justify="end">
-    <n-button size="tiny" quaternary :style="{ '--n-text-color-hover': '#f5d599' }">
+    <n-button size="tiny" quaternary :style="{ '--n-text-color-hover': '#f5d599' }" @click="appConfigVisible = true">
       <template #icon>
         <n-icon size="20">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -44,7 +45,8 @@ const appWindow = getCurrent()
       </template>
       请不要离开我＞﹏＜
     </n-popconfirm>
-
+    <AppConfig />
   </n-flex>
+
 </template>
 <style scoped lang="postcss"></style>

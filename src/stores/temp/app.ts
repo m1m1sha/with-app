@@ -1,11 +1,9 @@
 import { defineStore } from "pinia";
 
 export const useTempAppStore = defineStore("temp_app", () => {
-  const activeMenu = ref("/");
-  const advancedSetting = ref(false);
+  const appConfigVisible = ref(false);
 
   return {
-    activeMenu,
-    advancedSetting,
+    appConfigVisible,
   };
 });
