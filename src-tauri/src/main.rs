@@ -10,6 +10,7 @@ use plugins::{
 };
 
 fn main() {
+    println!("{:?}", utils::reg::network_adapters().unwrap());
     tauri::Builder::default()
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_fs::init())
@@ -19,7 +20,7 @@ fn main() {
             n2n::commands::edge_start,
             tools::broadcast::win_ip_broadcast_start,
             tools::broadcast::win_ip_broadcast_stop,
-            tools::tap::install
+            tools::tap::tap_install
         ])
         .setup(|app| {
             use tauri::Manager;
