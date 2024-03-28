@@ -34,6 +34,7 @@ impl Cmd {
 pub enum Action {
     Write,
     Read,
+    #[allow(dead_code)]
     Sub,
 }
 
