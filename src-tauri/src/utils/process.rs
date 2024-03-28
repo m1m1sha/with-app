@@ -48,7 +48,6 @@ pub fn get_process_list(like: String) -> Result<Vec<u32>> {
     loop {
         let sz_exe_file = pe32.szExeFile.map(|x| x as u8).to_vec();
         let name = from_utf8_or_gbk(&sz_exe_file);
-        println!("name: {}, p: {}", name.clone(), pe32.th32ProcessID);
         if name.contains(&like) {
             pids.push(pe32.th32ProcessID);
         }

@@ -5,7 +5,14 @@ use crate::utils;
 const WIN_IP_BROADCAST_EXE: &str = "with_winIPBroadcast.exe";
 
 #[tauri::command]
-pub fn win_ip_broadcast_start(app: AppHandle) -> Result<(), String> {
+pub fn win_ip_broadcast_start(force: bool, app: AppHandle) -> Result<(), String> {
+    let pids = utils::process::get_process_list(WIN_IP_BROADCAST_EXE.to_owned()).unwrap_or(vec![]);
+
+    // 仅当只存在一个wib时
+    if pids.len() == 1 && !force {
+        return Ok(());
+    }
+
     let _ = utils::process::kill_process(WIN_IP_BROADCAST_EXE.to_owned());
     let mut child = match Command::new("cmd")
         .creation_flags(0x08000000)
