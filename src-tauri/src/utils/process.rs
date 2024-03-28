@@ -45,11 +45,20 @@ pub fn get_process_list(like: String) -> Result<Vec<u32>> {
     pe32.dwSize = size_of_val(&pe32) as u32;
     unsafe { Process32First(handle, &mut pe32) }?;
     let mut pids = vec![];
-    while unsafe { Process32Next(handle, &mut pe32).is_err() } {
+    loop {
         let sz_exe_file = pe32.szExeFile.map(|x| x as u8).to_vec();
         let name = from_utf8_or_gbk(&sz_exe_file);
+        println!("name: {}, p: {}", name.clone(), pe32.th32ProcessID);
         if name.contains(&like) {
             pids.push(pe32.th32ProcessID);
+        }
+
+        for item in pe32.szExeFile.iter_mut() {
+            *item = 0;
+        }
+
+        if unsafe { Process32Next(handle, &mut pe32).is_err() } {
+            break;
         }
     }
 
