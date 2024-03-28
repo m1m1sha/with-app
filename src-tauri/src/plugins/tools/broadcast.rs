@@ -6,7 +6,7 @@ const WIN_IP_BROADCAST_EXE: &str = "with_winIPBroadcast.exe";
 
 #[tauri::command]
 pub fn win_ip_broadcast_start(app: AppHandle) -> Result<(), String> {
-    let _ = utils::cmd::kill_process(WIN_IP_BROADCAST_EXE.to_owned());
+    let _ = utils::process::kill_process(WIN_IP_BROADCAST_EXE.to_owned());
     let mut child = match Command::new("cmd")
         .creation_flags(0x08000000)
         .args(["/C", WIN_IP_BROADCAST_EXE, "run"])
@@ -38,5 +38,5 @@ pub fn win_ip_broadcast_start(app: AppHandle) -> Result<(), String> {
 
 #[tauri::command]
 pub fn win_ip_broadcast_stop() {
-    let _ = utils::cmd::kill_process(WIN_IP_BROADCAST_EXE.to_owned());
+    let _ = utils::process::kill_process(WIN_IP_BROADCAST_EXE.to_owned());
 }

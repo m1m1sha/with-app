@@ -81,8 +81,8 @@ pub async fn edge_start(
     {
         Ok(c) => c,
         Err(_) => {
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::process::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::process::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
             return Err(N2nError::EdgeStartFailed);
         }
     };
@@ -132,8 +132,8 @@ pub async fn edge_start(
 
     if let Err(_) = manager.stop(false).await {
         *state.tx.lock().await = None;
-        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
-        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+        let _ = utils::process::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+        let _ = utils::process::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
         return Err(N2nError::SocketConnectTimeout);
     }
     let (tx, rx) =
@@ -265,8 +265,8 @@ pub async fn edge_action(
         }
     } else {
         if flag == EdgeFlag::Stop {
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::process::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::process::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
         }
         Err(N2nError::EdgeIsStopped)
     }

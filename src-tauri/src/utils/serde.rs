@@ -1,4 +1,4 @@
-use serde::{Deserialize, Deserializer, Serializer};
+use serde::{Deserialize, Deserializer};
 
 pub fn deserialize_i32_to_bool<'de, D>(deserializer: D) -> Result<bool, D::Error>
 where
