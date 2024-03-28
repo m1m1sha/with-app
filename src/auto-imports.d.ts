@@ -9,6 +9,8 @@ declare global {
   const PKG: typeof import('./composables/env')['PKG']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const action: typeof import('./composables/n2nEdge')['action']
+  const broadcast_start: typeof import('./composables/tools')['broadcast_start']
+  const broadcast_stop: typeof import('./composables/tools')['broadcast_stop']
   const community: typeof import('./composables/n2nEdge')['community']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
@@ -76,6 +78,7 @@ declare global {
   const stop: typeof import('./composables/n2nEdge')['stop']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const supernodes: typeof import('./composables/n2nEdge')['supernodes']
+  const tap_install: typeof import('./composables/tools')['tap_install']
   const timestamps: typeof import('./composables/n2nEdge')['timestamps']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
@@ -119,6 +122,8 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly PKG: UnwrapRef<typeof import('./composables/env')['PKG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly broadcast_start: UnwrapRef<typeof import('./composables/tools')['broadcast_start']>
+    readonly broadcast_stop: UnwrapRef<typeof import('./composables/tools')['broadcast_stop']>
     readonly community: UnwrapRef<typeof import('./composables/n2nEdge')['community']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -182,6 +187,7 @@ declare module 'vue' {
     readonly stop: UnwrapRef<typeof import('./composables/n2nEdge')['stop']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly supernodes: UnwrapRef<typeof import('./composables/n2nEdge')['supernodes']>
+    readonly tap_install: UnwrapRef<typeof import('./composables/tools')['tap_install']>
     readonly timestamps: UnwrapRef<typeof import('./composables/n2nEdge')['timestamps']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
@@ -218,6 +224,8 @@ declare module '@vue/runtime-core' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly PKG: UnwrapRef<typeof import('./composables/env')['PKG']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
+    readonly broadcast_start: UnwrapRef<typeof import('./composables/tools')['broadcast_start']>
+    readonly broadcast_stop: UnwrapRef<typeof import('./composables/tools')['broadcast_stop']>
     readonly community: UnwrapRef<typeof import('./composables/n2nEdge')['community']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -281,6 +289,7 @@ declare module '@vue/runtime-core' {
     readonly stop: UnwrapRef<typeof import('./composables/n2nEdge')['stop']>
     readonly storeToRefs: UnwrapRef<typeof import('pinia')['storeToRefs']>
     readonly supernodes: UnwrapRef<typeof import('./composables/n2nEdge')['supernodes']>
+    readonly tap_install: UnwrapRef<typeof import('./composables/tools')['tap_install']>
     readonly timestamps: UnwrapRef<typeof import('./composables/n2nEdge')['timestamps']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>

@@ -8,3 +8,7 @@ body,
 .n-modal-mask {
   @apply backdrop-blur-sm;
 }
+
+.n-card.n-modal {
+  background: var(--n-color) !important;
+}
