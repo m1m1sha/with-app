@@ -17,10 +17,13 @@ tauri-plugin-fs = "2.0.0-beta.3"
 tauri-plugin-notification = "2.0.0-beta.3"
 
 windows = { version = "0.54", features = [
-  "Win32_System_Threading",
   "Win32_Foundation",
+  "Win32_Security",
+  "Win32_System_Threading",
   "Win32_System_Diagnostics_ToolHelp",
+  "Win32_Storage_FileSystem",
 ] }
+winreg = "0.52"
 
 tokio = { version = "^1", features = ["full"] }
 async-channel = "^2.2"
