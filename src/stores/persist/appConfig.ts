@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 import { AppConfig, DEFAULT_APP_CONFIG } from "~/types/app";
 
 export const usePersistAppStore = defineStore("persist_app", () => {
-  const appConfig = ref<AppConfig>(DEFAULT_APP_CONFIG);
+  const _config = ref<AppConfig>(DEFAULT_APP_CONFIG);
+  const appConfig = computed(() => _config.value);
 
   async function updateAppConfig() {
     await writeConfig("app", JSON.stringify(appConfig.value));
@@ -13,12 +14,13 @@ export const usePersistAppStore = defineStore("persist_app", () => {
     if (configString) {
       try {
         const config = JSON.parse(configString) as AppConfig;
-        appConfig.value = config;
+        _config.value = config;
       } catch {}
     }
   }
 
   return {
+    _config,
     appConfig,
     updateAppConfig,
     syncAppConfig,

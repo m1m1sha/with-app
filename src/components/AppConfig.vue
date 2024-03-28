@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 const { appConfigVisible } = storeToRefs(useTempAppStore());
-const { appConfig } = storeToRefs(usePersistAppStore());
+const { _config } = storeToRefs(usePersistAppStore());
 
 async function changeConfig() {
   await usePersistAppStore().updateAppConfig()
@@ -13,16 +13,16 @@ async function changeConfig() {
     <n-card title="设置" closable @close="appConfigVisible = false">
       <n-form label-placement="left" label-width="auto" size="small">
         <n-form-item label="开机启动">
-          <n-switch v-model:value="appConfig.autoStart" @update:value="changeConfig" />
+          <n-switch v-model:value="_config.autoStart" @update:value="changeConfig" />
         </n-form-item>
         <n-form-item label="启动最小化">
-          <n-switch v-model:value="appConfig.startMinimize" @update:value="changeConfig" />
+          <n-switch v-model:value="_config.startMinimize" @update:value="changeConfig" />
         </n-form-item>
         <n-form-item label="自动检测更新">
-          <n-switch v-model:value="appConfig.autoUpdate" @update:value="changeConfig" />
+          <n-switch v-model:value="_config.autoUpdate" @update:value="changeConfig" />
         </n-form-item>
-        <n-form-item label="消息通知">
-          <n-switch v-model:value="appConfig.systemNotification" @update:value="changeConfig" />
+        <n-form-item label="系统消息通知">
+          <n-switch v-model:value="_config.systemNotification" @update:value="changeConfig" />
         </n-form-item>
       </n-form>
     </n-card>
