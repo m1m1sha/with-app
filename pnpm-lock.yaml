@@ -11,6 +11,9 @@ dependencies:
   '@tauri-apps/plugin-fs':
     specifier: 2.0.0-beta.2
     version: 2.0.0-beta.2
+  '@tauri-apps/plugin-notification':
+    specifier: 2.0.0-beta.2
+    version: 2.0.0-beta.2
   '@tauri-apps/plugin-shell':
     specifier: 2.0.0-beta.2
     version: 2.0.0-beta.2
@@ -1537,6 +1540,12 @@ packages:
 
   /@tauri-apps/plugin-fs@2.0.0-beta.2:
     resolution: {integrity: sha512-jqeRBrm0h9QUoep5OzHx5R0vgFCYVAmZIy45jJpR7hHvnEgUwDU8JLUUVPvWniq6tUtxjwr1V/a0Hm9pE9V+NQ==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.4
+    dev: false
+
+  /@tauri-apps/plugin-notification@2.0.0-beta.2:
+    resolution: {integrity: sha512-OxMuKawWkXGR04hALFrPhRXhA3vGRyMy+kRT3vdHoAwngZHcBGetRqm6CuW0tSNWCgwuUYXpN57636CfUReg5g==}
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.4
     dev: false
