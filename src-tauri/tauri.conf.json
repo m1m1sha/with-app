@@ -8,6 +8,7 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "resources": ["bin"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -19,9 +20,7 @@
   "productName": "with",
   "version": "0.2.0",
   "identifier": "cn.smjb.with",
-  "plugins": {
-    
-  },
+  "plugins": {},
   "app": {
     "security": {
       "csp": null

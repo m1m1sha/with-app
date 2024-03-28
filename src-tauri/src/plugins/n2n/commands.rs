@@ -22,7 +22,7 @@ use crate::{
             edge::{EdgeFlag, EdgeFlagPayload},
         },
     },
-    utils::{self, path::CurrentPath},
+    utils::{self},
 };
 
 const N2N_EDGE_EXECUTABLE: &str = "with_n2n_edge_v3.1.1.exe";
@@ -60,7 +60,15 @@ pub async fn edge_start(
         .creation_flags(0x08000000)
         .stdout(Stdio::piped())
         .stdin(Stdio::null())
-        .current_dir(CurrentPath::default().bin())
+        .kill_on_drop(true)
+        .current_dir(
+            app.path()
+                .resource_dir()
+                .unwrap_or_default()
+                .join("bin")
+                .to_string_lossy()
+                .replace("\\\\?\\", ""),
+        )
         .args(match args.clone().to_args() {
             Ok(mut a) => {
                 let mut v = vec!["/C".to_owned(), N2N_EDGE_EXECUTABLE.to_owned()];
@@ -73,8 +81,8 @@ pub async fn edge_start(
     {
         Ok(c) => c,
         Err(_) => {
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
             return Err(N2nError::EdgeStartFailed);
         }
     };
@@ -124,8 +132,8 @@ pub async fn edge_start(
 
     if let Err(_) = manager.stop(false).await {
         *state.tx.lock().await = None;
-        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
-        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
+        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+        let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
         return Err(N2nError::SocketConnectTimeout);
     }
     let (tx, rx) =
@@ -257,8 +265,8 @@ pub async fn edge_action(
         }
     } else {
         if flag == EdgeFlag::Stop {
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
-            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned(), true);
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
+            let _ = utils::cmd::kill_process(N2N_EDGE_EXECUTABLE.to_owned());
         }
         Err(N2nError::EdgeIsStopped)
     }

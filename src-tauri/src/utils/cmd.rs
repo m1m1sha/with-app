@@ -1,9 +1,8 @@
 #![allow(dead_code)]
 
-use std::{io::Result, os::windows::process::CommandExt, process::Command};
+use std::io::Result;
 use sysinfo::{Pid, Process, System};
-
-use crate::utils::path::CurrentPath;
+use tokio::process::Command;
 
 pub fn get_process_list(name: String) -> Vec<Pid> {
     if name.is_empty() {
@@ -18,29 +17,20 @@ pub fn get_process_list(name: String) -> Vec<Pid> {
         .collect()
 }
 
-pub fn kill_process(name: String, force: bool) -> Result<()> {
+pub fn kill_process(name: String) -> Result<()> {
     for pid in get_process_list(name) {
         let pid = pid.to_string();
         if pid.is_empty() {
             continue;
         }
 
-        if force {
-            tracing::info!("kill: [pid: {}]", pid);
-            let _ = Command::new("cmd")
-                .creation_flags(0x08000000)
-                .args(["/C", "tskill", pid.as_str(), "/A"])
-                .spawn()
-                .unwrap();
-        } else {
-            tracing::info!("ctrlc: [pid: {}]", pid);
-            let _ = Command::new("cmd")
-                .creation_flags(0x08000000)
-                .args(["/C", "ctrlc.exe", pid.as_str()])
-                .current_dir(CurrentPath::default().bin())
-                .spawn()
-                .unwrap();
-        }
+        tracing::info!("kill: [pid: {}]", pid);
+        let _ = Command::new("cmd")
+            .creation_flags(0x08000000)
+            .kill_on_drop(true)
+            .args(["/C", "tskill", pid.as_str(), "/A"])
+            .spawn()
+            .unwrap();
     }
     Ok(())
 }
@@ -60,11 +50,13 @@ pub fn clear_network_profiles() -> Result<()> {
 }
 
 #[cfg(target_os = "windows")]
-pub fn unique() -> Option<String> {
+pub async fn unique() -> Option<String> {
     let output = match Command::new("wmic")
         .creation_flags(0x08000000)
+        .kill_on_drop(true)
         .args(&["csproduct", "get", "UUID"])
         .output()
+        .await
     {
         Ok(output) => output,
         Err(_) => {
@@ -82,10 +74,12 @@ pub fn unique() -> Option<String> {
 }
 
 #[cfg(target_os = "macos")]
-pub fn unique() -> Option<String> {
+pub async fn unique() -> Option<String> {
     let output = match Command::new("ioreg")
         .args(&["-rd1", "-c", "IOPlatformExpertDevice"])
+        .kill_on_drop(true)
         .output()
+        .await
     {
         Ok(output) => output,
         Err(_) => {
@@ -107,11 +101,13 @@ pub fn unique() -> Option<String> {
 }
 
 #[cfg(target_os = "linux")]
-pub fn unique() -> Option<String> {
+pub async fn unique() -> Option<String> {
     let output = match Command::new("dmidecode")
         .arg("-s")
         .arg("system-uuid")
+        .kill_on_drop(true)
         .output()
+        .await
     {
         Ok(output) => output,
         Err(_) => {

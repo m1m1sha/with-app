@@ -6,13 +6,18 @@
   "permissions": [
     "path:default",
     "event:default",
-    "window:default",
     "app:default",
     "resources:default",
     "menu:default",
     "tray:default",
     "window:allow-start-dragging",
     "window:allow-minimize",
-    "window:allow-close"
+    "window:allow-close",
+    "fs:read-all",
+    "fs:write-all",
+    {
+      "identifier": "fs:scope",
+      "allow": [{ "path": "*/**" }]
+    }
   ]
 }
