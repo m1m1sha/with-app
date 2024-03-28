@@ -1,50 +1,7 @@
 #![allow(dead_code)]
 
 use std::io::Result;
-use sysinfo::{Pid, Process, System};
 use tokio::process::Command;
-
-use crate::utils;
-
-pub fn get_process_list(name: String) -> Vec<Pid> {
-    if name.is_empty() {
-        return vec![];
-    }
-
-    System::new_all()
-        .processes()
-        .values()
-        .filter(move |val: &&Process| val.name().contains(&name))
-        .map(|p| p.pid())
-        .collect()
-}
-
-pub fn kill_process(name: String) -> Result<()> {
-    for pid in get_process_list(name) {
-        let pid = pid.to_string();
-        if pid.is_empty() {
-            continue;
-        }
-
-        let pid = match pid.parse::<u32>() {
-            Ok(p) => p,
-            Err(_) => continue,
-        };
-
-        tracing::info!("kill: [pid: {}]", pid);
-        if let Ok(p) = utils::process::Process::open(pid) {
-            let _ = p.kill();
-        } else {
-            let _ = Command::new("cmd")
-                .creation_flags(0x08000000)
-                .kill_on_drop(true)
-                .args(["/C", "tskill", &format!("{}", pid), "/A"])
-                .spawn()
-                .unwrap();
-        }
-    }
-    Ok(())
-}
 
 pub fn clear_network_profiles() -> Result<()> {
     let hklm = winreg::RegKey::predef(winreg::enums::HKEY_LOCAL_MACHINE);
